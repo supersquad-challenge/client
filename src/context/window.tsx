@@ -1,33 +1,48 @@
+"use client"
 import React, { createContext, ReactNode, useState } from 'react';
 
-interface WindowContext {
-  windowTheme: boolean;
-  handleWindowTheme: () => void;
+interface windowContext {
+  modalState: {
+    current: number,
+    prev: number
+  };
+  handleModalState: ({ current, prev }: { current: number, prev: number }) => void;
 }
 
-const defaultValue: WindowContext = {
-  windowTheme: true,
-  handleWindowTheme: () => {},
+const defaultValue: windowContext = {
+  modalState: {
+    current: 0,
+    prev: 0
+  },
+  handleModalState: () => {}
 };
 
 const WindowContext = createContext(defaultValue);
 
-const WindowProvider = ({ children }: { children: ReactNode }) => {
-  const [windowTheme, setWindowTheme] = useState<boolean>(true);
+const WindowProvider = ({ children } : { children: ReactNode }) => {
+  const [modalState, setModalState] = useState<{
+    current: number,
+    prev: number
+  }>({current: 0, prev: 0});
 
-  const handleWindowTheme = () => {
-    setWindowTheme(!windowTheme);
-  };
+  const handleModalState = ({ current, prev }: { current: number, prev: number }) => {
+    setModalState({
+      current: current,
+      prev: prev
+    })
+  }
 
   const contextValue = {
-    windowTheme,
-    handleWindowTheme,
-  };
-  return (
-    <WindowContext.Provider value={contextValue}>
-      {children}
-    </WindowContext.Provider>
-  );
-};
+    modalState,
+    handleModalState
+  }
 
+  return (
+    <>
+      <WindowContext.Provider value={contextValue}>
+        {children}
+      </WindowContext.Provider>
+    </>
+  )
+}
 export { WindowContext, WindowProvider };
