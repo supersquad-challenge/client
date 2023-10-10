@@ -3,7 +3,7 @@ import { BackgroundColorProps } from '@/interface';
 import styled from 'styled-components';
 import challengeInfo from '../../../testData/challengeInfo.json';
 import { daysBetweenDates } from '@/lib/dates';
-import ChallengeInfoTable from '@/components/common/ChallengeInfoTable';
+import ChallengeInfoTable from '@/components/common/ChallengeInfo';
 import BasicTag from '@/components/base/tag/BasicTag';
 import { colors } from '@/styles/color';
 
@@ -36,17 +36,6 @@ const TestChallenge = () => {
             ${challengeInfo?.challengeTotalDeposit}
           </ChallengeTotalDeposit>
         </ParticipantsTotalDepositWrapper>
-        <ChallengeInfoTable
-          challengeStartsAt={challengeInfo?.challengeStartsAt as string}
-          challengeEndsAt={challengeInfo?.challengeEndsAt as string}
-          challengeVerificationMethod={
-            challengeInfo?.challengeVerificationMethod as string
-          }
-          challengeVerificationFrequency={
-            challengeInfo?.challengeVerificationFrequency as string
-          }
-          cryptoYield={challengeInfo?.cryptoYield as number}
-        />
       </ChallengeContainer>
       {/* <BlackFixedButton onClick={handleIAmInButtonClick}>
         I am in!
@@ -230,7 +219,7 @@ const ParticipantsTotalDepositWrapper = styled.div`
 
 const ChallengeParticipants = styled.div`
   @media (max-width: 600px) {
-    font-size: 20px;
+    font-size: 18px;
     padding-right: 12px;
   }
   @media (max-width: 450px) {
@@ -249,7 +238,7 @@ const ChallengeParticipants = styled.div`
 
 const ChallengeTotalDeposit = styled.div`
   @media (max-width: 600px) {
-    font-size: 20px;
+    font-size: 18px;
   }
   @media (max-width: 450px) {
     font-size: 16px;
