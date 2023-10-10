@@ -1,7 +1,7 @@
 'use client';
 
 import BasicTag from '@/components/base/tag/BasicTag';
-import BeforeRegisterChallenge from '@/components/common/BeforeRegisterChallenge';
+import BeforeRegisterChallenge from '@/components/common/beforeRegisterChallenge/BeforeRegisterChallenge';
 import React from 'react';
 import styled from 'styled-components';
 
