@@ -1,10 +1,10 @@
 "use client"
 import React from 'react'
 
-const ChallengeDetail = () => {
+const Challenge = () => {
   return (
     <div>Challenge</div>
   )
 }
 
-export default ChallengeDetail
+export default Challenge
