@@ -19,7 +19,10 @@ const AuthSet = () => {
   return (
     <AuthSetContainer>
       {isLoggined ? (
-        <Profile />
+        <Profile
+          color='#cccccc'
+          size={28}
+        />
       ) : (
         <div>로그인</div>
       )}

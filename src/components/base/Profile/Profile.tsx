@@ -3,7 +3,12 @@ import React, { useContext } from 'react'
 import { HiOutlineUserCircle } from 'react-icons/hi2'
 import Image from 'next/image'
 
-const Profile = () => {
+type Props = {
+  color: string;
+  size: number
+}
+
+const Profile = ({ color, size }: Props) => {
   const { userProfile } = useContext(AuthContext)
   return (
     <>
@@ -16,7 +21,8 @@ const Profile = () => {
         />
       ) : (
         <HiOutlineUserCircle
-          size='28'
+          size={size}
+          color={color}
         />
       )}
     </>
