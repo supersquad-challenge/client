@@ -45,5 +45,4 @@ const WindowProvider = ({ children } : { children: ReactNode }) => {
     </>
   )
 }
-
 export { WindowContext, WindowProvider };
