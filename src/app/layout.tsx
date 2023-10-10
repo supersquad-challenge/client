@@ -1,4 +1,8 @@
+"use client"
+import Layout from '@/layout/Layout'
 import './globals.css'
+import { WindowProvider } from '@/context/window'
+import { AuthProvider } from '@/context/auth'
 
 export default function RootLayout({
   children,
@@ -7,7 +11,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AuthProvider>
+          <WindowProvider>
+            <Layout>
+              {children}
+            </Layout>
+          </WindowProvider>
+        </AuthProvider>
+      </body>
     </html>
   )
 }
