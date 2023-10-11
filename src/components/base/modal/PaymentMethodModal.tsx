@@ -14,7 +14,7 @@ const PaymentMethodModal = ({
     <BasicModal
       isOpen={isModalOpen}
       setIsOpen={setIsModalOpen}
-      title="You have..."
+      title="You are paying with"
     >
       <ModalPaymentMethodContainer>
         <ModalPaymentMethodWrapper>
