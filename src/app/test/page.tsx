@@ -12,7 +12,7 @@ const Test = () => {
     useState(true);
   return (
     <Container>
-      <BeforeRegisterChallenge />
+      {/* <BeforeRegisterChallenge /> */}
       {/* <PaymentMethodModal
         isModalOpen={true} //이렇게 해야만 열림... 왜..?
         setIsModalOpen={setIsChargeDepositModalOpen}

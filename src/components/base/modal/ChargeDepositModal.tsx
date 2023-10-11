@@ -6,6 +6,8 @@ import DepositSlider from '@/components/common/DepositSlider';
 import BasicButton from '../button/BasicButton';
 import { colors } from '@/styles/color';
 
+//api 연결부분이라 따로 템플릿화를 시켜놓지 않음.
+
 const ChargeDepositModal = ({
   isModalOpen,
   setIsModalOpen,

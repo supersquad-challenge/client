@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
 //챌린지 등록하러 들어갔을 때, 챌린지 제목과 등록자 수, total deposit
+interface IChallengeTitlePartDep {
+  challengeName: string;
+  challengeParticipantsCount: number;
+  challengeTotalDeposit: number;
+}
 
-const ChallengeTitlePartDep = () => {
-  //Dummy data
-  const challengeName = 'Lose 4lbs';
-  const challengeParticipantsCount = 30;
-  const challengeTotalDeposit = 3800;
-
+const ChallengeTitlePartDep = ({
+  challengeName,
+  challengeParticipantsCount,
+  challengeTotalDeposit,
+}: IChallengeTitlePartDep) => {
   <ChallengeContainer>
     <ChallengeTitle>{challengeName}</ChallengeTitle>
     <ParticipantsTotalDepositWrapper>
