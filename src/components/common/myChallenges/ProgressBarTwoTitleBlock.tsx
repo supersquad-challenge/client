@@ -1,19 +1,27 @@
-import TwoTitleBlock from '@/components/base/block/TwoTitleBlock';
+import TwoTitleBlock, {
+  ITwoTitleBlock,
+} from '@/components/base/block/TwoTitleBlock';
 import { colors } from '@/styles/color';
 import styled from 'styled-components';
 
 interface IProgessBarTwoTitleBlock {
+  title: string;
   percentage: number;
 }
 
-const ProgressBarTwoTitleBlock = ({ percentage }: IProgessBarTwoTitleBlock) => {
+const ProgressBarTwoTitleBlock = ({
+  title,
+  percentage,
+}: IProgessBarTwoTitleBlock) => {
   return (
     <TwoTitleBlock
-      title1={'My Success Rate'}
+      title1={title}
       content1={`${percentage}%`}
-      title2={'Target Success'}
+      title2="Target Success"
       content2="100%"
       background={colors.blockGray}
+      color1={colors.black}
+      color2={colors.black}
     >
       <ProgressBar percentage={percentage}></ProgressBar>
     </TwoTitleBlock>
