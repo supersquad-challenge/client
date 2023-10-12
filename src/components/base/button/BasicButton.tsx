@@ -8,32 +8,32 @@ type BasicButtonT = {
 }
 
 
-const BasicButton = ({ title, onClickHandler, color, fontSize }: BasicButtonT & ButtonProp) => {
-  
-  const BasicButton = styled.button<BasicButtonT>`
-    width: 100%;
-    min-width: 50px;    
-    height: 100%;
-    min-height: 20px;
-    font-size: ${(props) => `${(props.fontSize)}px`};
-    color: ${(props) => props.color};
-    text-align: center;
-    border: none;
-    transition: all ease .2s;
+const Button = styled.button<BasicButtonT>`
+  width: 100%;
+  min-width: 50px;    
+  height: 100%;
+  min-height: 20px;
+  font-size: ${(props) => `${(props.fontSize)}px`};
+  color: ${(props) => props.color};
+  text-align: center;
+  border: none;
+  transition: all ease .2s;
 
-    &:hover {
-      cursor: pointer;
-    }
-  `
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+const BasicButton = ({ title, onClickHandler, color, fontSize }: BasicButtonT & ButtonProp) => {
 
   return (
-    <BasicButton 
+    <Button 
       color={color} 
       fontSize={fontSize}
       onClick={() => onClickHandler()}
     >
       {title}
-    </BasicButton>
+    </Button>
   )
 }
 

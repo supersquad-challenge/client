@@ -84,7 +84,7 @@ const Header = () => {
   const [pageTitle, setPageTitle] = useState<string>('');
   const router = useRouter();
   const params = useSearchParams();
-  const state =  params.get('state')
+  const state =  params.get('state');
   const pathname = usePathname();
   
   useEffect(() => {
