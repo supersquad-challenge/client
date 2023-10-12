@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 // navigation = home에서 모든 챌린지를 보여주는 창에서 보여지는 모습
 // ChallengeCarousel에 해시태그(ex. #Diet)도 포함한 것
-// allChallengesData는 test data 이 부분은 따로 템플릿화를 시켜놓지는 않음.
+// allChallengesData는 test data
 
 interface IBeforeRegisterChallenge {
   hashTag: string;
