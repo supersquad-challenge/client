@@ -18,6 +18,7 @@ const BasicButton = ({
   backgroundColor,
 }: BasicButtonT & ButtonProp) => {
   return (
+
     <BasicButtonWrapper
       color={color}
       fontSize={fontSize}

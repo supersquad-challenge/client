@@ -1,9 +1,16 @@
-"use client"
+import { getAllChallenge } from '@/lib/api/challenge/getAllChallenge'
 import React from 'react'
 
-const Challenge = () => {
+const Challenge = async () => {
+  const { challenges } = await getAllChallenge();
+
+  console.log(challenges)
   return (
-    <div>Challenge</div>
+    <main>
+      {challenges.map((chal: any) => {
+        <div key={chal.challengeId}>{chal.challengeId}</div>
+      })}
+    </main>
   )
 }
 

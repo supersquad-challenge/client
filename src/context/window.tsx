@@ -7,6 +7,8 @@ interface windowContext {
     prev: number
   };
   handleModalState: ({ current, prev }: { current: number, prev: number }) => void;
+  loadingState: boolean;
+  useCallHandler: (func: () => Promise<void>) => void;
 }
 
 const defaultValue: windowContext = {
@@ -14,7 +16,10 @@ const defaultValue: windowContext = {
     current: 0,
     prev: 0
   },
-  handleModalState: () => {}
+  handleModalState: () => {},
+  loadingState: false,
+  useCallHandler: () => {},
+
 };
 
 const WindowContext = createContext(defaultValue);
@@ -24,6 +29,8 @@ const WindowProvider = ({ children } : { children: ReactNode }) => {
     current: number,
     prev: number
   }>({current: 0, prev: 0});
+  const [loadingState, setLoadingState] = useState<boolean>(false);
+
 
   const handleModalState = ({ current, prev }: { current: number, prev: number }) => {
     setModalState({
@@ -32,9 +39,19 @@ const WindowProvider = ({ children } : { children: ReactNode }) => {
     })
   }
 
+  async function useCallHandler(func: () => Promise<void>) {
+    setLoadingState(true);
+    await func();
+    setTimeout(() => {
+      setLoadingState(false);
+    }, 500)
+  }
+
   const contextValue = {
     modalState,
-    handleModalState
+    handleModalState,
+    loadingState,
+    useCallHandler
   }
 
   return (
