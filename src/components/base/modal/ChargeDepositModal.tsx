@@ -65,6 +65,8 @@ const ChargeDepositModal = ({
 export default ChargeDepositModal;
 
 const ModalChallengeInfoContainer = styled.div`
+  margin-top: 30px;
+  width: 420px;
   @media (max-width: 600px) {
     margin-top: 30px;
     width: 420px;
@@ -83,21 +85,23 @@ const ModalChallengeInfoContainer = styled.div`
 `;
 
 const ModalChallengeInfoWrapper = styled.div`
+  height: 30px;
+  font-size: 20px;
   @media (max-width: 600px) {
     height: 30px;
     font-size: 20px;
-    margin-bottom: 20px;
   }
   @media (max-width: 450px) {
     height: 28px;
     font-size: 16px;
-    margin-bottom: 20px;
   }
   @media (max-width: 392px) {
     height: 21px;
     font-size: 14px;
-    margin-bottom: 20px;
   }
+
+  margin-bottom: 20px;
+
   font-weight: 500;
   width: 100%;
   display: flex;
@@ -109,6 +113,13 @@ const ModalChallengeInfoWrapper = styled.div`
 `;
 
 const DepositWrapper = styled.div`
+  width: 420px;
+  height: 45px;
+
+  margin-top: 16px;
+  padding-left: 12px;
+
+  border-radius: 10px;
   @media (max-width: 600px) {
     width: 420px;
     height: 45px;
@@ -145,6 +156,9 @@ const DepositWrapper = styled.div`
 `;
 
 const UserAverageWrapper = styled.div`
+  width: 420px;
+  height: 22px;
+  font-size: 14px;
   @media (max-width: 600px) {
     width: 420px;
     height: 22px;
@@ -174,18 +188,18 @@ const OrangeText = styled.span`
 `;
 
 const BasicButtonContainer = styled.div`
+  width: 420px;
+
   @media (max-width: 600px) {
     width: 420px;
-    height: 50px;
   }
   @media (max-width: 450px) {
     width: 340px;
-    height: 50px;
   }
   @media (max-width: 392px) {
     width: 320px;
-    height: 50px;
   }
+  height: 50px;
   bottom: 20px;
   position: absolute;
 `;

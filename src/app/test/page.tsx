@@ -21,14 +21,14 @@ const Test = () => {
   return (
     <Container>
       {/* <BeforeRegisterChallenge hashTag={'Diet'} /> */}
-      <PaymentMethodModal
-        isModalOpen={true}
-        setIsModalOpen={setIsChargeDepositModalOpen}
-      />
-      {/* <ChargeDepositModal
+      {/* <PaymentMethodModal
         isModalOpen={true}
         setIsModalOpen={setIsChargeDepositModalOpen}
       /> */}
+      <ChargeDepositModal
+        isModalOpen={true}
+        setIsModalOpen={setIsChargeDepositModalOpen}
+      />
       {/* <BeforeMyChallengeDetail /> */}
       {/* <TwoTitleBlock
         title1={'My Success Rate'}
