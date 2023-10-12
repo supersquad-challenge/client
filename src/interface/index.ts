@@ -31,6 +31,11 @@ export interface HeightTypeProps {
   heightType: string;
 }
 
+export interface ModalOpenProps {
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 export interface AllChallengeProps {
   category: string;
   challengeEndsAt: string;

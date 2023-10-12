@@ -9,7 +9,7 @@ import {
 } from '@/interface';
 import { useRouter } from 'next/router';
 import { colors } from '@/styles/color';
-import BasicTag from '../base/tag/BasicTag';
+import BasicTag from '../../base/tag/BasicTag';
 
 interface ChallengesCarouselProps {
   data: AllChallengeProps[];

@@ -1,6 +1,7 @@
 import { TitleContentProps } from '@/interface';
 import styled from 'styled-components';
-import Block from '../base/block/block';
+import Block from '../../base/block/Block';
+//챌린지 등록하러 들어갔을 때 Schedule, How To, Complete, Crypto Yield가 들어가는 블록 하나하나
 
 interface IChallengeInfo extends TitleContentProps {
   contentColor: string;

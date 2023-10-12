@@ -2,13 +2,21 @@
 
 import styled, { useTheme } from 'styled-components';
 import ChallengesCarousel from './ChallengesCarousel';
-import allChallengesData from '../../../src/testData/allChallenges.json';
+import allChallengesData from '../../../testData/allChallenges.json';
 import { colors } from '@/styles/color';
 import { useEffect } from 'react';
 
-//navigation = home에서 모든 챌린지를 보여주는 창에서 보여지는 모습
+// navigation = home에서 모든 챌린지를 보여주는 창에서 보여지는 모습
+// ChallengeCarousel에 해시태그(ex. #Diet)도 포함한 것
+// allChallengesData는 test data
 
-export default function BeforeRegisterChallenge() {
+interface IBeforeRegisterChallenge {
+  hashTag: string;
+}
+
+export default function BeforeRegisterChallenge({
+  hashTag,
+}: IBeforeRegisterChallenge) {
   useEffect(() => {
     //탭 표시바 위치 지정
     const setMarginTop = () => {
@@ -27,7 +35,7 @@ export default function BeforeRegisterChallenge() {
 
   return (
     <ChallengeSection>
-      <ChallengeHashTag>#Diet</ChallengeHashTag>
+      <ChallengeHashTag>#{hashTag}</ChallengeHashTag>
       <ChallengesCarousel data={allChallengesData} />
     </ChallengeSection>
   );
@@ -59,7 +67,6 @@ const ChallengeHashTag = styled.div`
     margin-bottom: 11px;
   }
   @media (max-width: 390px) {
-    //mobile
     font-size: 30px;
     margin-bottom: 10px;
   }

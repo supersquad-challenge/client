@@ -3,7 +3,7 @@ import { BackgroundColorProps } from '@/interface';
 import styled from 'styled-components';
 import challengeInfo from '../../../testData/challengeInfo.json';
 import { daysBetweenDates } from '@/lib/dates';
-import ChallengeInfoTable from '@/components/common/ChallengeInfo';
+import ChallengeInfoTable from '@/components/common/challenges/ChallengeInfo';
 import BasicTag from '@/components/base/tag/BasicTag';
 import { colors } from '@/styles/color';
 
