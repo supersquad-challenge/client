@@ -23,6 +23,7 @@ const BasicModal = ({ isOpen, setIsOpen, title, children }: IBasicModal) => {
 export default BasicModal;
 
 const Modal = styled.div<IsOpenProps>`
+  height: 450px;
   @media (max-width: 600px) {
     height: 450px;
   }
@@ -55,6 +56,10 @@ const Modal = styled.div<IsOpenProps>`
 `;
 
 const CloseIcon = styled(AiOutlineClose)`
+  left: 30px;
+  top: 30px;
+  width: 30px;
+  height: 30px;
   @media (max-width: 600px) {
     left: 30px;
     top: 30px;
@@ -75,9 +80,14 @@ const CloseIcon = styled(AiOutlineClose)`
   }
 
   position: absolute;
+
+  /* border: 1px solid green;
+  box-sizing: border-box; */
 `;
 
 const ModalTitle = styled.div`
+  margin-top: 60px;
+  font-size: 32px;
   @media (max-width: 600px) {
     margin-top: 60px;
     font-size: 32px;

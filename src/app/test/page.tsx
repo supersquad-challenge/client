@@ -20,11 +20,11 @@ const Test = () => {
     useState(true);
   return (
     <Container>
-      <BeforeRegisterChallenge hashTag={'Diet'} />
-      {/* <PaymentMethodModal
+      {/* <BeforeRegisterChallenge hashTag={'Diet'} /> */}
+      <PaymentMethodModal
         isModalOpen={true}
         setIsModalOpen={setIsChargeDepositModalOpen}
-      /> */}
+      />
       {/* <ChargeDepositModal
         isModalOpen={true}
         setIsModalOpen={setIsChargeDepositModalOpen}

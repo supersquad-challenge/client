@@ -87,6 +87,8 @@ const PaymentMethodModal = ({
 export default PaymentMethodModal;
 
 const ModalPaymentMethodContainer = styled.div`
+  margin-top: 30px;
+  width: 455px;
   @media (max-width: 600px) {
     margin-top: 30px;
     width: 455px;
@@ -100,11 +102,12 @@ const ModalPaymentMethodContainer = styled.div`
     width: 343px;
   }
 
-  /* border: 1px solid black;
+  /* border: 1px solid green;
   box-sizing: border-box; */
 `;
 
 const ModalPaymentMethodWrapper = styled.div`
+  height: 95px;
   @media (max-width: 600px) {
     height: 95px;
   }
@@ -117,35 +120,41 @@ const ModalPaymentMethodWrapper = styled.div`
   width: 100%;
   display: flex;
 
-  /* border: 1px solid black;
+  /* border: 1px solid green;
   box-sizing: border-box; */
 `;
 
 const CheckButton = styled.div<IsClickedProps>`
+  width: 45px;
+  height: 45px;
   @media (max-width: 600px) {
     width: 45px;
     height: 45px;
-    border-radius: 50%;
   }
   @media (max-width: 450px) {
     width: 36px;
     height: 36px;
-    border-radius: 50%;
   }
   @media (max-width: 392px) {
     width: 30px;
     height: 30px;
-    border-radius: 50%;
   }
+  border-radius: 50%;
   z-index: 201;
   background-color: ${(props) =>
     props.$isclicked ? `${colors.lightPurple}` : 'white'};
 
-  border: ${(props) => (!props.$isclicked ? `${colors.lightGray}` : undefined)};
+  border: ${(props) =>
+    !props.$isclicked ? `2px solid ${colors.lightGray}` : undefined};
   box-sizing: border-box;
+
+  /* border: 1px solid green;
+  box-sizing: border-box; */
 `;
 
 const PaymentMethod = styled.div`
+  margin-top: 9px;
+  font-size: 24px;
   @media (max-width: 600px) {
     margin-top: 9px;
     font-size: 24px;
@@ -159,11 +168,14 @@ const PaymentMethod = styled.div`
     font-size: 18px;
   }
   font-weight: 500;
+
   /* border: 1px solid green;
   box-sizing: border-box; */
 `;
 
 const PaymentMethodDetail = styled.div`
+  font-size: 20px;
+  margin-top: 18px;
   @media (max-width: 600px) {
     font-size: 20px;
     margin-top: 18px;
@@ -177,11 +189,14 @@ const PaymentMethodDetail = styled.div`
     margin-top: 10px;
   }
   font-weight: 400;
+
   /* border: 1px solid green;
   box-sizing: border-box; */
 `;
 
 const BasicButtonContainer = styled.div`
+  width: 350px;
+  height: 70px;
   @media (max-width: 600px) {
     width: 350px;
     height: 70px;
