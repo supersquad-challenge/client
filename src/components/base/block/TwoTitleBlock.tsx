@@ -31,27 +31,27 @@ const TwoTitleBlock = ({
   $color2: color2,
 }: ITwoTitleBlock) => {
   return (
-    <MyStatusWrapper $background={background}>
-      <MyStatusSmallTitle color={color1} $index={0}>
+    <TwoTitleBlockWrapper $background={background}>
+      <TwoTitleBlockSmallTitle color={color1} $index={0}>
         {title1}
-      </MyStatusSmallTitle>
-      <MyStautsSmallContent color={color1} $index={0}>
+      </TwoTitleBlockSmallTitle>
+      <TwoTitleBlockSmallContent color={color1} $index={0}>
         {content1}
-      </MyStautsSmallContent>
-      <MyStatusSmallTitle color={color2} $index={1}>
+      </TwoTitleBlockSmallContent>
+      <TwoTitleBlockSmallTitle color={color2} $index={1}>
         {title2}
-      </MyStatusSmallTitle>
-      <MyStautsSmallContent color={color2} $index={1}>
+      </TwoTitleBlockSmallTitle>
+      <TwoTitleBlockSmallContent color={color2} $index={1}>
         {content2}
-      </MyStautsSmallContent>
+      </TwoTitleBlockSmallContent>
       {children}
-    </MyStatusWrapper>
+    </TwoTitleBlockWrapper>
   );
 };
 
 export default TwoTitleBlock;
 
-export const MyStatusWrapper = styled.div<BackgroundProps>`
+const TwoTitleBlockWrapper = styled.div<BackgroundProps>`
   @media (max-width: 600px) {
     width: 380px;
     height: 110px;
@@ -71,30 +71,29 @@ export const MyStatusWrapper = styled.div<BackgroundProps>`
   background: ${(props) => props.$background};
   position: relative;
   display: flex;
-  justify-content: center;
 
   /* border: 1px solid black;
   box-sizing: border-box; */
 `;
 
-export const MyStatusSmallTitle = styled.div<IndexProps>`
+const TwoTitleBlockSmallTitle = styled.div<IndexProps>`
   @media (max-width: 600px) {
     font-size: 16px;
     top: 15px;
-    left: ${(props) => props.$index == 0 && '30px'};
-    right: ${(props) => props.$index == 1 && '30px'};
+    left: ${(props) => props.$index == 0 && '20px'};
+    right: ${(props) => props.$index == 1 && '20px'};
   }
   @media (max-width: 450px) {
     font-size: 15px;
     top: 15px;
-    left: ${(props) => props.$index == 0 && '26px'};
-    right: ${(props) => props.$index == 1 && '26px'};
+    left: ${(props) => props.$index == 0 && '20px'};
+    right: ${(props) => props.$index == 1 && '20px'};
   }
   @media (max-width: 392px) {
     font-size: 14px;
     top: 15px;
-    left: ${(props) => props.$index == 0 && '24px'};
-    right: ${(props) => props.$index == 1 && '24px'};
+    left: ${(props) => props.$index == 0 && '18px'};
+    right: ${(props) => props.$index == 1 && '18px'};
   }
   font-weight: 500;
   color: ${(props) => props.color};
@@ -104,24 +103,24 @@ export const MyStatusSmallTitle = styled.div<IndexProps>`
   box-sizing: border-box; */
 `;
 
-export const MyStautsSmallContent = styled.div<IndexProps>`
+const TwoTitleBlockSmallContent = styled.div<IndexProps>`
   @media (max-width: 600px) {
     font-size: 28px;
     bottom: 20px;
-    left: ${(props) => props.$index == 0 && '30px'};
-    right: ${(props) => props.$index == 1 && '30px'};
+    left: ${(props) => props.$index == 0 && '20px'};
+    right: ${(props) => props.$index == 1 && '20px'};
   }
   @media (max-width: 450px) {
     font-size: 25px;
     bottom: 18px;
-    left: ${(props) => props.$index == 0 && '26px'};
-    right: ${(props) => props.$index == 1 && '26px'};
+    left: ${(props) => props.$index == 0 && '20px'};
+    right: ${(props) => props.$index == 1 && '20px'};
   }
   @media (max-width: 392px) {
     font-size: 24px;
     bottom: 15px;
-    left: ${(props) => props.$index == 0 && '24px'};
-    right: ${(props) => props.$index == 1 && '24px'};
+    left: ${(props) => props.$index == 0 && '18px'};
+    right: ${(props) => props.$index == 1 && '18px'};
   }
   font-weight: 600;
   color: ${(props) => props.color};

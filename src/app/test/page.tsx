@@ -1,5 +1,8 @@
 'use client';
 
+import OneTitleBlock, {
+  OneTitleBlockSmallDoubleContainer,
+} from '@/components/base/block/OneTitleBlock';
 import TwoTitleBlock from '@/components/base/block/TwoTitleBlock';
 import BasicModal from '@/components/base/modal/BasicModal';
 import ChargeDepositModal from '@/components/base/modal/ChargeDepositModal';
@@ -38,6 +41,26 @@ const Test = () => {
       ></TwoTitleBlock> */}
       {/* <ProgressBarTwoTitleBlock title={'My Success Rate'} percentage={30} /> */}
       <PurpleGradientTwoTitleBlock />
+      <OneTitleBlock
+        background={colors.blockPurple}
+        title="Total Cash Deposit"
+        content="$2300"
+        isSmall={false}
+      />
+      <OneTitleBlockSmallDoubleContainer>
+        <OneTitleBlock
+          background={colors.blockGray}
+          title="Over 80% Pool"
+          content="$1500"
+          isSmall={true}
+        />
+        <OneTitleBlock
+          background={colors.blockGray}
+          title="Under 80% Pool"
+          content="$0"
+          isSmall={true}
+        />
+      </OneTitleBlockSmallDoubleContainer>
     </Container>
   );
 };
@@ -53,4 +76,5 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
 `;
