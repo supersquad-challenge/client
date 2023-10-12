@@ -1,22 +1,22 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 import { TextareaProp } from '@/types/Textarea';
 
 type BasicTextareaT = {
   color: string;
-  fontSize: number;
-}
+  fontsize: number;
+};
 
 const BasicTextareaElement = styled.textarea<BasicTextareaT>`
   width: 100%;
   min-width: 400px;
   height: 100%;
   min-height: 120px;
-  font-size: ${(props) => `${(props.fontSize)}px`};
+  font-size: ${(props) => `${props.fontsize}px`};
   color: ${(props) => props.color};
   border: 1px solid #ccc;
   border-radius: 10px;
-  line-height: ${(props) => `${(props.fontSize + 10)}px`};
+  line-height: ${(props) => `${props.fontsize + 10}px`};
   letter-spacing: 1.5px;
   padding: 10px;
   resize: none;
@@ -24,19 +24,24 @@ const BasicTextareaElement = styled.textarea<BasicTextareaT>`
   &::placeholder {
     color: #cccccc;
   }
-`
+`;
 
-const BasicTextarea = ({ placeholder, updateInput, currentValue, color, fontSize }: TextareaProp & BasicTextareaT) => {
-
+const BasicTextarea = ({
+  placeholder,
+  updateInput,
+  currentValue,
+  color,
+  fontsize: fontsize,
+}: TextareaProp & BasicTextareaT) => {
   return (
     <BasicTextareaElement
       placeholder={placeholder}
       onChange={updateInput}
       color={color}
-      fontSize={fontSize}
+      fontsize={fontsize}
       value={currentValue || ''}
     />
-  )
-}
+  );
+};
 
-export default BasicTextarea
+export default BasicTextarea;

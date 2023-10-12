@@ -63,20 +63,20 @@ const ChallengeTag = ({
       <BasicTag
         title={title}
         onClickHandler={onClickHandler}
-        color={`${colors.black}`}
-        backgroundcolor={backgroundcolor}
-        borderRadius600={15}
-        borderRadius450={11}
-        borderRadius392={10}
-        paddingHorizontal600={15}
-        paddingHorizontal450={11}
-        paddingHorizontal392={10}
-        paddingVertical600={6}
-        paddingVertical450={4}
-        paddingVertical392={3}
-        fontSize600={18}
-        fontSize450={16}
-        fontSize392={14}
+        $color={colors.black}
+        $backgroundcolor={backgroundcolor}
+        $borderradius600={15}
+        $borderradius450={11}
+        $borderradius392={10}
+        $paddinghorizontal600={15}
+        $paddinghorizontal450={11}
+        $paddinghorizontal392={10}
+        $paddingvertical600={6}
+        $paddingvertical450={4}
+        $paddingvertical392={3}
+        $fontsize600={18}
+        $fontsize450={16}
+        $fontsize392={14}
       />
     </ChallengeTagWrapper>
   );

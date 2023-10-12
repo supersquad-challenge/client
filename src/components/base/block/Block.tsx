@@ -8,7 +8,7 @@ interface BlockProps {
 }
 
 const Block = ({ backgroundColor, children }: BlockProps) => {
-  return <BlockWrapper background={backgroundColor}>{children}</BlockWrapper>;
+  return <BlockWrapper $background={backgroundColor}>{children}</BlockWrapper>;
 };
 export default Block;
 
@@ -26,5 +26,5 @@ const BlockWrapper = styled.div<BackgroundProps>`
     height: 95px;
   }
   border-radius: 20px;
-  background-color: ${(props) => props.background};
+  background-color: ${(props) => props.$background};
 `;

@@ -1,13 +1,13 @@
 export interface IsClickedProps {
-  isClicked: boolean;
+  $isclicked: boolean;
 }
 
 export interface IsOpenProps {
-  isOpen: boolean;
+  $isopen: boolean;
 }
 
 export interface BackgroundProps {
-  background: string;
+  $background: string;
 }
 
 export interface TitleContentProps {
@@ -20,7 +20,7 @@ export interface ImageProps {
 }
 
 export interface IndexProps {
-  index: number;
+  $index: number;
 }
 
 export interface OnClickProps {

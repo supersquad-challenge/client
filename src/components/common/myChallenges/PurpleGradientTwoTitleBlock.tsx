@@ -11,9 +11,9 @@ const PurpleGradientTwoTitleBlock = () => {
       content1={`$${totalCryptoDeposit}`}
       title2="Crypto Yield Boost"
       content2={`+$${cryptoYieldBoost}`}
-      background="linear-gradient(to right, #d6c0f0, #8a01d7)"
-      color1={colors.black}
-      color2="white"
+      $background="linear-gradient(to right, #d6c0f0, #8a01d7)"
+      $color1={colors.black}
+      $color2="white"
     />
   );
 };

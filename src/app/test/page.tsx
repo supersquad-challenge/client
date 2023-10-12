@@ -7,6 +7,7 @@ import PaymentMethodModal from '@/components/base/modal/PaymentMethodModal';
 import BeforeRegisterChallenge from '@/components/common/beforeRegisterChallenge/BeforeRegisterChallenge';
 import BeforeMyChallengeDetail from '@/components/common/myChallenges/BeforeMyChallengeDetail';
 import ProgressBarTwoTitleBlock from '@/components/common/myChallenges/ProgressBarTwoTitleBlock';
+import PurpleGradientTwoTitleBlock from '@/components/common/myChallenges/PurpleGradientTwoTitleBlock';
 import { colors } from '@/styles/color';
 import React, { useState } from 'react';
 import styled from 'styled-components';
@@ -16,9 +17,9 @@ const Test = () => {
     useState(true);
   return (
     <Container>
-      {/* <BeforeRegisterChallenge /> */}
+      {/* <BeforeRegisterChallenge hashTag={'Diet'} /> */}
       {/* <PaymentMethodModal
-        isModalOpen={true} //이렇게 해야만 열림... 왜..?
+        isModalOpen={true}
         setIsModalOpen={setIsChargeDepositModalOpen}
       /> */}
       {/* <ChargeDepositModal
@@ -31,9 +32,12 @@ const Test = () => {
         content1={'100%'}
         title2={'Target Success'}
         content2={'100%'}
-        background={`${colors.blockGray}`}
+        $background={`${colors.blockGray}`}
+        $color1={colors.black}
+        $color2={colors.black}
       ></TwoTitleBlock> */}
-      <ProgressBarTwoTitleBlock percentage={30} />
+      {/* <ProgressBarTwoTitleBlock title={'My Success Rate'} percentage={30} /> */}
+      <PurpleGradientTwoTitleBlock />
     </Container>
   );
 };
@@ -48,4 +52,5 @@ const Container = styled.div`
 
   display: flex;
   justify-content: center;
+  flex-direction: column;
 `;

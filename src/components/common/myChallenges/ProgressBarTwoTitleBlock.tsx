@@ -19,9 +19,9 @@ const ProgressBarTwoTitleBlock = ({
       content1={`${percentage}%`}
       title2="Target Success"
       content2="100%"
-      background={colors.blockGray}
-      color1={colors.black}
-      color2={colors.black}
+      $background={colors.blockGray}
+      $color1={colors.black}
+      $color2={colors.black}
     >
       <ProgressBar percentage={percentage}></ProgressBar>
     </TwoTitleBlock>
@@ -52,9 +52,9 @@ const ProgressBarContainer = styled.div`
   position: absolute;
 `;
 
-const Filler = styled.div<{ percentage: number }>`
+const Filler = styled.div<{ $percentage: number }>`
   height: 100%;
-  width: ${(props) => props.percentage}%;
+  width: ${(props) => props.$percentage}%;
   background-color: ${colors.darkPurple};
   border-radius: inherit;
   text-align: right;
@@ -64,10 +64,12 @@ interface ProgressBarProps {
   percentage: number;
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ percentage }) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({
+  percentage: percentage,
+}) => {
   return (
     <ProgressBarContainer>
-      <Filler percentage={percentage}></Filler>
+      <Filler $percentage={percentage}></Filler>
     </ProgressBarContainer>
   );
 };

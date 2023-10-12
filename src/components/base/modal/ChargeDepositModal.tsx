@@ -52,10 +52,10 @@ const ChargeDepositModal = ({
         <BasicButton
           title="Charge Deposit"
           onClickHandler={() => {}}
-          color="white"
-          backgroundColor={colors.black}
-          borderRadius={20}
-          fontSize={16}
+          $color="white"
+          $backgroundcolor={colors.black}
+          $borderradius={20}
+          $fontsize={16}
         />
       </BasicButtonContainer>
     </BasicModal>

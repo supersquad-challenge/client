@@ -14,7 +14,7 @@ const BeforeMyChallengeDetail = () => {
           imageUrl="/dietThumbnail.svg"
           width={90}
           height={90}
-          borderRadius={10}
+          $borderRadius={10}
         />
       </FixedSizeImageWrapper>
       <MyChallengeInfoWrapper>
@@ -31,10 +31,10 @@ const BeforeMyChallengeDetail = () => {
           <BasicButton
             title="Starting Soon"
             onClickHandler={() => {}}
-            color={colors.black}
-            backgroundColor="#dadada"
-            borderRadius={50}
-            fontSize={14}
+            $color={colors.black}
+            $backgroundcolor="#dadada"
+            $borderradius={50}
+            $fontsize={14}
           />
         </BasicButtonContainer>
       </MyChallengeInfoWrapper>

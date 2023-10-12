@@ -12,7 +12,7 @@ interface IBasicModal {
 
 const BasicModal = ({ isOpen, setIsOpen, title, children }: IBasicModal) => {
   return (
-    <Modal isOpen={isOpen}>
+    <Modal $isopen={isOpen}>
       <CloseIcon onClick={() => setIsOpen(false)} />
       <ModalTitle>{title}</ModalTitle>
       {children}
@@ -50,7 +50,7 @@ const Modal = styled.div<IsOpenProps>`
   background-color: white;
 
   transform: ${(props) =>
-    props.isOpen ? 'translateY(0)' : 'translateY(100%)'};
+    props.$isopen ? 'translateY(0)' : 'translateY(100%)'};
   transition: transform 0.3s ease-in-out;
 `;
 

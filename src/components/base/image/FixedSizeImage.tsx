@@ -3,14 +3,14 @@ import { ImageProps } from '@/interface';
 interface IFixedSizeImage {
   width: number;
   height: number;
-  borderRadius: number;
+  $borderRadius: number;
   imageUrl: string;
 }
 
 const FixedSizeImage = ({
   width,
   height,
-  borderRadius,
+  $borderRadius: borderRadius,
   imageUrl,
 }: IFixedSizeImage) => {
   return (

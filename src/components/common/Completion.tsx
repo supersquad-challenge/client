@@ -18,10 +18,10 @@ const Completion = ({ title, detail, buttonTitle }: ICompletion) => {
         <BasicButton
           title={buttonTitle}
           onClickHandler={() => {}}
-          color="white"
-          backgroundColor={colors.black}
-          borderRadius={12}
-          fontSize={16}
+          $color="white"
+          $backgroundcolor={colors.black}
+          $borderradius={12}
+          $fontsize={16}
         />
       </BasicButtonContainer>
     </Wrapper>

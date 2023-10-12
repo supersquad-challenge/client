@@ -27,7 +27,7 @@ const PaymentMethodModal = ({
             }}
           >
             <CheckButton
-              isClicked={paymentMethod == 'crypto'}
+              $isclicked={paymentMethod == 'crypto'}
               onClick={() => {
                 if (paymentMethod == '' || paymentMethod == 'cash') {
                   setPaymentMethod('crypto');
@@ -54,7 +54,7 @@ const PaymentMethodModal = ({
             }}
           >
             <CheckButton
-              isClicked={paymentMethod == 'cash'}
+              $isclicked={paymentMethod == 'cash'}
               onClick={() => {
                 if (paymentMethod == '' || paymentMethod == 'crypto') {
                   setPaymentMethod('cash');
@@ -74,10 +74,10 @@ const PaymentMethodModal = ({
         <BasicButton
           title="Go On"
           onClickHandler={() => {}}
-          color="white"
-          backgroundColor={colors.black}
-          borderRadius={30}
-          fontSize={22}
+          $color="white"
+          $backgroundcolor={colors.black}
+          $borderradius={30}
+          $fontsize={22}
         />
       </BasicButtonContainer>
     </BasicModal>
@@ -139,9 +139,9 @@ const CheckButton = styled.div<IsClickedProps>`
   }
   z-index: 201;
   background-color: ${(props) =>
-    props.isClicked ? `${colors.lightPurple}` : 'white'};
+    props.$isclicked ? `${colors.lightPurple}` : 'white'};
 
-  border: ${(props) => !props.isClicked && `${colors.lightGray}`};
+  border: ${(props) => (!props.$isclicked ? `${colors.lightGray}` : undefined)};
   box-sizing: border-box;
 `;
 

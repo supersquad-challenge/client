@@ -3,27 +3,27 @@ import styled from 'styled-components';
 import { ButtonProp } from '@/types/Button';
 
 type BasicButtonT = {
-  color: string;
-  fontSize: number;
-  borderRadius: number;
-  backgroundColor: string;
+  $color: string;
+  $fontsize: number;
+  $borderradius: number;
+  $backgroundcolor: string;
 };
 
 const BasicButton = ({
   title,
   onClickHandler,
-  color,
-  fontSize,
-  borderRadius,
-  backgroundColor,
+  $color: color,
+  $fontsize: fontsize,
+  $borderradius: borderRadius,
+  $backgroundcolor: backgroundColor,
 }: BasicButtonT & ButtonProp) => {
   return (
     <BasicButtonWrapper
-      color={color}
-      fontSize={fontSize}
+      $color={color}
+      $fontsize={fontsize}
       onClick={() => onClickHandler()}
-      borderRadius={borderRadius}
-      backgroundColor={backgroundColor}
+      $borderradius={borderRadius}
+      $backgroundcolor={backgroundColor}
     >
       {title}
     </BasicButtonWrapper>
@@ -37,13 +37,13 @@ const BasicButtonWrapper = styled.button<BasicButtonT>`
   min-width: 50px;
   height: 100%;
   min-height: 20px;
-  font-size: ${(props) => `${props.fontSize}px`};
-  color: ${(props) => props.color};
+  font-size: ${(props) => `${props.$fontsize}px`};
+  color: ${(props) => props.$color};
   text-align: center;
   border: none;
   transition: all ease 0.2s;
-  border-radius: ${(props) => `${props.borderRadius}px`};
-  background-color: ${(props) => props.backgroundColor};
+  border-radius: ${(props) => `${props.$borderradius}px`};
+  background-color: ${(props) => props.$backgroundcolor};
 
   &:hover {
     cursor: pointer;

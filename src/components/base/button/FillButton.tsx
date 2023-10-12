@@ -1,21 +1,26 @@
-import React from 'react'
-import { ButtonProp } from '@/types/Button'
-import styled from 'styled-components'
+import React from 'react';
+import { ButtonProp } from '@/types/Button';
+import styled from 'styled-components';
 
 type FillButtonT = {
   color: string;
-  fontSize: number;
+  fontsize: number;
   backgroundcolor: string;
-}
+};
 
-const FillButton = ({ title, onClickHandler, color, fontSize, backgroundcolor }: ButtonProp & FillButtonT) => {
-
-const FillButton = styled.button<FillButtonT>`
+const FillButton = ({
+  title,
+  onClickHandler,
+  color,
+  fontsize: fontsize,
+  backgroundcolor,
+}: ButtonProp & FillButtonT) => {
+  const FillButton = styled.button<FillButtonT>`
     width: 100%;
-    min-width: 50px;    
+    min-width: 50px;
     height: 100%;
     min-height: 20px;
-    font-size: ${(props) => `${(props.fontSize)}px`};
+    font-size: ${(props) => `${props.fontsize}px`};
     color: ${(props) => props.color};
     text-align: center;
     line-height: 100%;
@@ -28,17 +33,17 @@ const FillButton = styled.button<FillButtonT>`
       background-color: ${(props) => props.color};
       color: ${(props) => props.backgroundcolor};
     }
-  `
+  `;
   return (
     <FillButton
       color={color}
-      fontSize={fontSize}
+      fontsize={fontsize}
       backgroundcolor={backgroundcolor}
       onClick={() => onClickHandler()}
     >
       {title}
     </FillButton>
-  )
-}
+  );
+};
 
-export default FillButton
+export default FillButton;

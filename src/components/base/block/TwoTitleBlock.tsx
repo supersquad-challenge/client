@@ -3,13 +3,21 @@ import { colors } from '@/styles/color';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-interface ITwoTitleBlock {
+export interface ITwoTitleBlock {
   title1: string;
   content1: string;
   title2: string;
   content2: string;
   children?: ReactNode;
-  background: string;
+  $background: string;
+  /**
+   * color1: title1, content1 font color
+   */
+  $color1: string;
+  /**
+   * color2: title2, content2 font color
+   */
+  $color2: string;
 }
 
 const TwoTitleBlock = ({
@@ -18,14 +26,24 @@ const TwoTitleBlock = ({
   title2,
   content2,
   children,
-  background,
+  $background: background,
+  $color1: color1,
+  $color2: color2,
 }: ITwoTitleBlock) => {
   return (
-    <MyStatusWrapper background={background}>
-      <MyStatusSmallTitle index={0}>{title1}</MyStatusSmallTitle>
-      <MyStautsSmallContent index={0}>{content1}</MyStautsSmallContent>
-      <MyStatusSmallTitle index={1}>{title2}</MyStatusSmallTitle>
-      <MyStautsSmallContent index={1}>{content2}</MyStautsSmallContent>
+    <MyStatusWrapper $background={background}>
+      <MyStatusSmallTitle color={color1} $index={0}>
+        {title1}
+      </MyStatusSmallTitle>
+      <MyStautsSmallContent color={color1} $index={0}>
+        {content1}
+      </MyStautsSmallContent>
+      <MyStatusSmallTitle color={color2} $index={1}>
+        {title2}
+      </MyStatusSmallTitle>
+      <MyStautsSmallContent color={color2} $index={1}>
+        {content2}
+      </MyStautsSmallContent>
       {children}
     </MyStatusWrapper>
   );
@@ -33,7 +51,7 @@ const TwoTitleBlock = ({
 
 export default TwoTitleBlock;
 
-const MyStatusWrapper = styled.div<BackgroundProps>`
+export const MyStatusWrapper = styled.div<BackgroundProps>`
   @media (max-width: 600px) {
     width: 380px;
     height: 110px;
@@ -50,7 +68,7 @@ const MyStatusWrapper = styled.div<BackgroundProps>`
     border-radius: 20px;
   }
   margin-top: 10px;
-  background-color: ${(props) => props.background};
+  background: ${(props) => props.$background};
   position: relative;
   display: flex;
   justify-content: center;
@@ -59,54 +77,54 @@ const MyStatusWrapper = styled.div<BackgroundProps>`
   box-sizing: border-box; */
 `;
 
-const MyStatusSmallTitle = styled.div<IndexProps>`
+export const MyStatusSmallTitle = styled.div<IndexProps>`
   @media (max-width: 600px) {
     font-size: 16px;
     top: 15px;
-    left: ${(props) => props.index == 0 && '30px'};
-    right: ${(props) => props.index == 1 && '30px'};
+    left: ${(props) => props.$index == 0 && '30px'};
+    right: ${(props) => props.$index == 1 && '30px'};
   }
   @media (max-width: 450px) {
     font-size: 15px;
     top: 15px;
-    left: ${(props) => props.index == 0 && '26px'};
-    right: ${(props) => props.index == 1 && '26px'};
+    left: ${(props) => props.$index == 0 && '26px'};
+    right: ${(props) => props.$index == 1 && '26px'};
   }
   @media (max-width: 392px) {
     font-size: 14px;
     top: 15px;
-    left: ${(props) => props.index == 0 && '24px'};
-    right: ${(props) => props.index == 1 && '24px'};
+    left: ${(props) => props.$index == 0 && '24px'};
+    right: ${(props) => props.$index == 1 && '24px'};
   }
   font-weight: 500;
-  color: ${colors.black};
+  color: ${(props) => props.color};
   position: absolute;
 
   /* border: 1px solid black;
   box-sizing: border-box; */
 `;
 
-const MyStautsSmallContent = styled.div<IndexProps>`
+export const MyStautsSmallContent = styled.div<IndexProps>`
   @media (max-width: 600px) {
     font-size: 28px;
     bottom: 20px;
-    left: ${(props) => props.index == 0 && '30px'};
-    right: ${(props) => props.index == 1 && '30px'};
+    left: ${(props) => props.$index == 0 && '30px'};
+    right: ${(props) => props.$index == 1 && '30px'};
   }
   @media (max-width: 450px) {
     font-size: 25px;
     bottom: 18px;
-    left: ${(props) => props.index == 0 && '26px'};
-    right: ${(props) => props.index == 1 && '26px'};
+    left: ${(props) => props.$index == 0 && '26px'};
+    right: ${(props) => props.$index == 1 && '26px'};
   }
   @media (max-width: 392px) {
     font-size: 24px;
     bottom: 15px;
-    left: ${(props) => props.index == 0 && '24px'};
-    right: ${(props) => props.index == 1 && '24px'};
+    left: ${(props) => props.$index == 0 && '24px'};
+    right: ${(props) => props.$index == 1 && '24px'};
   }
   font-weight: 600;
-  color: ${colors.black};
+  color: ${(props) => props.color};
   position: absolute;
 
   /* border: 1px solid black;
