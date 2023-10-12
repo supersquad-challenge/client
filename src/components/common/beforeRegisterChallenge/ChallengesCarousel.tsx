@@ -109,6 +109,8 @@ const Challenge = ({ onClick, datum }: ChallengeProps) => {
 };
 
 const ChallengeWrapper = styled.div`
+  width: 230px;
+  height: 248px;
   @media (max-width: 600px) {
     width: 205px;
     height: 220px;
@@ -136,6 +138,8 @@ const ChallengeThumbnail: React.FC<ImageProps> = ({ imageUrl }) => {
   );
 };
 const ChallengeThumbnailWrapper = styled.div`
+  width: 230px; // 원하는 크기로 설정
+  height: 140px;
   @media (max-width: 600px) {
     width: 205px; // 원하는 크기로 설정
     height: 131px;
@@ -156,6 +160,7 @@ const ChallengeThumbnailWrapper = styled.div`
 `;
 
 const ChallengeThumbnailImage = styled.img`
+  width: 230px;
   @media (max-width: 600px) {
     width: 205px;
   }
@@ -170,6 +175,8 @@ const ChallengeThumbnailImage = styled.img`
 `;
 
 const ChallengeTitle = styled.div`
+  font-size: 28px;
+  margin-top: 10px;
   @media (max-width: 600px) {
     font-size: 24px;
     margin-top: 8px;
@@ -186,24 +193,27 @@ const ChallengeTitle = styled.div`
   font-weight: 500;
 
   width: fit-content;
+
+  /* border: 1px solid green;
+  box-sizing: border-box; */
 `;
 
 const ChallengePeriod = styled.div`
+  font-size: 17px;
+  margin-top: 10px;
   @media (max-width: 600px) {
-    width: 245px;
     font-size: 14px;
     margin-top: 8px;
   }
   @media (max-width: 450px) {
-    width: 184px;
     font-size: 11px;
     margin-top: 6px;
   }
   @media (max-width: 392px) {
-    width: 160px;
     font-size: 10px;
     margin-top: 5px;
   }
+  width: fit-content;
   font-weight: 500;
   color: ${colors.gray};
 
@@ -212,16 +222,14 @@ const ChallengePeriod = styled.div`
 `;
 
 const ChallengeParticipants = styled.div`
+  font-size: 16px;
   @media (max-width: 600px) {
-    height: 18px;
     font-size: 14px;
   }
   @media (max-width: 450px) {
-    height: 14px;
     font-size: 11px;
   }
   @media (max-width: 392px) {
-    height: 12px;
     font-size: 10px;
   }
   color: ${colors.black};
@@ -232,21 +240,17 @@ const ChallengeParticipants = styled.div`
 `;
 
 const ChallengeTotalDeposit = styled.div`
+  font-size: 16px;
+  margin-left: 15px;
   @media (max-width: 600px) {
-    height: 18px;
-
     font-size: 15px;
     margin-left: 15px;
   }
   @media (max-width: 450px) {
-    height: 14px;
-
     font-size: 11px;
     margin-left: 11px;
   }
   @media (max-width: 392px) {
-    height: 12px;
-
     font-size: 10px;
     margin-left: 10px;
   }
@@ -258,6 +262,8 @@ const ChallengeTotalDeposit = styled.div`
 `;
 
 const ChallengeTagContainer = styled.div`
+  left: 9px;
+  top: 12px;
   @media (max-width: 600px) {
     left: 9px;
     top: 12px;
@@ -315,6 +321,7 @@ const ChallengeTag = ({
 };
 
 const ChallengeTagWrapper = styled.div`
+  height: 24px;
   @media (max-width: 600px) {
     height: 24px;
   }
@@ -324,6 +331,6 @@ const ChallengeTagWrapper = styled.div`
   @media (max-width: 392px) {
     height: 16px;
   }
-  width: fit-content;
   margin-right: 5px;
+  width: fit-content;
 `;

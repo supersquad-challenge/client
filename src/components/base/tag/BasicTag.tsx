@@ -71,6 +71,11 @@ const BasicTagWrapper = styled.div<Presenter>`
   align-items: center;
   text-align: center;
 
+  border-radius: ${(props) => `${props.$borderradius600}px`};
+  padding-left: ${(props) => `${props.$paddinghorizontal600}px`};
+  padding-right: ${(props) => `${props.$paddinghorizontal600}px`};
+  font-size: ${(props) => `${props.$fontsize600}px`};
+
   @media (max-width: 600px) {
     border-radius: ${(props) => `${props.$borderradius600}px`};
     padding-left: ${(props) => `${props.$paddinghorizontal600}px`};

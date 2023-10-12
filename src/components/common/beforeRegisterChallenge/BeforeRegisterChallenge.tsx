@@ -1,6 +1,6 @@
 'use client';
 
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 import ChallengesCarousel from './ChallengesCarousel';
 import allChallengesData from '../../../testData/allChallenges.json';
 import { colors } from '@/styles/color';
@@ -42,6 +42,7 @@ export default function BeforeRegisterChallenge({
 }
 
 const ChallengeSection = styled.div`
+  height: 375px;
   @media (max-width: 600px) {
     height: 325px;
   }
@@ -58,6 +59,8 @@ const ChallengeSection = styled.div`
 `;
 
 const ChallengeHashTag = styled.div`
+  font-size: 50px;
+  margin-bottom: 20px;
   @media (max-width: 600px) {
     font-size: 40px;
     margin-bottom: 15px;
