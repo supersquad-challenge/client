@@ -62,7 +62,7 @@ const MyChllengeWrapper = styled.div`
   border-radius: 20px;
   position: relative;
 
-  background-color: #f6f6f6;
+  background-color: ${colors.blockGray};
 `;
 
 const FixedSizeImageWrapper = styled.div`

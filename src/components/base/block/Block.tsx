@@ -1,4 +1,4 @@
-import { BackgroundColorProps } from '@/interface';
+import { BackgroundProps } from '@/interface';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
@@ -8,13 +8,11 @@ interface BlockProps {
 }
 
 const Block = ({ backgroundColor, children }: BlockProps) => {
-  return (
-    <BlockWrapper backgroundColor={backgroundColor}>{children}</BlockWrapper>
-  );
+  return <BlockWrapper background={backgroundColor}>{children}</BlockWrapper>;
 };
 export default Block;
 
-const BlockWrapper = styled.div<BackgroundColorProps>`
+const BlockWrapper = styled.div<BackgroundProps>`
   @media (max-width: 600px) {
     width: 210px;
     height: 120px;
@@ -28,5 +26,5 @@ const BlockWrapper = styled.div<BackgroundColorProps>`
     height: 95px;
   }
   border-radius: 20px;
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${(props) => props.background};
 `;

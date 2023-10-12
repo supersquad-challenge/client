@@ -6,8 +6,8 @@ export interface IsOpenProps {
   isOpen: boolean;
 }
 
-export interface BackgroundColorProps {
-  backgroundColor: string;
+export interface BackgroundProps {
+  background: string;
 }
 
 export interface TitleContentProps {
