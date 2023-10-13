@@ -29,8 +29,8 @@ const Test = () => {
         isModalOpen={true}
         setIsModalOpen={setIsChargeDepositModalOpen}
       /> */}
-      <BeforeMyChallengeDetail />
-      {/* <TwoTitleBlock
+      {/* <BeforeMyChallengeDetail /> */}
+      <TwoTitleBlock
         title1={'My Success Rate'}
         content1={'100%'}
         title2={'Target Success'}
@@ -38,7 +38,7 @@ const Test = () => {
         $background={`${colors.blockGray}`}
         $color1={colors.black}
         $color2={colors.black}
-      ></TwoTitleBlock> */}
+      ></TwoTitleBlock>
       {/* <ProgressBarTwoTitleBlock title={'My Success Rate'} percentage={30} /> */}
       {/* <PurpleGradientTwoTitleBlock /> */}
       {/* <OneTitleBlock

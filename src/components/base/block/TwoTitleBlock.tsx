@@ -52,21 +52,21 @@ const TwoTitleBlock = ({
 export default TwoTitleBlock;
 
 const TwoTitleBlockWrapper = styled.div<BackgroundProps>`
+  width: 400px;
+  height: 120px;
   @media (max-width: 600px) {
     width: 380px;
     height: 110px;
-    border-radius: 20px;
   }
   @media (max-width: 450px) {
     width: 360px;
     height: 100px;
-    border-radius: 20px;
   }
   @media (max-width: 392px) {
     width: 345px;
     height: 95px;
-    border-radius: 20px;
   }
+  border-radius: 20px;
   margin-top: 10px;
   background: ${(props) => props.$background};
   position: relative;
@@ -77,6 +77,10 @@ const TwoTitleBlockWrapper = styled.div<BackgroundProps>`
 `;
 
 const TwoTitleBlockSmallTitle = styled.div<IndexProps>`
+  font-size: 17px;
+  top: 15px;
+  left: ${(props) => props.$index == 0 && '22px'};
+  right: ${(props) => props.$index == 1 && '22px'};
   @media (max-width: 600px) {
     font-size: 16px;
     top: 15px;
@@ -104,6 +108,10 @@ const TwoTitleBlockSmallTitle = styled.div<IndexProps>`
 `;
 
 const TwoTitleBlockSmallContent = styled.div<IndexProps>`
+  font-size: 30px;
+  bottom: 22px;
+  left: ${(props) => props.$index == 0 && '22px'};
+  right: ${(props) => props.$index == 1 && '22px'};
   @media (max-width: 600px) {
     font-size: 28px;
     bottom: 20px;
