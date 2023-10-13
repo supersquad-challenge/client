@@ -7,12 +7,13 @@ import ChallengeInfoTable from '@/components/common/challenges/ChallengeInfo';
 import BasicTag from '@/components/base/tag/BasicTag';
 import { colors } from '@/styles/color';
 import ChallengeInfo from '@/components/common/challenges/ChallengeInfo';
+import ChallengeTwoTags from '@/components/common/challenges/ChallengeTwoTags';
 
 const TestChallenge = () => {
   return (
     <Container>
       <ChallengeThumbnailImage src="/dietThumbnail.svg" alt="dietThumbnail" />
-      <TagsContainer>
+      {/* <TagsContainer>
         <ChallengeTag
           title={challengeInfo?.challengeVerificationFrequency}
           onClickHandler={() => {}}
@@ -26,7 +27,14 @@ const TestChallenge = () => {
           onClickHandler={() => {}}
           backgroundcolor={`${colors.lightPurple}`}
         />
-      </TagsContainer>
+      </TagsContainer> */}
+      <ChallengeTwoTags
+        tag1={challengeInfo?.challengeVerificationFrequency}
+        tag2={daysBetweenDates(
+          challengeInfo?.challengeEndsAt as string,
+          challengeInfo?.challengeStartsAt as string,
+        )}
+      />
       <ChallengeContainer>
         <ChallengeTitle>{challengeInfo?.challengeName}</ChallengeTitle>
         <ParticipantsTotalDepositWrapper>

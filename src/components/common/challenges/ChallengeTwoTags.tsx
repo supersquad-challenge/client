@@ -27,6 +27,8 @@ const ChallengeTwoTags = ({ tag1, tag2 }: IChallengeTwoTags) => {
 export default ChallengeTwoTags;
 
 const TagsContainer = styled.div`
+  width: 440px;
+  height: 36px;
   @media (max-width: 600px) {
     width: 440px;
     height: 36px;
@@ -83,6 +85,7 @@ const ChallengeTag = ({
 };
 
 const ChallengeTagWrapper = styled.div`
+  height: 36px;
   @media (max-width: 600px) {
     height: 36px;
   }
