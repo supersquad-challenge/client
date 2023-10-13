@@ -31,6 +31,9 @@ const ProgressBarTwoTitleBlock = ({
 export default ProgressBarTwoTitleBlock;
 
 const ProgressBarContainer = styled.div`
+  width: 144px;
+  height: 22px;
+  bottom: 27px;
   @media (max-width: 600px) {
     width: 140px;
     height: 20px;

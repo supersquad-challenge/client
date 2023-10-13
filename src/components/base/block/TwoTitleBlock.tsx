@@ -71,6 +71,7 @@ const TwoTitleBlockWrapper = styled.div<BackgroundProps>`
   background: ${(props) => props.$background};
   position: relative;
   display: flex;
+  justify-content: center;
 
   /* border: 1px solid black;
   box-sizing: border-box; */
