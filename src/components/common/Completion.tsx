@@ -45,6 +45,8 @@ const Wrapper = styled.div`
 `;
 
 const CheckImage = styled.img`
+  width: 60px;
+  height: 60px;
   @media (max-width: 600px) {
     width: 55px;
     height: 55px;
@@ -60,6 +62,7 @@ const CheckImage = styled.img`
 `;
 
 const CompletionTitle = styled.div`
+  font-size: 30px;
   @media (max-width: 600px) {
     font-size: 28px;
   }
@@ -81,6 +84,8 @@ const CompletionTitle = styled.div`
 `;
 
 const CompletionDetail = styled.div`
+  width: 320px;
+  font-size: 20px;
   @media (max-width: 600px) {
     width: 300px;
     font-size: 18px;
@@ -106,6 +111,7 @@ const CompletionDetail = styled.div`
 `;
 
 const BasicButtonContainer = styled.div`
+  width: 220px;
   @media (max-width: 600px) {
     width: 200px;
   }
