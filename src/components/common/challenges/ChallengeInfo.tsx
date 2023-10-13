@@ -21,6 +21,7 @@ const ChallengeInfo = ({ title, content, contentColor }: IChallengeInfo) => {
 export default ChallengeInfo;
 
 const ChallengeInfoTitle = styled.div`
+  font-size: 20px;
   @media (max-width: 600px) {
     font-size: 18px;
   }
@@ -41,6 +42,7 @@ const ChallengeInfoTitle = styled.div`
 `;
 
 const ChallengeInfoContent = styled.div`
+  font-size: 24px;
   @media (max-width: 600px) {
     font-size: 22px;
   }

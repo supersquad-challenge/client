@@ -6,6 +6,7 @@ import { daysBetweenDates } from '@/lib/dates';
 import ChallengeInfoTable from '@/components/common/challenges/ChallengeInfo';
 import BasicTag from '@/components/base/tag/BasicTag';
 import { colors } from '@/styles/color';
+import ChallengeInfo from '@/components/common/challenges/ChallengeInfo';
 
 const TestChallenge = () => {
   return (
@@ -37,9 +38,19 @@ const TestChallenge = () => {
           </ChallengeTotalDeposit>
         </ParticipantsTotalDepositWrapper>
       </ChallengeContainer>
-      {/* <BlackFixedButton onClick={handleIAmInButtonClick}>
-        I am in!
-      </BlackFixedButton> */}
+
+      {/* <div style={{ display: 'flex' }}>
+        <ChallengeInfo
+          contentColor={colors.black}
+          title="Schedule"
+          content="Oct 11st- Nov 10th"
+        />
+        <ChallengeInfo
+          contentColor={colors.black}
+          title="Schedule"
+          content="Oct 11st- Nov 10th"
+        />
+      </div> */}
     </Container>
   );
 };

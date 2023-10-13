@@ -13,6 +13,8 @@ const Block = ({ backgroundColor, children }: BlockProps) => {
 export default Block;
 
 const BlockWrapper = styled.div<BackgroundProps>`
+  width: 240px;
+  height: 140px;
   @media (max-width: 600px) {
     width: 210px;
     height: 120px;
@@ -25,6 +27,12 @@ const BlockWrapper = styled.div<BackgroundProps>`
     width: 160px;
     height: 95px;
   }
+  //이거는 조절해야함.
+  margin: 10px;
+
   border-radius: 20px;
   background-color: ${(props) => props.$background};
+
+  /* box-sizing: content-box;
+  border: 1px solid black; */
 `;
