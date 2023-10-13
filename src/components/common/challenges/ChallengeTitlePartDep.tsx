@@ -12,15 +12,17 @@ const ChallengeTitlePartDep = ({
   challengeParticipantsCount,
   challengeTotalDeposit,
 }: IChallengeTitlePartDep) => {
-  <ChallengeContainer>
-    <ChallengeTitle>{challengeName}</ChallengeTitle>
-    <ParticipantsTotalDepositWrapper>
-      <ChallengeParticipants>
-        {challengeParticipantsCount} Participants
-      </ChallengeParticipants>
-      <ChallengeTotalDeposit>${challengeTotalDeposit}</ChallengeTotalDeposit>
-    </ParticipantsTotalDepositWrapper>
-  </ChallengeContainer>;
+  return (
+    <ChallengeContainer>
+      <ChallengeTitle>{challengeName}</ChallengeTitle>
+      <ParticipantsTotalDepositWrapper>
+        <ChallengeParticipants>
+          {challengeParticipantsCount} Participants
+        </ChallengeParticipants>
+        <ChallengeTotalDeposit>${challengeTotalDeposit}</ChallengeTotalDeposit>
+      </ParticipantsTotalDepositWrapper>
+    </ChallengeContainer>
+  );
 };
 
 export default ChallengeTitlePartDep;
@@ -38,6 +40,8 @@ const ChallengeContainer = styled.div`
 `;
 
 const ChallengeTitle = styled.div`
+  font-size: 35px;
+  width: 460px;
   @media (max-width: 600px) {
     font-size: 33px;
     width: 440px;
@@ -52,13 +56,14 @@ const ChallengeTitle = styled.div`
   }
   margin-top: 20px;
   font-weight: 600;
-  width: fit-content;
+  /* width: fit-content; */
 
   /* border: 1px solid black;
   box-sizing: border-box; */
 `;
 
 const ParticipantsTotalDepositWrapper = styled.div`
+  width: 460px;
   @media (max-width: 600px) {
     width: 440px;
   }
@@ -73,6 +78,8 @@ const ParticipantsTotalDepositWrapper = styled.div`
 `;
 
 const ChallengeParticipants = styled.div`
+  font-size: 20px;
+  padding-right: 12px;
   @media (max-width: 600px) {
     font-size: 18px;
     padding-right: 12px;
@@ -92,6 +99,7 @@ const ChallengeParticipants = styled.div`
 `;
 
 const ChallengeTotalDeposit = styled.div`
+  font-size: 20px;
   @media (max-width: 600px) {
     font-size: 18px;
   }

@@ -8,44 +8,25 @@ import BasicTag from '@/components/base/tag/BasicTag';
 import { colors } from '@/styles/color';
 import ChallengeInfo from '@/components/common/challenges/ChallengeInfo';
 import ChallengeTwoTags from '@/components/common/challenges/ChallengeTwoTags';
+import ChallengeTitlePartDep from '@/components/common/challenges/ChallengeTitlePartDep';
 
 const TestChallenge = () => {
   return (
     <Container>
       <ChallengeThumbnailImage src="/dietThumbnail.svg" alt="dietThumbnail" />
-      {/* <TagsContainer>
-        <ChallengeTag
-          title={challengeInfo?.challengeVerificationFrequency}
-          onClickHandler={() => {}}
-          backgroundcolor={`${colors.lightGray}`}
-        />
-        <ChallengeTag
-          title={daysBetweenDates(
-            challengeInfo?.challengeEndsAt as string,
-            challengeInfo?.challengeStartsAt as string,
-          )}
-          onClickHandler={() => {}}
-          backgroundcolor={`${colors.lightPurple}`}
-        />
-      </TagsContainer> */}
-      <ChallengeTwoTags
+      {/* <ChallengeTwoTags
         tag1={challengeInfo?.challengeVerificationFrequency}
         tag2={daysBetweenDates(
           challengeInfo?.challengeEndsAt as string,
           challengeInfo?.challengeStartsAt as string,
         )}
+      /> */}
+
+      <ChallengeTitlePartDep
+        challengeName={challengeInfo?.challengeName}
+        challengeParticipantsCount={challengeInfo?.challengeParticipantsCount}
+        challengeTotalDeposit={challengeInfo?.challengeTotalDeposit}
       />
-      <ChallengeContainer>
-        <ChallengeTitle>{challengeInfo?.challengeName}</ChallengeTitle>
-        <ParticipantsTotalDepositWrapper>
-          <ChallengeParticipants>
-            {challengeInfo?.challengeParticipantsCount} Participants
-          </ChallengeParticipants>
-          <ChallengeTotalDeposit>
-            ${challengeInfo?.challengeTotalDeposit}
-          </ChallengeTotalDeposit>
-        </ParticipantsTotalDepositWrapper>
-      </ChallengeContainer>
 
       {/* <div style={{ display: 'flex' }}>
         <ChallengeInfo
