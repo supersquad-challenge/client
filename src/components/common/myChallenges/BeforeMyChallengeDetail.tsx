@@ -46,6 +46,8 @@ const BeforeMyChallengeDetail = () => {
 export default BeforeMyChallengeDetail;
 
 const MyChllengeWrapper = styled.div`
+  width: 430px;
+  height: 135px;
   @media (max-width: 600px) {
     width: 400px;
     height: 135px;
@@ -66,6 +68,8 @@ const MyChllengeWrapper = styled.div`
 `;
 
 const FixedSizeImageWrapper = styled.div`
+  left: 28px;
+  top: 23px;
   @media (max-width: 600px) {
     left: 23px;
     top: 23px;
@@ -84,6 +88,8 @@ const FixedSizeImageWrapper = styled.div`
 `;
 
 const MyChallengeInfoWrapper = styled.div`
+  left: 148px;
+  top: 23px;
   @media (max-width: 600px) {
     left: 140px;
     top: 23px;
@@ -104,6 +110,7 @@ const MyChallengeInfoWrapper = styled.div`
 `;
 
 const MyChallengeTitle = styled.div`
+  font-size: 19px;
   @media (max-width: 600px) {
     font-size: 19px;
   }
@@ -116,6 +123,8 @@ const MyChallengeTitle = styled.div`
 `;
 
 const MyChallengeDuration = styled.div`
+  height: 18px;
+  font-size: 15px;
   @media (max-width: 600px) {
     height: 18px;
     font-size: 15px;
@@ -134,6 +143,8 @@ const MyChallengeDuration = styled.div`
 `;
 
 const GoDetailIcon = styled(AiOutlineRight)`
+  right: 20px;
+  top: 58px;
   @media (max-width: 600px) {
     right: 15px;
     top: 58px;
@@ -152,6 +163,8 @@ const GoDetailIcon = styled(AiOutlineRight)`
 `;
 
 const BasicButtonContainer = styled.div`
+  width: 190px;
+  height: 34px;
   @media (max-width: 600px) {
     width: 190px;
     height: 34px;

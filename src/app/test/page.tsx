@@ -25,11 +25,11 @@ const Test = () => {
         isModalOpen={true}
         setIsModalOpen={setIsChargeDepositModalOpen}
       /> */}
-      <ChargeDepositModal
+      {/* <ChargeDepositModal
         isModalOpen={true}
         setIsModalOpen={setIsChargeDepositModalOpen}
-      />
-      {/* <BeforeMyChallengeDetail /> */}
+      /> */}
+      <BeforeMyChallengeDetail />
       {/* <TwoTitleBlock
         title1={'My Success Rate'}
         content1={'100%'}
