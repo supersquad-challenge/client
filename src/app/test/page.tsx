@@ -39,9 +39,9 @@ const Test = () => {
         $color1={colors.black}
         $color2={colors.black}
       ></TwoTitleBlock> */}
-      <ProgressBarTwoTitleBlock title={'My Success Rate'} percentage={30} />
-      {/* <PurpleGradientTwoTitleBlock /> */}
-      {/* <OneTitleBlock
+      {/* <ProgressBarTwoTitleBlock title={'My Success Rate'} percentage={30} /> */}
+      <PurpleGradientTwoTitleBlock />
+      <OneTitleBlock
         background={colors.blockPurple}
         title="Total Cash Deposit"
         content="$2300"
@@ -60,7 +60,7 @@ const Test = () => {
           content="$0"
           isSmall={true}
         />
-      </OneTitleBlockSmallDoubleContainer> */}
+      </OneTitleBlockSmallDoubleContainer>
     </Container>
   );
 };

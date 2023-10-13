@@ -30,6 +30,7 @@ const OneTitleBlock = ({
 export default OneTitleBlock;
 
 export const OneTitleBlockSmallDoubleContainer = styled.div`
+  width: 400px;
   @media (max-width: 600px) {
     width: 380px;
   }
@@ -51,6 +52,8 @@ export const OneTitleBlockSmallDoubleContainer = styled.div`
 `;
 
 const OneTitleBlockBigWrapper = styled.div<BackgroundProps>`
+  width: 400px;
+  height: 120px;
   @media (max-width: 600px) {
     width: 380px;
     height: 110px;
@@ -74,6 +77,8 @@ const OneTitleBlockBigWrapper = styled.div<BackgroundProps>`
   box-sizing: border-box; */
 `;
 const OneTitleBlockSmallWrapper = styled.div<BackgroundProps>`
+  width: 190px;
+  height: 120px;
   @media (max-width: 600px) {
     width: 184px;
     height: 110px;
@@ -96,6 +101,9 @@ const OneTitleBlockSmallWrapper = styled.div<BackgroundProps>`
 `;
 
 const TwoTitleBlockSmallTitle = styled.div`
+  font-size: 17px;
+  top: 15px;
+  left: 22px;
   @media (max-width: 600px) {
     font-size: 16px;
     top: 15px;
@@ -120,6 +128,9 @@ const TwoTitleBlockSmallTitle = styled.div`
 `;
 
 const TwoTitleBlockSmallContent = styled.div`
+  font-size: 30px;
+  bottom: 22px;
+  left: 22px;
   @media (max-width: 600px) {
     font-size: 28px;
     bottom: 20px;
