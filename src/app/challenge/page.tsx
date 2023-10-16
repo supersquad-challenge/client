@@ -1,15 +1,26 @@
-import { getAllChallenge } from '@/lib/api/challenge/getAllChallenge'
-import React from 'react'
+"use client"
+import ChallengeSet from '@/components/common/challenge/unregistered/ChallengeSet';
+import { getAllChallenge } from '@/lib/api/axios/challenge/getAllChallenge';
+import { useQuery } from 'react-query';
+import React, { useEffect } from 'react'
 
-const Challenge = async () => {
-  const { challenges } = await getAllChallenge();
+const Challenge = () => {
 
-  console.log(challenges)
+  useEffect(() =>{
+    console.log(getAllChallenge());
+  }, [])
+  // const { data, error, isLoading } = useQuery({
+  //   queryKey: ['allChallenges'], 
+  //   queryFn: async () => {
+  //     const res = await getAllChallenge();
+  //     return res;
+  //   }
+  // })
+
   return (
     <main>
-      {challenges.map((chal: any) => {
-        <div key={chal.challengeId}>{chal.challengeId}</div>
-      })}
+      Hello, World
+      <ChallengeSet />
     </main>
   )
 }

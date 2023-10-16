@@ -10,12 +10,12 @@ const Layout = (
   { children: ReactNode }) => {
   const pathname = usePathname();
   const showHeader = () => {
-    if (pathname === '/signup')
+    if (pathname === '/signup' || pathname.includes('/challenge/my/detail'))
       return false;
     return true;
   }
   const showFooter = () => {
-    if (pathname === '/signup')
+    if (pathname === '/signup' || pathname.includes('/detail'))
       return false;
     return true;
   }

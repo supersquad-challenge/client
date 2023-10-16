@@ -1,3 +1,4 @@
+"use client"
 import Profile from '@/components/base/Profile/Profile'
 import FillButton from '@/components/base/button/FillButton'
 import { AuthContext } from '@/context/auth'

@@ -1,6 +1,9 @@
+"use client"
+import React, { useEffect, useState } from 'react'
 import AuthSet from '@/components/common/authSet/AuthSet'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import { FiChevronLeft } from 'react-icons/fi'
+
 import styled from 'styled-components'
 
 const HeaderContainer = styled.header`
@@ -8,6 +11,7 @@ const HeaderContainer = styled.header`
   height: auto;
   display: flex;
   flex-direction: column;
+  margin: 10px auto;
   `
 
 const NavItem = styled.div<{display: string, animation: string}>`
@@ -86,7 +90,13 @@ const Header = () => {
   const params = useSearchParams();
   const state =  params.get('state');
   const pathname = usePathname();
-  
+
+  const isDetail = () => {
+    if (pathname.includes('/detail'))
+      return false;
+    return true;
+  }
+
   useEffect(() => {
     setPageState(state === "application" ? true : false);
     
@@ -94,19 +104,30 @@ const Header = () => {
       setPageTitle(state === "application" ? "Supersquad" : "Ongoing Challenges");
     } else if (pathname === "/challenge/my") {
       setPageTitle("My Challenges")
-    }
-
+    } 
   }, [state, pathname])
 
 
   return (
     <HeaderContainer>
       <HeaderInner>
+        {isDetail() ? (
         <HeaderTitle>
           {pageTitle}
         </HeaderTitle>
+        ) : (
+        <ButtonContainer
+          onClick={() => router.back()}
+        >
+          <FiChevronLeft
+            color="#000000"
+            size="24"
+          />
+        </ButtonContainer>
+        )}
         <AuthSet />
       </HeaderInner>
+      {isDetail() && (
       <HeaderInner>
         <NavItem
           onClick={() => {
@@ -129,8 +150,25 @@ const Header = () => {
           On Going 
         </NavItem>
       </HeaderInner>
+    )}
     </HeaderContainer>
   )
 }
 
 export default Header
+
+const ButtonContainer = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  transition: all .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 40px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #cccccc;
+  }
+`
