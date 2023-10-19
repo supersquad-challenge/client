@@ -20,11 +20,11 @@ const BasicButton = ({
   return (
 
     <BasicButtonWrapper
-      color={color}
-      fontSize={fontSize}
+      $color={color}
+      $fontSize={fontSize}
       onClick={() => onClickHandler()}
-      borderRadius={borderRadius}
-      backgroundColor={backgroundColor}
+      $borderRadius={borderRadius}
+      $backgroundColor={backgroundColor}
     >
       {title}
     </BasicButtonWrapper>
@@ -33,18 +33,23 @@ const BasicButton = ({
 
 export default BasicButton;
 
-const BasicButtonWrapper = styled.button<BasicButtonT>`
+const BasicButtonWrapper = styled.button<{
+  $color: string,
+  $fontSize: number,
+  $borderRadius: number,
+  $backgroundColor: string
+}>`
   width: 100%;
   min-width: 50px;
   height: 100%;
   min-height: 20px;
-  font-size: ${(props) => `${props.fontSize}px`};
-  color: ${(props) => props.color};
+  font-size: ${(props) => `${props.$fontSize}px`};
+  color: ${(props) => props.$color};
   text-align: center;
   border: none;
   transition: all ease 0.2s;
-  border-radius: ${(props) => `${props.borderRadius}px`};
-  background-color: ${(props) => props.backgroundColor};
+  border-radius: ${(props) => `${props.$borderRadius}px`};
+  background-color: ${(props) => props.$backgroundColor};
 
   &:hover {
     cursor: pointer;

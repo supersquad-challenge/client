@@ -1,18 +1,19 @@
 import axios from "axios";
 
 type Props = {
-  email: string;
+  userInfoId: string;
   address: string;
 }
 
-export const setAddress = async({ email, address }: Props) => {
+export const setAddress = async({ userInfoId, address }: Props) => {
   try {
     const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/user/address`, {
-      email: email,
+      userInfoId: userInfoId,
       address: address
     });
     return res.data;
   } catch (e) {
     console.log(e);
+    return e;
   }
 }

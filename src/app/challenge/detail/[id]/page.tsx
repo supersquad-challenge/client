@@ -1,18 +1,38 @@
 "use client"
 import styled from 'styled-components';
-import React from 'react'
-import ChallengeDetail from '@/components/common/challenge/ChallengeDetail';
+import React, { useContext } from 'react'
+import ChallengeDetail from '@/components/common/challenge/detail/ChallengeDetail';
 import { usePathname } from 'next/navigation';
+import { WindowContext } from '@/context/window';
+import SelectPaymentModal from '@/components/base/modal/SelectPaymentModal';
+import ChargeDepositModal from '@/components/base/modal/ChargeDepositModal';
+import SuccessModal from '@/components/base/modal/SuccessModal';
 
 const Challenge = () => {
   const path = usePathname();
   const id = path.split('/')[3];
+  const { modalState } = useContext(WindowContext);
 
   return (
     <PageContainer>
-      <ChallengeDetail 
+      <ChallengeDetail
         id={id}
       />
+      {modalState === 'payments' && (
+        <SelectPaymentModal />
+      )}
+      {modalState === 'deposit' && (
+        <ChargeDepositModal
+          id={id}
+        />
+      )}
+      {modalState === 'Success' && (
+        <SuccessModal
+          title='Now you are in!'
+          detail='Be ready to enforce your goal'
+          buttonTitle='Go to My Challenge'
+        />
+      )}
     </PageContainer>
   )
 }
@@ -20,15 +40,6 @@ const Challenge = () => {
 const PageContainer = styled.main`
   width: 100%;
   height: auto;
-  margin-bottom: 120px;
   position: relative;
 `
-
-const BodyContainer = styled.section`
-  width: 90%;
-  margin: 20px auto 0 auto;
-  display: grid;
-  grid: '. .';
-`
-
 export default Challenge

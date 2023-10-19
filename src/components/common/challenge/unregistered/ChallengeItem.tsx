@@ -1,36 +1,60 @@
+import { isValidUrl } from '@/utils/urlUtils';
 import Image from 'next/image'
+import Link from 'next/link';
 import React from 'react'
 import styled from 'styled-components'
 
-const UnRegisterItem = () => {
+type Props = {
+  id: string;
+  title: string;
+  thumbnailUrl: string;
+  duration: string;
+  participants: number;
+  deposit: string;
+  isRegistered: boolean;
+}
+
+const UnRegisterItem = ({
+  id,
+  title,
+  thumbnailUrl,
+  duration,
+  participants,
+  deposit,
+  isRegistered
+}: Props) => {
   return (
-    <ChallengeContainer>
-      <ImageContainer>
-        <Image
-          src={"/default/diet_thumbnail.svg"}
-          alt='challenge'
-          fill
-          style={{
-            objectFit: "cover"
-          }}
-          priority={true}
-        />
-      </ImageContainer>
-      <ChallengeTitle>
-        asdf
-      </ChallengeTitle>
-      <ChallengeDur>
-        Sep 11st - Oct 11st
-      </ChallengeDur>
-      <ChallengeMetaContainer>
-        <ChallengeMetaItem>
-          asdf
-        </ChallengeMetaItem>
-        <ChallengeMetaItem>
-          asdf
-        </ChallengeMetaItem>
-      </ChallengeMetaContainer>
-    </ChallengeContainer>
+    <Link href={isRegistered 
+      ? `/challenge/my/detail/${id}?state=my`
+      : `/challenge/detail/${id}`}>
+      <ChallengeContainer>
+        <ImageContainer>
+          <Image
+            src={isValidUrl(thumbnailUrl) ? thumbnailUrl : "/default/diet_thumbnail.svg"}
+            alt='challenge'
+            fill
+            style={{
+              objectFit: "cover"
+            }}
+            priority={true}
+          />
+        </ImageContainer>
+        <ChallengeTitle>
+          {title}
+        </ChallengeTitle>
+        <ChallengeDur>
+          {duration}
+        </ChallengeDur>
+        <ChallengeMetaContainer>
+          <ChallengeMetaItem>
+            {participants} participants
+          </ChallengeMetaItem>
+          <ChallengeMetaItem>
+            ${deposit}
+          </ChallengeMetaItem>
+        </ChallengeMetaContainer>
+      </ChallengeContainer>
+    </Link>
   )
 }
 
@@ -61,11 +85,12 @@ const ChallengeDur = styled.div`
 const ChallengeMetaContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
 `
 
 const ChallengeMetaItem = styled.div`
-  width: 50%;
+  width: auto;
   font-size: 14px;
   font-weight: 400;
   color: #000000;

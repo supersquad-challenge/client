@@ -6,6 +6,7 @@ import { AuthProvider } from '@/context/auth'
 import StyledComponentsRegistry from '@/app/registry/registry'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
+
 export default function RootLayout({
   children,
 }: {
