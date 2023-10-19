@@ -1,57 +1,69 @@
 "use client"
+import { AxiosResponse } from 'axios';
 import React, { createContext, ReactNode, useState } from 'react';
 
 interface windowContext {
-  modalState: {
-    current: number,
-    prev: number
-  };
-  handleModalState: ({ current, prev }: { current: number, prev: number }) => void;
+  modalState: string | undefined;
+  handleModalState: (stats: string | undefined) => void;
   loadingState: boolean;
-  useCallHandler: (func: () => Promise<void>) => void;
+  handleLoadingState: (state: boolean) => void;
+  useCallHandler: <T> (args: T, func: (args: T) => Promise<AxiosResponse | undefined>) => Promise<AxiosResponse | undefined>;
+  statusCode: number | undefined;
+  handleStatusCode: (code: number | undefined) => void;
 }
 
 const defaultValue: windowContext = {
-  modalState: {
-    current: 0,
-    prev: 0
-  },
+  modalState: undefined,
   handleModalState: () => {},
   loadingState: false,
-  useCallHandler: () => {},
-
+  handleLoadingState: () => {},
+  useCallHandler: async () => undefined,
+  statusCode: undefined,
+  handleStatusCode: () => {}
 };
 
 const WindowContext = createContext(defaultValue);
 
 const WindowProvider = ({ children } : { children: ReactNode }) => {
-  const [modalState, setModalState] = useState<{
-    current: number,
-    prev: number
-  }>({current: 0, prev: 0});
+  const [modalState, setModalState] = useState<string | undefined>(undefined);
   const [loadingState, setLoadingState] = useState<boolean>(false);
+  const [statusCode, setstatusCode ] = useState<number | undefined>(undefined);
 
-
-  const handleModalState = ({ current, prev }: { current: number, prev: number }) => {
-    setModalState({
-      current: current,
-      prev: prev
-    })
+  const handleModalState = (state: string | undefined) => {
+    setModalState(state)
   }
 
-  async function useCallHandler(func: () => Promise<void>) {
+  const handleLoadingState = (state: boolean) => {
+    setLoadingState(state)
+  }
+
+  async function useCallHandler<T>(args: T, func: (args: T) => Promise<AxiosResponse | undefined>): Promise<AxiosResponse | undefined> {
     setLoadingState(true);
-    await func();
+    console.log(func)
+    const res = await func(args);
+    console.log(res);
+    if (res !== undefined) {
+      setstatusCode(res.status);
+    }
     setTimeout(() => {
       setLoadingState(false);
     }, 500)
+
+    return res;
+  }
+
+  const handleStatusCode = (code: number | undefined) => {
+    setstatusCode(code)
   }
 
   const contextValue = {
     modalState,
     handleModalState,
     loadingState,
-    useCallHandler
+    handleLoadingState,
+    useCallHandler,
+    statusCode,
+    handleStatusCode
   }
 
   return (

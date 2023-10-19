@@ -2,14 +2,16 @@
 import React, { createContext, ReactNode, useEffect, useState} from 'react';
 
 interface authContext {
-  isLoggined: boolean;
+  isLogin: boolean;
+  userId: string | undefined;
   userName: string | undefined;
   userAddress: string | undefined;
   userProfile: string | undefined;
 }
 
 const defaultValue: authContext = {
-  isLoggined: false,
+  isLogin: false,
+  userId: undefined,
   userName: undefined,
   userAddress: undefined,
   userProfile: undefined
@@ -18,17 +20,23 @@ const defaultValue: authContext = {
 const AuthContext = createContext(defaultValue);
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [isLoggined, setIsLoggined] = useState<boolean>(false);
+  const [isLogin, setisLogin] = useState<boolean>(false);
   const [userName, setUserName] = useState<string | undefined>(undefined);
   const [userAddress, setUserAddress] = useState<string | undefined>(undefined);
   const [userProfile, setUserProfile] = useState<string | undefined>(undefined);
-
+  const [userId, setUserId] = useState<string | undefined>(undefined);
+  
   useEffect(() => {
-
+    const user = localStorage.getItem('supersquad');
+    if (user !== undefined && user !== null) {
+      setUserId(user);
+      setisLogin(true);
+    }
   }, [])
 
   const contextValue = {
-    isLoggined,
+    isLogin,
+    userId,
     userName,
     userAddress,
     userProfile

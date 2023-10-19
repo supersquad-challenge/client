@@ -1,24 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { GoHome } from 'react-icons/go'
 import { LuFlag } from 'react-icons/lu'
 import Profile from '@/components/base/Profile/Profile'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
+import { AuthContext } from '@/context/auth'
+import { WindowContext } from '@/context/window'
 
 const FooterContainer = styled.footer`
-  width: 90%;
+  width: 85%;
   height: 72px;
   max-width: 400px;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  position: absolute;
+  position: fixed;
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
   background-color: #000000;
   border-radius: 21px;
+  z-index: 99;
 `
 
 const FooterItem = styled.div<{display: string}>`
@@ -49,10 +52,10 @@ const FooterItem = styled.div<{display: string}>`
 
 const Footer = () => {
   const pathname = usePathname();
-  const params = useSearchParams();
-  const query = params.get('state');
   const router = useRouter();
-  
+  const { isLogin } = useContext(AuthContext);
+  const { handleModalState } = useContext(WindowContext);
+
   const handlePageState = () => {
     if (pathname === "/challenge") {
       return 0
@@ -74,7 +77,7 @@ const Footer = () => {
       <FooterItem
         onClick={() => {
           const path = "/challenge"
-          router.push(`${path}?state=${query}`)
+          router.push(`${path}?state=${'application'}`)
         }}
         display={pageState === 0 ? "block" : "none"}
       >
@@ -86,7 +89,14 @@ const Footer = () => {
       <FooterItem
         onClick={() => {
           const path = "/challenge/my"
-          router.push(`${path}?state=${query}`)
+          if (isLogin) {
+            router.push(`${path}?state=${'application'}`)
+          } else {
+            handleModalState('login');
+            setTimeout(() => {
+              handleModalState(undefined);
+            }, 2400)
+          }
         }}
         display={pageState === 1 ? "block" : "none"}
       >
@@ -98,7 +108,14 @@ const Footer = () => {
       <FooterItem
         onClick={() => {
           const path = "/mypage"
-          router.push(`${path}?state=${query}`)
+          if (isLogin) {
+            router.push(`${path}`)
+          } else {
+            handleModalState('login');
+            setTimeout(() => {
+              handleModalState(undefined);
+            }, 2400)   
+          }
         }}
         display={pageState === 2 ? "block" : "none"}
       >

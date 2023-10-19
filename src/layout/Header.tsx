@@ -1,13 +1,24 @@
+"use client"
+import React, { useEffect, useState } from 'react'
 import AuthSet from '@/components/common/authSet/AuthSet'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import { FiChevronLeft } from 'react-icons/fi'
 import styled from 'styled-components'
 
 const HeaderContainer = styled.header`
   width: 100%;
+  max-width: 600px;
   height: auto;
   display: flex;
   flex-direction: column;
+  margin: 0px auto 10px auto;
+  position: fixed;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  overflow: hidden;
+  z-index: 99;
+  background-color: #ffffff;
   `
 
 const NavItem = styled.div<{display: string, animation: string}>`
@@ -43,7 +54,7 @@ const NavItem = styled.div<{display: string, animation: string}>`
         transform: translateX(-100%);
       }
       100% {
-        transform: translateX(0%);
+        transform: translateX(0);
       }
     }
 
@@ -86,14 +97,26 @@ const Header = () => {
   const params = useSearchParams();
   const state =  params.get('state');
   const pathname = usePathname();
-  
+
+  const isDetail = () => {
+    if (pathname.includes('/detail') || pathname.includes('/mypage'))
+      return false;
+    return true;
+  }
+
   useEffect(() => {
     setPageState(state === "application" ? true : false);
     
     if (pathname === "/challenge") {
       setPageTitle(state === "application" ? "Supersquad" : "Ongoing Challenges");
+      if (state !== 'application' && state !== 'going') {
+        router.push(`${pathname}?state=${'application'}`)
+      }
     } else if (pathname === "/challenge/my") {
       setPageTitle("My Challenges")
+      if (state !== 'application' && state !== 'going') {
+        router.push(`${pathname}?state=${'application'}`)
+      }
     }
 
   }, [state, pathname])
@@ -102,11 +125,23 @@ const Header = () => {
   return (
     <HeaderContainer>
       <HeaderInner>
+        {isDetail() ? (
         <HeaderTitle>
           {pageTitle}
         </HeaderTitle>
+        ) : (
+        <ButtonContainer
+          onClick={() => router.back()}
+        >
+          <FiChevronLeft
+            color="#000000"
+            size="24"
+          />
+        </ButtonContainer>
+        )}
         <AuthSet />
       </HeaderInner>
+      {isDetail() && (
       <HeaderInner>
         <NavItem
           onClick={() => {
@@ -129,8 +164,25 @@ const Header = () => {
           On Going 
         </NavItem>
       </HeaderInner>
+    )}
     </HeaderContainer>
   )
 }
 
 export default Header
+
+const ButtonContainer = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  transition: all .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 40px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #cccccc;
+  }
+`

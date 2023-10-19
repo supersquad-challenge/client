@@ -1,6 +1,8 @@
+"use client"
 import Profile from '@/components/base/Profile/Profile'
 import FillButton from '@/components/base/button/FillButton'
 import { AuthContext } from '@/context/auth'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useContext } from 'react'
 import styled from 'styled-components'
@@ -28,16 +30,18 @@ const ButtonContainer = styled.div`
 `
 
 const AuthSet = () => {
-  const { isLoggined } = useContext(AuthContext);
+  const { isLogin } = useContext(AuthContext);
   const router = useRouter();
 
   return (
     <AuthSetContainer>
-      {isLoggined ? (
-        <Profile
-          color='#cccccc'
-          size={28}
-        />
+      {isLogin ? (
+        <Link href={'/mypage'}>
+          <Profile
+            color='#222222'
+            size={28}
+          />
+        </Link>
       ) : (
         <ButtonContainer>
           <FillButton

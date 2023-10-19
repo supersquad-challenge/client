@@ -1,191 +1,195 @@
-import { ModalOpenProps } from '@/interface';
-import BasicModal from './BasicModal';
+import React, { useContext, useState } from 'react'
+import BaseModal from '@/components/base/modal/BaseModal'
+import { WindowContext } from '@/context/window'
+import { useQuery } from 'react-query';
+import { getSingleChallenge } from '@/lib/api/querys/challenge/getSingleChallenge';
+import { SingleChallenges } from '@/types/challenge/Challenge';
+import Loading from '@/components/animation/Loading/Loading';
+import CommonError from '@/components/common/error/CommonError';
+import SmallBlock from '@/components/base/block/SmallBlock';
+import { convertIsoDateToReadable } from '@/utils/dateFormatUtils';
+import BaseSlider from '@/components/base/slider/BaseSlider';
 import styled from 'styled-components';
-import { useState } from 'react';
-import DepositSlider from '@/components/common/DepositSlider';
-import BasicButton from '../button/BasicButton';
-import { colors } from '@/styles/color';
+import FillButton from '@/components/base/button/FillButton';
+import OutlineInput from '@/components/base/input/OutlineInput';
+import { setChallenge } from '@/lib/api/axios/challenge/setChallenge';
+import { useRouter } from 'next/navigation';
+import { AuthContext } from '@/context/auth';
 
-//api 연결부분이라 따로 템플릿화를 시켜놓지 않음.
+type Props = {
+  id: string;
+}
 
-const ChargeDepositModal = ({
-  isModalOpen,
-  setIsModalOpen,
-}: ModalOpenProps) => {
-  const [deposit, setDeposit] = useState(0);
+const ChargeDepositModal = ({ id }: Props) => {
+  const { 
+    statusCode, 
+    modalState,
+    handleModalState,
+    handleStatusCode,
+    handleLoadingState } = useContext(WindowContext);
+  const { userId } = useContext(AuthContext);
+  const router = useRouter();
+  const [ deposit, setDeposit ] = useState<number>(0);
+
+  const { data, error, isLoading } = useQuery({
+    queryKey: [`singleChallenge-${id}`],
+    queryFn: async() => {
+      const res = await getSingleChallenge({ challengeId: id })
+      const challenge: SingleChallenges = res.challengeInfo;
+      return challenge;
+    },
+    staleTime: 5000,
+    cacheTime: Infinity
+  });
+
+  if (isLoading || data === undefined) {
+    return <Loading />
+  }
+
+  if (!isLoading && (error
+    || data === undefined)) {
+    return <CommonError msg="Fetch failed" />;
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 0 || parseInt(e.target.value) < 0)
+      setDeposit(0);
+    else if (parseInt(e.target.value) > 300)
+      setDeposit(300);
+    else 
+      setDeposit(parseInt(e.target.value));
+  };
+
   return (
-    <BasicModal
-      isOpen={isModalOpen}
-      setIsOpen={setIsModalOpen}
-      title="Win your goal"
-    >
-      <ModalChallengeInfoContainer>
-        <ModalChallengeInfoWrapper>
-          <div>Period</div>
-          <div style={{ fontWeight: 700 }}>Sep 11st - Oct 11st</div>
-        </ModalChallengeInfoWrapper>
-        <ModalChallengeInfoWrapper>
-          <div>Frequency</div>
-          <div style={{ fontWeight: 700 }}>Everyday</div>
-        </ModalChallengeInfoWrapper>
-        <ModalChallengeInfoWrapper style={{ marginBottom: 0 }}>
-          <div>Deposit</div>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <div style={{ fontWeight: 700, marginRight: 15 }}>0</div>
-            <DepositSlider deposit={deposit} setDeposit={setDeposit} />
-            <div style={{ fontWeight: 700, marginLeft: 15 }}>200</div>
-          </div>
-        </ModalChallengeInfoWrapper>
-      </ModalChallengeInfoContainer>
-      <DepositWrapper>${deposit} USDT</DepositWrapper>
-      <UserAverageWrapper>
-        Members deposit &nbsp;<OrangeText>$ 150 USDT </OrangeText>&nbsp;/ 3 week
-        in average
-      </UserAverageWrapper>
-      <BasicButtonContainer>
-        <BasicButton
-          title="Charge Deposit"
-          onClickHandler={() => {}}
-          color="white"
-          backgroundColor={colors.black}
-          borderRadius={20}
-          fontSize={16}
+    <BaseModal
+      deletePath={undefined}
+      title="Win Your Goal"
+      show={modalState === 'deposit' ? true : false}>
+      <SmallBlock
+        leftTitle='Period'
+        rightTitle={`${convertIsoDateToReadable(data.challengeStartsAt)} - ${convertIsoDateToReadable(data.challengeEndsAt)}`}
+        leftColor="#000000"
+        rightColor="#000000">
+      </SmallBlock>
+      <SmallBlock
+        leftTitle='Frequency'
+        rightTitle={data.challengeVerificationFrequency}
+        leftColor="#000000"
+        rightColor="#000000">
+      </SmallBlock>
+      <SmallBlock
+        leftTitle='Deposit'
+        rightTitle={undefined}
+        leftColor="#000000"
+        rightColor={undefined}>
+          <BaseSlider
+            deposit={deposit}
+            handleDeposit={handleChange}
+          />
+      </SmallBlock>
+      <InputContainer>
+        <OutlineInput
+          placeholder='$USDT'
+          updateInput={handleChange}
+          submitInput={() => {}}
+          currentValue={deposit.toString()}
+          color='#000000'
+          fontSize={17}
+          bordercolor='#cccccc'
         />
-      </BasicButtonContainer>
-    </BasicModal>
-  );
-};
+        <TickerContainer>
+          $USDT
+        </TickerContainer>
+      </InputContainer>
+      <MsgContainer>
+        Members deposit 
+        <span style={{
+          color: 'red',
+          textDecoration: 'underline',
+          margin: '0 7px'
+        }}>150 $USDT</span>
+         / 1 Week in average!
+      </MsgContainer>
+      <ButtonContainer>
+        <FillButton 
+          title={'Charge Deposit'} 
+          onClickHandler={async () => {
+            handleLoadingState(true);
+            if (userId) {
+              const res = await setChallenge({
+                userId: userId,
+                challengeId: id
+              })
+            handleLoadingState(false);
+            handleStatusCode(409);
+            if (res?.status === 409 || statusCode === 409) {
+              const userChallengeId = res?.data.userChallengeId;
+              setTimeout(() => {
+                router.push(`/challenge/my/detail/${userChallengeId}?state=my`)
+              }, 2500)
+              return ;
+            }
 
-export default ChargeDepositModal;
+            if (res?.status === 200 || statusCode === 200) {
+              const userChallengeId = res?.data.userChallengeId;
+              handleModalState('Success');
 
-const ModalChallengeInfoContainer = styled.div`
-  @media (max-width: 600px) {
-    margin-top: 30px;
-    width: 420px;
-  }
-  @media (max-width: 450px) {
-    margin-top: 30px;
-    width: 340px;
-  }
-  @media (max-width: 392px) {
-    margin-top: 30px;
-    width: 320px;
-  }
+              setTimeout(() => {
+                handleModalState(undefined);
+                router.push(`/challenge/my/detail/${userChallengeId}?state=my`);
+              }, 3000)
+            }}
+          }} 
+          color={'#ffffff'} 
+          fontSize={17} 
+          backgroundcolor={'#000000'}          
+        />
+      </ButtonContainer>
+    </BaseModal>
+  )
+}
 
-  /* border: 1px solid black;
-  box-sizing: border-box; */
-`;
-
-const ModalChallengeInfoWrapper = styled.div`
-  @media (max-width: 600px) {
-    height: 30px;
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-  @media (max-width: 450px) {
-    height: 28px;
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-  @media (max-width: 392px) {
-    height: 21px;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
+const ButtonContainer = styled.div`
+  width: 90%;
+  min-width: 300px;
+  max-width: 500px;
   font-weight: 500;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  /* border: 1px solid green;
-  box-sizing: border-box; */
-`;
-
-const DepositWrapper = styled.div`
-  @media (max-width: 600px) {
-    width: 420px;
-    height: 45px;
-
-    margin-top: 16px;
-    padding-left: 12px;
-
-    border-radius: 10px;
-  }
-  @media (max-width: 450px) {
-    width: 340px;
-    height: 40px;
-
-    margin-top: 20px;
-    padding-left: 12px;
-
-    border-radius: 9px;
-  }
-  @media (max-width: 392px) {
-    width: 320px;
-    height: 40px;
-
-    margin-top: 20px;
-    padding-left: 12px;
-
-    border-radius: 8px;
-  }
-
-  display: flex;
-  align-items: center;
-  text-align: center;
-
-  border: 1px solid #ececec;
-`;
-
-const UserAverageWrapper = styled.div`
-  @media (max-width: 600px) {
-    width: 420px;
-    height: 22px;
-    font-size: 14px;
-  }
-  @media (max-width: 450px) {
-    width: 340px;
-    height: 22px;
-    font-size: 14px;
-  }
-  @media (max-width: 392px) {
-    width: 320px;
-    height: 22px;
-    font-size: 12px;
-  }
-  color: #898989;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-top: 10px;
-`;
-
-const OrangeText = styled.span`
-  color: #eb4826;
-`;
-
-const BasicButtonContainer = styled.div`
-  @media (max-width: 600px) {
-    width: 420px;
-    height: 50px;
-  }
-  @media (max-width: 450px) {
-    width: 340px;
-    height: 50px;
-  }
-  @media (max-width: 392px) {
-    width: 320px;
-    height: 50px;
-  }
-  bottom: 20px;
+  height: 60px;
+  border-radius: 20px;
+  overflow: hidden;
   position: absolute;
-`;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  &:hover {
+    border: 1px solid #000000;
+  }
+`
+
+const InputContainer = styled.div`
+  width: 90%;
+  height: 45px;
+  margin: 10px auto 0 auto;
+  position: relative;
+`
+
+const TickerContainer = styled.div`
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 17px;
+  font-weight: 400;
+  color: #898989;
+`
+
+const MsgContainer = styled.div`
+  width: 90%;
+  margin: 0 auto;
+  font-size: 13px;
+  text-align: left;
+  font-weight: 400;
+  color: #898989;
+`
+
+export default ChargeDepositModal

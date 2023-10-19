@@ -16,12 +16,10 @@ export type OutlineInputT = {
   font-size: ${(props) => `${(props.fontSize)}px`};
   color: ${(props) => props.color};
   border: 1px solid ${(props) => props.bordercolor};
-  border-radius: 5px;
+  border-radius: 10px;
   text-align: left;
-
-  &:focus {
-    border: 1.5px solid #222;
-  }
+  padding-left: 10px;
+  outline: ${(props) => props.bordercolor};
 `
 
 const OutlineInput = ({ placeholder, updateInput, submitInput, currentValue, color, fontSize, bordercolor }: InputProp & OutlineInputT) => {
