@@ -15,6 +15,7 @@ import OutlineInput from '@/components/base/input/OutlineInput';
 import { setChallenge } from '@/lib/api/axios/challenge/setChallenge';
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/context/auth';
+import transfer from '@/lib/transactions/transfer';
 
 type Props = {
   id: string;
@@ -27,6 +28,7 @@ const ChargeDepositModal = ({ id }: Props) => {
     handleModalState,
     handleStatusCode,
     handleLoadingState } = useContext(WindowContext);
+
   const { userId } = useContext(AuthContext);
   const router = useRouter();
   const [ deposit, setDeposit ] = useState<number>(0);
@@ -41,6 +43,7 @@ const ChargeDepositModal = ({ id }: Props) => {
     staleTime: 5000,
     cacheTime: Infinity
   });
+
 
   if (isLoading || data === undefined) {
     return <Loading />
@@ -119,7 +122,7 @@ const ChargeDepositModal = ({ id }: Props) => {
               const res = await setChallenge({
                 userId: userId,
                 challengeId: id
-              })
+            })
             handleLoadingState(false);
             handleStatusCode(409);
             if (res?.status === 409 || statusCode === 409) {
@@ -127,6 +130,11 @@ const ChargeDepositModal = ({ id }: Props) => {
               setTimeout(() => {
                 router.push(`/challenge/my/detail/${userChallengeId}?state=my`)
               }, 2500)
+              return ;
+            }
+            const isDeposited = await transfer({ to: data?.poolAddress , value: deposit })
+            if (!isDeposited) {
+              handleLoadingState(false);
               return ;
             }
 

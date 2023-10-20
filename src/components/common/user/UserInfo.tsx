@@ -25,8 +25,6 @@ const UserInfo = ({ id }: Props) => {
     }
   })
 
-  console.log(data)
-
   if (isLoading) {
     return <Loading />
   }

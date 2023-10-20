@@ -17,7 +17,6 @@ const ImageUploader = ({ userChallengeId }: Props) => {
   const onUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e);
     const file = e.target.files?.[0];
-    console.log(file);
 
     if (file) {
       const reader = new FileReader();

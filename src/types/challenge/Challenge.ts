@@ -22,4 +22,5 @@ export type SingleChallenges = {
   challengeVerificationFrequency: string;
   challengeVerificationMethod: string;
   cryptoYield: number;
+  poolAddress: string;
 }

@@ -5,7 +5,7 @@ import { WindowProvider } from '@/context/window'
 import { AuthProvider } from '@/context/auth'
 import StyledComponentsRegistry from '@/app/registry/registry'
 import { QueryClient, QueryClientProvider } from 'react-query'
-
+import GoogleAnalytics from '@/app/GoogleAnalytics'
 
 export default function RootLayout({
   children,
@@ -23,6 +23,7 @@ export default function RootLayout({
             <StyledComponentsRegistry>
               <Layout>
                 {children}
+                <GoogleAnalytics />
               </Layout>
             </StyledComponentsRegistry>
           </WindowProvider>

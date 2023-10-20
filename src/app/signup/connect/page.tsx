@@ -51,7 +51,6 @@ const WalletConnect = () => {
             userInfoId: userId,
             address: accounts[0].address
           });
-          console.log(res);
         }
         setTimeout(() => {
           router.back();

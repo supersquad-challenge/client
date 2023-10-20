@@ -25,7 +25,7 @@ const Loading = () => {
   `
 
   const Loader = styled.div`
-    color: #0AFBD0;
+    color: #8A01D7;
     font-size: 10px;
     width: 1em;
     height: 1em;

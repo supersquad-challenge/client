@@ -44,10 +44,12 @@ const ChallengeItem = ({
         <ChallengeTitle>
           {title}
         </ChallengeTitle>
-        <Duration>
-          {frequency} |
-          {daysBetweenDates(startDate, endDate)}
-        </Duration>
+        <MetaContainer>
+          <Duration>
+            {frequency}
+          </Duration>
+          {startDate.length === 0 ? 'None' : daysBetweenDates(startDate, endDate)}
+        </MetaContainer>
         <ButtonContainer>
           <BasicButton
             title="starting soon"
@@ -131,27 +133,39 @@ const ChallengeTitle = styled.div`
 `;
 
 const Duration = styled.div`
-  height: 18px;
+  position: relative;
   font-size: 15px;
+  padding-right: 10px;
+  margin: 0 10px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 
   @media (max-width: 600px) {
-    height: 18px;
     font-size: 15px;
   }
 
   @media (max-width: 450px) {
-    height: 18px;
     font-size: 14px;
   }
 
   @media (max-width: 392px) {
-    height: 18px;
     font-size: 14px;
   }
 
-  margin-top: 2px;
   font-weight: 400;
   color: #898989;
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    transform: translateY(-40%);
+    top: 50%;
+    border: .5px solid #898989;
+    border-radius: 0.5px;
+    height: 80%;
+    display: flex;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -183,5 +197,12 @@ const ButtonContainer = styled.div`
   font-size: 14px;
   font-weight: 700;
 `;
+
+const MetaContainer = styled.div`
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 
 export default ChallengeItem;

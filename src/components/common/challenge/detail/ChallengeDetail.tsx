@@ -40,6 +40,8 @@ const ChallengeDetail = ({ id }: Props) => {
     cacheTime: Infinity
   })
 
+  console.log(data)
+
   useEffect(() => {
     if (statusCode === 409) {
       setIsError(true);
@@ -84,7 +86,7 @@ const ChallengeDetail = ({ id }: Props) => {
         <InfoContainer>
           <ChallengeInfo
             title='Schedule'
-            content={`${convertIsoDateToReadable(data.challengeStartsAt)} - ${convertIsoDateToReadable(data.challengeEndsAt)}`}
+            content={data.challengeStartsAt.length === 0 ? 'None' : `${convertIsoDateToReadable(data.challengeStartsAt)} - ${convertIsoDateToReadable(data.challengeEndsAt)}`}
             contentColor='#000000'
             shadow='rb'
           />

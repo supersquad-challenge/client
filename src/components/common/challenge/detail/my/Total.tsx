@@ -20,7 +20,6 @@ const Total = ({ id }: Props) => {
       const res = await getTotalStatus({
         userChallengeId: id
       })
-      console.log(res)
       const totalStatus: TotalStatus = res.totalStatus;
       return totalStatus;
     },
