@@ -69,7 +69,7 @@ const SelectPaymentModal = () => {
               handleModalState('deposit')
             }
           }}
-          color={'#ffffff'} 
+          color={'#ffffff'}
           fontSize={17} 
           backgroundcolor={'#000000'}          
         />

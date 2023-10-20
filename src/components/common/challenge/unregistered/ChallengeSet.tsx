@@ -38,7 +38,7 @@ const ChallengeSet = ({
         id={id}
         title={title}
         thumbnailUrl={thumbnail}
-        duration={`${convertIsoDateToReadable(startDate)} 
+        duration={startDate.length === 0 ? 'None' : `${convertIsoDateToReadable(startDate)} 
         - ${convertIsoDateToReadable(endDate)}`}
         participants={participants}
         deposit={thousandFormat(deposit)}
@@ -56,7 +56,7 @@ const ItemContainer = styled.section`
 
 const ItemCategory = styled.div`
   font-weight: 700;
-  font-size: 24px;
+  font-size: 22px;
 `
 
 export default ChallengeSet

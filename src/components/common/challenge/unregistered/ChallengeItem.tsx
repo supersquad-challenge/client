@@ -71,14 +71,14 @@ const ImageContainer = styled.div`
 `
 
 const ChallengeTitle = styled.div`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   margin: 5px 0;
 `
 
 const ChallengeDur = styled.div`
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   color: #cccccc;
 `
 

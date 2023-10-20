@@ -19,15 +19,12 @@ const About = ({ id }: Props) => {
       const res = await getChallenge({
         userChallengeId: id
       })
-      console.log(res)
       const challenge = res.challengeInfo;
       return challenge;
     },
     staleTime: 5000,
     cacheTime: Infinity
   });
-
-  console.log(data)
 
   if (isLoading) {
     return <Loading />
@@ -43,7 +40,7 @@ const About = ({ id }: Props) => {
       <InfoContainer>
           <ChallengeInfo
             title='Schedule'
-            content={`${convertIsoDateToReadable(data.challengeStartsAt)} - ${convertIsoDateToReadable(data.challengeEndsAt)}`}
+            content={data.challengeStartsAt.length === 0 ? 'None' : `${convertIsoDateToReadable(data.challengeStartsAt)} - ${convertIsoDateToReadable(data.challengeEndsAt)}`}
             contentColor='#000000'
             shadow='rb'
           />
@@ -72,9 +69,6 @@ const About = ({ id }: Props) => {
         <Description>
           {data.description}
         </Description>
-        <FooterContainer>
-          Complete Mission
-        </FooterContainer>
     </Container>
   )
 }
@@ -114,30 +108,5 @@ const Description = styled.div`
   font-size: 15px;
   padding: 0 5px;
 `
-
-const FooterContainer = styled.footer`
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  height: 60px;
-  max-width: 500px;
-  background-color: #000000;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
-  font-size: 18px;
-  border: 1px solid #000000;
-
-  &:hover {
-    cursor: pointer;
-    background-color: #ffffff;
-    color: #000000;
-  }
-`
-
 
 export default About
