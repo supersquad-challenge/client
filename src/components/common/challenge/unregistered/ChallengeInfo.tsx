@@ -5,13 +5,16 @@ type Props = {
   title: string;
   content: string;
   contentColor: string;
+  direction: 'right' | 'left'
   shadow: 'rt' | 'rb' | 'lt' | 'lb';
 }
 
-const ChallengeInfo = ({ title, content, contentColor, shadow }: Props) => {
+const ChallengeInfo = ({ title, content, contentColor, direction, shadow }: Props) => {
   return (
-    <ShadowContainer>
-      <BaseBlock backgroundColor="white">
+    <ShadowContainer
+      $direction={direction}
+    >
+      <BaseBlock backgroundColor="#ffffff">
         <Title>{title}</Title>
         <Content $color={contentColor}>
           {content}
@@ -23,26 +26,27 @@ const ChallengeInfo = ({ title, content, contentColor, shadow }: Props) => {
 
 export default ChallengeInfo;
 
-const ShadowContainer = styled.div`
+const ShadowContainer = styled.div<{
+  $direction: string
+}>`
   border-radius: 20px;
   margin: 10px auto;
   box-shadow: 0px 5px 25px 0px #eee;
   overflow: hidden;
-
-  width: 50%;
-  min-width: 220px;
-  height: 130px;
-
+  display: flex;
+  align-items: center;
+  justify-content: ${(props) => props.$direction === 'left' ? 'flex-start' : 'flex-end'} ;
+  width: 46%;
+  margin-left: ${(props) => props.$direction === 'left' ? 0 : 'unset'};
+  margin-right: ${(props) => props.$direction === 'right' ? 0 : 'unset'};
+  height: 125px;
   @media (max-width: 600px) {
-    min-width: 170px;
     height: 120px;
   }
   @media (max-width: 450px) {
-    min-width: 150px;
     height: 103px;
   }
   @media (max-width: 350px) {
-    min-width: 130px;
     height: 95px;
   }
 
@@ -61,13 +65,14 @@ const Title = styled.div`
   }
   font-weight: 500;
   margin-top: 10px;
-  margin-left: 20px;
+  margin-left: 15px;
 `;
 
 const Content = styled.div<{
   $color: string
 }>`
   font-size: 23px;
+  width: 80%;
   @media (max-width: 600px) {
     font-size: 21px;
   }
@@ -78,7 +83,9 @@ const Content = styled.div<{
     font-size: 17px;
   }
   font-weight: 700;
-  margin-top: 10px;
-  margin-left: 20px;
+  margin-top: 5px;
+  margin-left: 15px;
+  white-space: pre-line;
+  line-height: 98%;
   color: ${(props) => props.$color};
 `;

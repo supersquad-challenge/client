@@ -46,7 +46,6 @@ const ModalBackground = styled.section`
   width: 100%;
   height: 100%;
   max-width: 600px;
-  min-width: 350px;
   margin: 0 auto;
 
 `
@@ -64,6 +63,14 @@ const ModalContainer = styled.div<{
   animation-name: ${(props) => props.$show ? 'moveUp' : 'moveDown'};
   animation-duration: .3s;
   animation-timing-function: linear;
+
+  @media (max-width: 350px) {
+    height: 400px;
+  }
+
+  @media (max-width: 300px) {
+    height: 350px;
+  }
 
   @keyframes moveUp {
     0% {
@@ -120,6 +127,10 @@ const ModalTitle = styled.div`
   @media (max-width: 392px) {
     margin-top: 46px;
     font-size: 25px;
+  }
+  @media (max-width: 350px) {
+    margin-top: 42px;
+    font-size: 22px;
   }
 
   font-weight: 700;

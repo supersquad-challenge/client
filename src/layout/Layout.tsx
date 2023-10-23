@@ -7,12 +7,13 @@ import { usePathname } from 'next/navigation'
 import styled from 'styled-components'
 import { WindowContext } from '@/context/window'
 import PopupModal from '@/components/base/modal/PopupModal'
+import Splash from '@/components/base/splash/splash'
 
 const Layout = (
   { children }: 
   { children: ReactNode }) => {
   const pathname = usePathname();
-  const { modalState } = useContext(WindowContext);
+  const { modalState, isEntry } = useContext(WindowContext);
 
   const showHeader = () => {
     if (pathname.includes('/signup') || pathname.includes('/error'))
@@ -28,7 +29,7 @@ const Layout = (
     <>
       {showHeader() && <Header />}
       <BodyContainer
-        top={!showHeader() || pathname.includes('/detail') || pathname.includes('/mypage') ? 45 : 70}
+        top={!showHeader() || pathname.includes('/detail') || pathname.includes('/mypage') ? 35 : 60}
         bot={showFooter() ? 110 : 40}
       >
         {modalState === 'login' && (
@@ -36,7 +37,11 @@ const Layout = (
             title='Login required!'
           />
         )}
-        {children}
+        {isEntry ? (
+          <Splash />
+        ) : (
+          children
+        )}
       </BodyContainer>
       {showFooter() && <Footer />}
     </>

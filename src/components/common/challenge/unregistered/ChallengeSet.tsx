@@ -1,6 +1,5 @@
 "use client"
 import React from 'react'
-import styled from 'styled-components'
 import UnRegisterItem from '@/components/common/challenge/unregistered/ChallengeItem'
 import { convertIsoDateToReadable } from '@/utils/dateFormatUtils'
 import { thousandFormat } from '@/utils/moneyFormatUtils'
@@ -30,33 +29,17 @@ const ChallengeSet = ({
  }: Props) => {
 
   return (
-    <ItemContainer>
-      <ItemCategory>
-        #{category}
-      </ItemCategory>
-      <UnRegisterItem
-        id={id}
-        title={title}
-        thumbnailUrl={thumbnail}
-        duration={startDate.length === 0 ? 'None' : `${convertIsoDateToReadable(startDate)} 
-        - ${convertIsoDateToReadable(endDate)}`}
-        participants={participants}
-        deposit={thousandFormat(deposit)}
-        isRegistered={isRegistered}
-      />
-    </ItemContainer>
+    <UnRegisterItem
+      id={id}
+      title={title}
+      thumbnailUrl={thumbnail}
+      duration={startDate.length === 0 ? 'None' : `${convertIsoDateToReadable(startDate)} 
+      - ${convertIsoDateToReadable(endDate)}`}
+      participants={participants}
+      deposit={thousandFormat(deposit)}
+      isRegistered={isRegistered}
+    />
   )
 }
-
-const ItemContainer = styled.section`
-  width: 100%;
-  height: 220px;
-  margin: 18px auto;
-`
-
-const ItemCategory = styled.div`
-  font-weight: 700;
-  font-size: 22px;
-`
 
 export default ChallengeSet

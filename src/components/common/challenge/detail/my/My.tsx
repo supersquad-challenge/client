@@ -68,7 +68,7 @@ const My = ({ id }: Props) => {
 }
 
 const Container = styled.section`
-  width: 90%;
+  width: 100%;
   min-width: 250px;
   max-width: 450px;
   margin: 0 auto;

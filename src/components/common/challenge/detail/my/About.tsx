@@ -42,26 +42,30 @@ const About = ({ id }: Props) => {
             title='Schedule'
             content={data.challengeStartsAt.length === 0 ? 'None' : `${convertIsoDateToReadable(data.challengeStartsAt)} - ${convertIsoDateToReadable(data.challengeEndsAt)}`}
             contentColor='#000000'
+            direction='left'
             shadow='rb'
           />
-        <ChallengeInfo
-          title='How To'
-          content='Take a picture'
-          contentColor='#000000'
-          shadow='rb'
-          />
-        <ChallengeInfo
-            title='Complete'
-            content={data.challengeVerificationFrequency}
+          <ChallengeInfo
+            title='How To'
+            content='Take a picture'
             contentColor='#000000'
+            direction='right'
+            shadow='rb'
+            />
+          <ChallengeInfo
+              title='Complete'
+              content={data.challengeVerificationFrequency}
+              contentColor='#000000'
+              direction='left'
+              shadow='rb'
+            />
+          <ChallengeInfo
+            title='Crypto Yield +'
+            content={`%${data.cryptoYield}`}
+            contentColor='#8A01D7'
+            direction='right'
             shadow='rb'
           />
-        <ChallengeInfo
-          title='Crypto Yield +'
-          content={`%${data.cryptoYield}`}
-          contentColor='#8A01D7'
-          shadow='rb'
-        />
         </InfoContainer>
         <PageTitle>
           Description
@@ -92,15 +96,16 @@ const PageTitle = styled.div`
 `
 
 const Container = styled.section`
-  width: 90%;
+  width: 100%;
   min-width: 250px;
   max-width: 450px;
   margin: 0 auto;
 `
 const InfoContainer = styled.div`
-  width: 100%;
-  display: grid;
-  grid: '. .';
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
 `
 
 const Description = styled.div`

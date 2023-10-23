@@ -68,6 +68,8 @@ const ChargeDepositModal = ({ id }: Props) => {
       deletePath={undefined}
       title="Win Your Goal"
       show={modalState === 'deposit' ? true : false}>
+      <BlockContainer>
+
       <SmallBlock
         leftTitle='Period'
         rightTitle={data.challengeStartsAt.length === 0 ? 'None' : `${convertIsoDateToReadable(data.challengeStartsAt)} - ${convertIsoDateToReadable(data.challengeEndsAt)}`}
@@ -90,6 +92,7 @@ const ChargeDepositModal = ({ id }: Props) => {
             handleDeposit={handleChange}
           />
       </SmallBlock>
+      </BlockContainer>
       <InputContainer>
         <OutlineInput
           placeholder='$USDT'
@@ -182,13 +185,9 @@ const TickerContainer = styled.div`
   color: #898989;
 `
 
-const MsgContainer = styled.div`
+const BlockContainer = styled.div`
   width: 90%;
   margin: 0 auto;
-  font-size: 13px;
-  text-align: left;
-  font-weight: 400;
-  color: #898989;
 `
 
 export default ChargeDepositModal

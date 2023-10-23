@@ -13,6 +13,7 @@ const Challenge = () => {
   const id = path.split('/')[3];
   const { modalState } = useContext(WindowContext);
 
+
   return (
     <PageContainer>
       <ChallengeDetail
