@@ -12,7 +12,7 @@ dotenv.config();
 const changeChain = async() => {
   const ethereum = window.ethereum as Ethereum | undefined;
 
-  function handleChainChanged(chainId = '137') {
+  function handleChainChanged(chainId = '80001') {
     window.location.reload();
   }
 

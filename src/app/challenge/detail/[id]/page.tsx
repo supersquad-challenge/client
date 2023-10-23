@@ -7,6 +7,7 @@ import { WindowContext } from '@/context/window';
 import SelectPaymentModal from '@/components/base/modal/SelectPaymentModal';
 import ChargeDepositModal from '@/components/base/modal/ChargeDepositModal';
 import SuccessModal from '@/components/base/modal/SuccessModal';
+import PopupModal from '@/components/base/modal/PopupModal';
 
 const Challenge = () => {
   const path = usePathname();
@@ -34,6 +35,16 @@ const Challenge = () => {
           title='Now you are in!'
           detail='Be ready to enforce your goal'
           buttonTitle='Go to My Challenge'
+        />
+      )}
+      {modalState === 'txFailed1' && (
+        <PopupModal
+          title='Missing ChainID'
+        />
+      )}
+      {modalState === 'txFailed2' && (
+        <PopupModal
+          title='Transaction Failed'
         />
       )}
     </PageContainer>
