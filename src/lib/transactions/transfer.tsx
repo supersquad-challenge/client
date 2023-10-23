@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 import { MetaMaskInpageProvider } from '@metamask/providers';
+import { Ethereum } from '../../../@types/ethereum';
 const convert = require('ethereum-unit-converter');
 
 type Props = {
@@ -8,9 +9,35 @@ type Props = {
 }
 
 dotenv.config();
+const changeChain = async() => {
+  const ethereum = window.ethereum as Ethereum | undefined;
+
+  function handleChainChanged(chainId = '137') {
+    window.location.reload();
+  }
+
+  if (ethereum) {
+    const chainId = await ethereum.request({ method: 'eth_chainId' });
+    console.log(chainId);
+  }
+
+  if (ethereum && ethereum.on) {
+    ethereum.on('chainChanged', handleChainChanged);
+    return true;
+  }
+  return false;
+}
 
 const transfer = async ({ to, value }: Props) => {
   const result = convert(value, 'ether')
+  const chainIdRes = changeChain();
+  if (!chainIdRes) {
+    return {
+      status: false,
+      code: 1,
+      msg: 'need to add chainId'
+    };
+  }
 
   const ethereum = window.ethereum as MetaMaskInpageProvider | undefined;
   if (ethereum !== undefined) {
@@ -25,7 +52,7 @@ const transfer = async ({ to, value }: Props) => {
           gasLimit: '0x5028',
           maxPriorityFeePerGas: '0x3b9aca00', 
           maxFeePerGas: '0x2540be400',
-        },
+        }, 
         ],
       }).then((txHash) => {
         return true;
@@ -34,13 +61,20 @@ const transfer = async ({ to, value }: Props) => {
       console.error(error)
       return false;
     });
-      if (await res === true) 
-        return true;
-      return false;
+      if (await res === true) {
+        return {
+          status: true,
+          code: 0,
+          msg: 'transaction success'
+        };
+      }
     }
-    return false;
   }
-  return false;
+  return {
+    status: false,
+    code: 2,
+    msg: 'transaction failed'
+  };
 }
 
 export default transfer
