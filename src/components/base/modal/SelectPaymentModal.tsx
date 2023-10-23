@@ -79,8 +79,8 @@ const SelectPaymentModal = ({ id }: Props) => {
                   userId: userId,
                   challengeId: id
               })
+              handleStatusCode(res?.status);
               handleLoadingState(false);
-              handleStatusCode(409);
               if (res?.status === 409 || statusCode === 409) {
                 const userChallengeId = res?.data.userChallengeId;
                 setTimeout(() => {
