@@ -12,6 +12,7 @@ const FooterContainer = styled.footer`
   width: 100%;
   height: 60px;
   display: flex;
+  max-width: 600px;
   align-items: center;
   justify-content: space-around;
   position: fixed;
