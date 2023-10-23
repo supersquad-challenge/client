@@ -1,4 +1,5 @@
 "use client"
+import { login } from '@/lib/api/axios/auth/login';
 import React, { createContext, ReactNode, useEffect, useState} from 'react';
 
 interface authContext {
@@ -27,6 +28,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
   
   useEffect(() => {
+    const res = login();
+    console.log("login res", res);
     const user = localStorage.getItem('supersquad');
     if (user !== undefined && user !== null) {
       setUserId(user);

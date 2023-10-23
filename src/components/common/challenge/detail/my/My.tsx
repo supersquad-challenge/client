@@ -57,7 +57,7 @@ const My = ({ id }: Props) => {
         leftTitle='Your Deposit'
         leftContent={`$${thousandFormat(data.deposit)}`}
         rightTitle='Availability'
-        rightContent={convertIsoDateToReadable(data.challengeEndsAt)}
+        rightContent={data.challengeEndsAt.length === 0 ? 'None' : convertIsoDateToReadable(data.challengeEndsAt)}
         leftColor='#000000'
         rightColor='#000000'
         leftBackground='#F6F6F6'
@@ -69,7 +69,7 @@ const My = ({ id }: Props) => {
 
 const Container = styled.section`
   width: 90%;
-  min-width: 350px;
+  min-width: 250px;
   max-width: 450px;
   margin: 0 auto;
 `

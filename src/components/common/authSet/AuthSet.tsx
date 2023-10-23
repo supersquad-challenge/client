@@ -18,7 +18,7 @@ const AuthSetContainer = styled.div`
 `
 
 const ButtonContainer = styled.div`
-  padding: 10px auto;
+  height: 26px;
   border-radius: 5px;
   overflow: hidden;
   border: 1px solid #8A01D7;
@@ -29,6 +29,14 @@ const ButtonContainer = styled.div`
   }
 `
 
+const IconContainer = styled.div`
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
 const AuthSet = () => {
   const { isLogin } = useContext(AuthContext);
   const router = useRouter();
@@ -36,12 +44,14 @@ const AuthSet = () => {
   return (
     <AuthSetContainer>
       {isLogin ? (
+      <IconContainer>
         <Link href={'/mypage'}>
           <Profile
             color='#222222'
             size={28}
           />
         </Link>
+      </IconContainer>
       ) : (
         <ButtonContainer>
           <FillButton
@@ -50,7 +60,7 @@ const AuthSet = () => {
               router.push('/signup')
             }}
             color='#8A01D7'
-            fontSize={13}
+            fontSize={16}
             backgroundcolor='#ffffff'
           />
         </ButtonContainer>

@@ -21,7 +21,7 @@ const CheckContainer = styled.div`
   flex-flow: column;
   align-items: center;
   justify-content: space-between;
-  z-index: 999;
+  z-index: 99;
 `
 
 const CheckBackground = styled.div`

@@ -61,6 +61,7 @@ const UnRegisterItem = ({
 const ChallengeContainer = styled.div`
   width: 180px;
   height: 110px;
+  margin-top: 8px;
   background-color: #cccccc;
 `
 

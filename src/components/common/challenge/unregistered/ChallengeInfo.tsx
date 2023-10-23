@@ -29,34 +29,35 @@ const ShadowContainer = styled.div`
   box-shadow: 0px 5px 25px 0px #eee;
   overflow: hidden;
 
-  width: 220px;
+  width: 50%;
+  min-width: 220px;
   height: 130px;
 
   @media (max-width: 600px) {
-    width: 210px;
+    min-width: 170px;
     height: 120px;
   }
   @media (max-width: 450px) {
-    width: 172px;
+    min-width: 150px;
     height: 103px;
   }
-  @media (max-width: 392px) {
-    width: 160px;
+  @media (max-width: 350px) {
+    min-width: 130px;
     height: 95px;
   }
 
 `
 
 const Title = styled.div`
-  font-size: 20px;
+  font-size: 18px;
   @media (max-width: 600px) {
-    font-size: 18px;
-  }
-  @media (max-width: 450px) {
     font-size: 16px;
   }
-  @media (max-width: 392px) {
+  @media (max-width: 450px) {
     font-size: 14px;
+  }
+  @media (max-width: 350px) {
+    font-size: 12px;
   }
   font-weight: 500;
   margin-top: 10px;

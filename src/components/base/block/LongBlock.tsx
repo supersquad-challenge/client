@@ -30,11 +30,13 @@ const LongBlock = ({
       $rightBackground={rightBackground}>
       <BlockItem 
         $index={1}>
-        <BlockTitle 
+        <BlockTitle
+          $index={1}
           $color={leftColor}>
           {leftTitle}
         </BlockTitle>
         <BlockContent 
+          $index={1}
           $color={leftColor}>
           {leftContent}
         </BlockContent>
@@ -48,10 +50,12 @@ const LongBlock = ({
         ? (
           <>
             <BlockTitle 
+              $index={2}
               $color={rightColor}>
               {rightTitle}
             </BlockTitle>
             <BlockContent 
+              $index={2}
               $color={rightColor}>
               {rightContent}
             </BlockContent>        
@@ -78,6 +82,10 @@ const BlockWrapper = styled.div<{
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 350px) {
+    height: 95px;
+  }
 `;
 
 const BlockItem = styled.div<{$index: number}>`
@@ -90,26 +98,53 @@ const BlockItem = styled.div<{$index: number}>`
 
 const BlockTitle = styled.div<{
   $color: string,
+  $index: number
 }>`
   font-size: 16px;
   font-weight: 500;
-  display: flex;
   margin-top: 10px;
-  flex-direction: column;
-  justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: ${(props) => props.$index === 1 ? 'flex-start' : 'flex-end'};
   color: ${(props) => props.$color};
+
+  @media (max-width: 450px) {
+    font-size: 13px;
+  }
+
+  @media (max-width: 350px) {
+    font-size: 13px;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 11px;
+  }
 `;
 
 const BlockContent = styled.div<{
   $color: string,
+  $index: number
 }>`
   font-size: 24px;
   font-weight: 600;
   margin-top: 15px;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: ${(props) => props.$index === 1 ? 'flex-start' : 'flex-end'};
   color: ${(props) => props.$color};
+
+  
+  @media (max-width: 450px) {
+    font-size: 22px;
+  }
+
+  @media (max-width: 350px) {
+    font-size: 20px;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 17px;
+  }
 `;
 
 export default LongBlock;

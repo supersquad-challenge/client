@@ -15,6 +15,7 @@ import { WindowContext } from '@/context/window';
 import PopupModal from '@/components/base/modal/PopupModal';
 import CommonError from '@/components/common/error/CommonError';
 import { AuthContext } from '@/context/auth';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   id: string
@@ -24,10 +25,12 @@ const ChallengeDetail = ({ id }: Props) => {
   const { 
     statusCode, 
     loadingState, 
-    handleStatusCode, 
+    handleStatusCode,
+    handleLoadingState, 
     handleModalState } = useContext(WindowContext);
   const [isError, setIsError] = useState<boolean>(false);
-  const { isLogin } = useContext(AuthContext)
+  const { isLogin } = useContext(AuthContext);
+  const router = useRouter();
 
   const { data, error, isLoading } = useQuery({
     queryKey: [`singleChallenge-${id}`],
@@ -104,7 +107,7 @@ const ChallengeDetail = ({ id }: Props) => {
           />
         <ChallengeInfo
           title='Crypto Yield +'
-          content={`%${data.cryptoYield}`}
+          content={`${data.cryptoYield}%`}
           contentColor='#8A01D7'
           shadow='rb'
         />
@@ -119,10 +122,11 @@ const ChallengeDetail = ({ id }: Props) => {
               if (isLogin) {
                 handleModalState('payments')
               } else {
-                handleModalState('login');
+                handleLoadingState(true);
                 setTimeout(() => {
-                  handleModalState(undefined);
-                }, 2400)
+                  handleLoadingState(false);
+                  router.push('/signup')
+                }, 500);
               }
             }}
           />

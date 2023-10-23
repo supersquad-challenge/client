@@ -17,11 +17,11 @@ const ProgressBar = ({ rate }: Props) => {
 }
 
 const BarBody = styled.div<{$width: number}>`
-  width: 45%;
+  width: 35%;
   border: 1px solid #cccccc;
   position: absolute;
   left: 48.5%;
-  top: 67%;
+  top: 68%;
   transform: translate(-50%, -50%);
   
   &::after {
@@ -29,7 +29,7 @@ const BarBody = styled.div<{$width: number}>`
     position: absolute;
     left: 0;
     top: -2.5px;
-    border: 5px solid #8A01D7;
+    border: 3px solid #8A01D7;
     border-radius: 3px;
     width: ${(props) => `${props.$width}%`};
     animation-name: appearRight;
@@ -53,15 +53,15 @@ const BarBody = styled.div<{$width: number}>`
 `
 
 const BarDot = styled.div<{$width: number}>`
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   border: 2px solid #8A01D7;
   background-color: #ffffff;
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translateY(-30%);
+  transform: translateY(-45%);
   z-index: 99;
   animation-name: moveRight;
   animation-duration: .5s;
