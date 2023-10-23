@@ -1,5 +1,5 @@
 "use client"
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import React, { useContext, useEffect, useState } from 'react'
 import Image from 'next/image';
 import styled from 'styled-components';
@@ -11,18 +11,31 @@ import About from '@/components/common/challenge/detail/my/About';
 import ImageUploader from '@/components/base/imageUploader/ImageUploader';
 import { WindowContext } from '@/context/window';
 import SuccessModal from '@/components/base/modal/SuccessModal';
+import { AuthContext } from '@/context/auth';
 
 const MyDetail = () => {
   const pathname = usePathname();
   const params = useSearchParams();
+  const router = useRouter();
   const query = params.get('state');
   const userChallengeId = pathname.split('/')[4];
-  const { modalState } = useContext(WindowContext);
+  const { isLogin } = useContext(AuthContext)
+  const { modalState, handleModalState } = useContext(WindowContext);
 
   const [current, setCurrent] = useState<string | null>(query)
   useEffect(() => {
+    if (!isLogin) {
+      router.push('/signup');
+    }
     setCurrent(query);
   }, [query])
+
+  const handleDetectDevice = () => {
+    handleModalState('You can authenticate only mobile');
+    setTimeout(() => {
+      handleModalState(undefined);
+    }, 1500)
+  }
   
   return (
     <PageContainer>
@@ -72,6 +85,9 @@ const MyDetail = () => {
           </PageInner>
         )}
         <ImageUploader 
+          onClickEvent={() => {
+            handleDetectDevice();
+          }}
           userChallengeId={userChallengeId}
         />
       {modalState === 'upload' && (

@@ -2,11 +2,14 @@ import React from 'react'
 import { useQuery } from 'react-query';
 import { getChallenge } from '@/lib/api/querys/user/getChellenge';
 import CommonError from '@/components/common/error/CommonError';
-import Loading from '@/components/animation/Loading/Loading';
+import Loading from '@/components/animation/Loading/Spinner/Loading';
 import styled from 'styled-components';
 import ChallengeInfo from '@/components/common/challenge/unregistered/ChallengeInfo';
 import { convertIsoDateToReadable } from '@/utils/dateFormatUtils';
 import { colors } from '@/styles/color';
+import { parseChallengeDesc } from '@/utils/parseDescUtils';
+import { ParsedDesc } from '@/types/challenge/Challenge';
+import ChallengeDesc from '@/components/common/challenge/description/ChallengeDesc';
 
 type Props = {
   id: string;
@@ -26,6 +29,8 @@ const About = ({ id }: Props) => {
     cacheTime: Infinity
   });
 
+  console.log(data)
+
   if (isLoading) {
     return <Loading />
   }
@@ -34,6 +39,8 @@ const About = ({ id }: Props) => {
     || data === undefined || data === null)) {
     return <CommonError msg="Fetch failed" />;
   }
+
+  const _desc = parseChallengeDesc(data.description);
 
   return (
     <Container>
@@ -70,9 +77,13 @@ const About = ({ id }: Props) => {
         <PageTitle>
           Description
         </PageTitle>
-        <Description>
-          {data.description}
-        </Description>
+        {_desc.map((el: ParsedDesc, idx: number) => {
+          return (
+            <ChallengeDesc
+              key={idx}
+              block={el}
+            />
+        )})}
     </Container>
   )
 }
@@ -108,12 +119,6 @@ const InfoContainer = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
-`
-
-const Description = styled.div`
-  width: 100%;
-  font-size: 15px;
-  padding: 0 5px;
 `
 
 export default About

@@ -1,9 +1,19 @@
 "use client"
 import UserInfo from '@/components/common/user/UserInfo'
-import React from 'react'
+import { AuthContext } from '@/context/auth'
+import { useRouter } from 'next/navigation'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
 
 const MyPage = () => {
+  const { isLogin, userId } = useContext(AuthContext);
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!isLogin) {
+      router.push('/signup')
+    }
+  }, [])
   
   return (
     <PageContainer>
@@ -11,9 +21,11 @@ const MyPage = () => {
         <PageTitle>
           Profile
         </PageTitle>
-        <UserInfo
-          id='65194b0d9f321ba6780caf11'
-        />
+        {isLogin && userId && (
+          <UserInfo
+            id={userId}
+          />
+        )}
       </PageInner>
     </PageContainer>
   )
@@ -28,7 +40,7 @@ const PageContainer = styled.main`
 
 const PageInner = styled.section`
   width: 90%;
-  margin: 100px auto 0 auto;
+  margin: 70px auto 0 auto;
   display: flex;
   flex-direction: column;
 `

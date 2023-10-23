@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import '@/components/animation/Loading/Loading.module.css';
+import '@/components/animation/Loading/Spinner/Loading.module.css';
 
 const Loading = () => {
 

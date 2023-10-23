@@ -3,18 +3,23 @@ import postPhoto from '@/lib/api/axios/feature/postPhoto';
 import { useRouter } from 'next/navigation';
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
+import { isMobile } from '@/utils/detectDeviceUtils';
 
 type Props = {
+  onClickEvent: () => void;
   userChallengeId: string;
 }
 
-const ImageUploader = ({ userChallengeId }: Props) => {
+const ImageUploader = ({ onClickEvent, userChallengeId }: Props) => {
   const router = useRouter();
   const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
   const { handleModalState } = useContext(WindowContext);
+  const detectDetive = isMobile(window.navigator.userAgent);
 
   const onUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
+    if (detectDetive === false) {
+      return ;
+    }
     const file = e.target.files?.[0];
 
     if (file) {
@@ -42,7 +47,13 @@ const ImageUploader = ({ userChallengeId }: Props) => {
   };
   
   return (
-    <Container>
+    <Container
+      onClick={() => {
+        if (detectDetive === false) {
+          onClickEvent();
+        }
+      }}
+    >
       <input
         id='image'
         accept="image/*"
@@ -52,7 +63,8 @@ const ImageUploader = ({ userChallengeId }: Props) => {
         style={{ display: "none" }}
       />
       <ButtonItem
-        htmlFor='image'
+        $color={detectDetive ? '#000' : '#ccc'}
+        htmlFor={detectDetive ? 'image' : ''}
       >
         Complete Mission
       </ButtonItem>
@@ -72,7 +84,9 @@ const Container = styled.div`
   color: #ffffff;
 `
 
-const ButtonItem = styled.label`
+const ButtonItem = styled.label<{
+  $color: string
+}>`
   font-size: 18px;
   width: 100%;
   margin: 0 auto;
@@ -80,8 +94,8 @@ const ButtonItem = styled.label`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #000000;
-  border: 1px solid #000000;
+  background-color: ${(props) => props.$color};
+  border: 1px solid ${(props) => props.$color};
   border-radius: 20px;
 `
 

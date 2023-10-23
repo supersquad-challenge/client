@@ -3,7 +3,7 @@ import ChallengeSet from '@/components/common/challenge/unregistered/ChallengeSe
 import { getAllChallenge } from '@/lib/api/querys/challenge/getAllChallenge';
 import { useQuery } from 'react-query';
 import { AllChallenges } from '@/types/challenge/Challenge';
-import Loading from '@/components/animation/Loading/Loading';
+import Loading from '@/components/animation/Loading/Spinner/Loading';
 import styled from 'styled-components';
 import CommonError from '@/components/common/error/CommonError';
 

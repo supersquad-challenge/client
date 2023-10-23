@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
+import Loading from '@/components/animation/Loading/Bar/Loading'
 
 const Splash = () => {
   return (
@@ -20,6 +21,9 @@ const Splash = () => {
         <LogoTitle>
           SUPERSQUAD
         </LogoTitle>
+      <LoadingContainer>
+        <Loading />
+      </LoadingContainer>
       </LogoContainer>
     </Container>
   )
@@ -68,6 +72,11 @@ const LogoTitle = styled.div`
   font-family: ClashDisplayVariable;  
   font-weight: 800;
   font-size: 24px;
+`
+
+const LoadingContainer = styled.div`
+  z-index: 99;
+  width: 200px;
 `
 
 export default Splash

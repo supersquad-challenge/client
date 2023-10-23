@@ -23,4 +23,10 @@ export type SingleChallenges = {
   challengeVerificationMethod: string;
   cryptoYield: number;
   poolAddress: string;
+  description: string;
+}
+
+export type ParsedDesc = {
+  text: string,
+  type: 'T' | 'D'
 }

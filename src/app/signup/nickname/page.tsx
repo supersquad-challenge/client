@@ -10,7 +10,7 @@ import { setNickname } from '@/lib/api/axios/user/setNickname'
 import { WindowContext } from '@/context/window'
 import { AuthContext } from '@/context/auth'
 import Check from '@/components/animation/Check/Check'
-import Loading from '@/components/animation/Loading/Loading'
+import Loading from '@/components/animation/Loading/Spinner/Loading'
 
 const SetNickname = () => {
   const router = useRouter();
