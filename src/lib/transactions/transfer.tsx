@@ -10,6 +10,7 @@ type Props = {
 
 dotenv.config();
 const changeChain = async() => {
+  let res;
   const ethereum = window.ethereum as Ethereum | undefined;
 
   function handleChainChanged(chainId = '80001') {
@@ -18,14 +19,17 @@ const changeChain = async() => {
 
   if (ethereum) {
     const chainId = await ethereum.request({ method: 'eth_chainId' });
-    console.log(chainId);
   }
 
   if (ethereum && ethereum.on) {
     ethereum.on('chainChanged', handleChainChanged);
-    return true;
   }
-  return false;
+
+  if (ethereum) {
+    res = await ethereum.request({ method: 'eth_chainId' });
+  }
+  
+  return res === '80001' ? true : false;
 }
 
 const transfer = async ({ to, value }: Props) => {

@@ -104,13 +104,23 @@ const ChargeDepositModal = ({ id }: Props) => {
           bordercolor='#cccccc'
         />
         <TickerContainer>
-          $USDT
+          $MATIC
         </TickerContainer>
       </InputContainer>
       <ButtonContainer>
         <FillButton 
           title={'Charge Deposit'} 
           onClickHandler={async () => {
+            const { status, code } = await transfer({ to: data?.poolAddress , value: deposit })
+            
+            if (!status) {
+              handleLoadingState(false);
+              handleModalState(`txFailed${code}`);
+              setTimeout(() => {
+                handleModalState(undefined);
+              }, 2000)
+              return ;
+            }
             handleLoadingState(true);
             if (userId) {
               const res = await setChallenge({
@@ -124,15 +134,6 @@ const ChargeDepositModal = ({ id }: Props) => {
               setTimeout(() => {
                 router.push(`/challenge/my/detail/${userChallengeId}?state=my`)
               }, 2500)
-              return ;
-            }
-            const { status, code } = await transfer({ to: data?.poolAddress , value: deposit })
-            if (!status) {
-              handleLoadingState(false);
-              handleModalState(`txFailed${code}`);
-              setTimeout(() => {
-                handleModalState('txFailed');
-              }, 2000)
               return ;
             }
 
