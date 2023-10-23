@@ -28,8 +28,8 @@ const Layout = (
     <>
       {showHeader() && <Header />}
       <BodyContainer
-        top={!showHeader() || pathname.includes('/detail') || pathname.includes('/mypage') ? 45 : 120}
-        bot={showFooter() ? 160 : 40}
+        top={!showHeader() || pathname.includes('/detail') || pathname.includes('/mypage') ? 45 : 70}
+        bot={showFooter() ? 110 : 40}
       >
         {modalState === 'login' && (
           <PopupModal

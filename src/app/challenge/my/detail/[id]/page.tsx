@@ -71,9 +71,9 @@ const MyDetail = () => {
             />
           </PageInner>
         )}
-      <ImageUploader 
-        userChallengeId={userChallengeId}
-      />
+        <ImageUploader 
+          userChallengeId={userChallengeId}
+        />
       {modalState === 'upload' && (
         <SuccessModal
           title='Congrats!'

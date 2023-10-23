@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import AuthSet from '@/components/common/authSet/AuthSet'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { FiChevronLeft } from 'react-icons/fi'
 import styled from 'styled-components'
 
@@ -83,19 +83,17 @@ const HeaderTitle = styled.div`
   min-width: 160px;
   font-size: 20px;
   height: 100%;
-  font-weight: 500;
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: flex-start;
   padding-left: 24px;
+  font-family: Opensans;
+  font-weight: bold
 `
 
 const Header = () => {
-  const [pageState, setPageState] = useState<boolean | null>(true);
   const [pageTitle, setPageTitle] = useState<string>('');
   const router = useRouter();
-  const params = useSearchParams();
-  const state =  params.get('state');
   const pathname = usePathname();
 
   const isDetail = () => {
@@ -105,21 +103,13 @@ const Header = () => {
   }
 
   useEffect(() => {
-    setPageState(state === "application" ? true : false);
-    
     if (pathname === "/challenge") {
-      setPageTitle(state === "application" ? "Supersquad" : "Ongoing Challenges");
-      if (state !== 'application' && state !== 'going') {
-        router.push(`${pathname}?state=${'application'}`)
-      }
+      setPageTitle("Supersquad")
     } else if (pathname === "/challenge/my") {
       setPageTitle("My Challenges")
-      if (state !== 'application' && state !== 'going') {
-        router.push(`${pathname}?state=${'application'}`)
-      }
     }
 
-  }, [state, pathname])
+  }, [pathname])
 
 
   return (
@@ -141,30 +131,6 @@ const Header = () => {
         )}
         <AuthSet />
       </HeaderInner>
-      {isDetail() && (
-      <HeaderInner>
-        <NavItem
-          onClick={() => {
-            const query = "application"
-            router.push(`${pathname}?state=${query}`)
-          }}
-          display={!pageState ? "none" : "block"}
-          animation={'appearLeft'}
-        >
-          On Application
-        </NavItem>
-        <NavItem
-          onClick={() => {
-            const query = "going"
-            router.push(`${pathname}?state=${query}`)
-          }}
-          display={!pageState ? "block" : "none"}
-          animation={'appearRight'}
-        >
-          On Going 
-        </NavItem>
-      </HeaderInner>
-    )}
     </HeaderContainer>
   )
 }
@@ -179,7 +145,7 @@ const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 40px;
+  margin-left: 20px;
 
   &:hover {
     cursor: pointer;

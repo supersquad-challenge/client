@@ -32,7 +32,7 @@ const CommonError = ({ msg }: Props) => {
         </ButtonItem>
         <ButtonItem
           onClick={() => {
-            router.push(`/challenge?state=application`)
+            router.push(`/challenge`)
           }}
         >
           <GoHome

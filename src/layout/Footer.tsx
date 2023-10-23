@@ -1,53 +1,48 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { GoHome } from 'react-icons/go'
 import { LuFlag } from 'react-icons/lu'
 import Profile from '@/components/base/Profile/Profile'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import { AuthContext } from '@/context/auth'
 import { WindowContext } from '@/context/window'
+import { AiOutlineSearch } from "react-icons/ai";
 
 const FooterContainer = styled.footer`
-  width: 85%;
-  height: 72px;
-  max-width: 400px;
+  width: 100%;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   position: fixed;
-  bottom: 5%;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   background-color: #000000;
-  border-radius: 21px;
+  border-radius: 5px;
   z-index: 99;
 `
 
 const FooterItem = styled.div<{display: string}>`
-  width: 40px;
-  height: 40px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   position: relative;
 
   &:hover {
     cursor: pointer;
   }
-    
-  &::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 50%;
-    border: 1.5px solid #ffffff;
-    border-radius: 2px;
-    z-index: 9;
-    display: ${(props) => props.display};
-    transform: translateX(-50%);
-  }
+`
+
+const FooterTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
 `
 
 const Footer = () => {
@@ -77,20 +72,23 @@ const Footer = () => {
       <FooterItem
         onClick={() => {
           const path = "/challenge"
-          router.push(`${path}?state=${'application'}`)
+          router.push(`${path}`)
         }}
         display={pageState === 0 ? "block" : "none"}
       >
-        <GoHome
+        <AiOutlineSearch
           color="#ffffff"
-          size="28"
+          size="25"
         />
+        <FooterTitle>
+          Explore
+        </FooterTitle>
       </FooterItem>
       <FooterItem
         onClick={() => {
           const path = "/challenge/my"
           if (isLogin) {
-            router.push(`${path}?state=${'application'}`)
+            router.push(`${path}`)
           } else {
             handleModalState('login');
             setTimeout(() => {
@@ -102,8 +100,11 @@ const Footer = () => {
       >
         <LuFlag
           color="#ffffff"
-          size="27"
+          size="25"
         />
+        <FooterTitle>      
+          My Challenges
+        </FooterTitle>
       </FooterItem>
       <FooterItem
         onClick={() => {
@@ -121,8 +122,11 @@ const Footer = () => {
       >
         <Profile
           color='#ffffff'
-          size={28}
+          size={26}
         />
+        <FooterTitle>
+          Profile
+        </FooterTitle>
       </FooterItem>
     </FooterContainer>
   )

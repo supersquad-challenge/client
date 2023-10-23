@@ -16,8 +16,8 @@ const Profile = ({ color, size }: Props) => {
         <Image
           src={userProfile}  
           alt='user'
-          width={28}
-          height={28}      
+          width={size}
+          height={size}      
         />
       ) : (
         <HiOutlineUserCircle

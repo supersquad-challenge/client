@@ -7,12 +7,25 @@ import FillButton from '@/components/base/button/FillButton';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import PopupModal from './PopupModal';
+import { setChallenge } from '@/lib/api/axios/challenge/setChallenge';
+import { AuthContext } from '@/context/auth';
 
-const SelectPaymentModal = () => {
+type Props = {
+  id: string;
+}
+
+const SelectPaymentModal = ({ id }: Props) => {
   const router = useRouter();
   const [isError, setIsError] = useState<boolean>(false);
   const [paymentMethod, setPaymentMethod] = useState<string>('crypto');
-  const { modalState, handleModalState } = useContext(WindowContext)
+  const { userId } = useContext(AuthContext);
+  
+  const { 
+    modalState, 
+    statusCode,
+    handleLoadingState,
+    handleStatusCode,
+    handleModalState } = useContext(WindowContext)
   
   return (
     <BaseModal 
@@ -56,23 +69,41 @@ const SelectPaymentModal = () => {
       <ButtonContainer>
         <FillButton 
           title={'Go On'} 
-          onClickHandler={() => {
+          onClickHandler={async() => {
             if (paymentMethod.length === 0)
               return ;
-            if (!localStorage.getItem('isWalletConnected') && paymentMethod === 'crypto') {
-              setIsError(true);
-              setTimeout(() => {
-                setIsError(false);
-                router.push('/signup/connect');
-              }, 3000)
-            } else {
-              handleModalState('deposit')
+            if (paymentMethod === 'free') {
+              handleLoadingState(true);
+              if (userId) {
+                const res = await setChallenge({
+                  userId: userId,
+                  challengeId: id
+              })
+              handleLoadingState(false);
+              handleStatusCode(409);
+              if (res?.status === 409 || statusCode === 409) {
+                const userChallengeId = res?.data.userChallengeId;
+                setTimeout(() => {
+                  router.push(`/challenge/my/detail/${userChallengeId}?state=my`)
+                }, 2500)
+              }
             }
-          }}
-          color={'#ffffff'}
-          fontSize={17} 
-          backgroundcolor={'#000000'}          
-        />
+            return ;
+          }
+          if (!localStorage.getItem('isWalletConnected') && paymentMethod === 'crypto') {
+            setIsError(true);
+            setTimeout(() => {
+              setIsError(false);
+              router.push('/signup/connect');
+            }, 3000)
+          } else {
+            handleModalState('deposit')
+          }
+        }}
+        color={'#ffffff'}
+        fontSize={17} 
+        backgroundcolor={'#000000'}          
+      />
       </ButtonContainer>
       {isError && (
         <PopupModal

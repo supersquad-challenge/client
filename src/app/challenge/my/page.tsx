@@ -3,6 +3,7 @@ import Loading from '@/components/animation/Loading/Loading';
 import ChallengeItem from '@/components/common/challenge/registered/ChallengeItem';
 import ChallengeSet from '@/components/common/challenge/unregistered/ChallengeSet';
 import CommonError from '@/components/common/error/CommonError';
+import NoChallenge from '@/components/common/error/NoChallenge';
 import { getAllChallengeByUserId } from '@/lib/api/axios/user/getAllChallengeByUserId';
 import { UserChallengeInfo } from '@/types/user/User';
 import { useSearchParams } from 'next/navigation'
@@ -34,6 +35,11 @@ const MyChallenge = () => {
     (error || data === undefined)) {
     return <CommonError msg="Fetch failed" />;
   }
+
+  if (!isLoading &&
+    (!error && data !== undefined && data.length === 0)) {
+      return <NoChallenge />
+    }
 
   return (
     <main>

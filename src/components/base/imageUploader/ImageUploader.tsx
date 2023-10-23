@@ -1,6 +1,5 @@
 import { WindowContext } from '@/context/window';
 import postPhoto from '@/lib/api/axios/feature/postPhoto';
-import { AxiosResponse } from 'axios';
 import { useRouter } from 'next/navigation';
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
@@ -57,7 +56,6 @@ const ImageUploader = ({ userChallengeId }: Props) => {
       >
         Complete Mission
       </ButtonItem>
-      
     </Container>
   )
 }
@@ -65,29 +63,26 @@ const ImageUploader = ({ userChallengeId }: Props) => {
 const Container = styled.div`
   position: fixed;
   left: 50%;
-  bottom: 40px;
+  bottom: 30px;
   width: 90%;
   transform: translateX(-50%);
   height: 60px;
   max-width: 500px;
   margin: 0 auto;
-  background-color: #000000;
   color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
-  border: 1px solid #000000;
 `
 
 const ButtonItem = styled.label`
   font-size: 18px;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 5px;
+  background-color: #000000;
+  border: 1px solid #000000;
+  border-radius: 20px;
 `
 
 

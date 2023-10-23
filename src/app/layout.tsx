@@ -6,6 +6,24 @@ import { AuthProvider } from '@/context/auth'
 import StyledComponentsRegistry from '@/app/registry/registry'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import GoogleAnalytics from '@/app/GoogleAnalytics'
+import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react"
+import { WagmiConfig, sepolia } from "wagmi"
+import { goerli, mainnet, polygon, polygonMumbai } from "wagmi/chains"
+
+const PROJECT_ID = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || '';
+
+const metadata = {
+  name: 'Supersquad',
+  description: 'supersqaud challenge',
+  url: 'https://supersquad.site',
+  icons: ['/src/app/favicon.ico']
+}
+
+const chains = [mainnet, goerli, sepolia, polygon, polygonMumbai]
+
+const wagmiConfig = defaultWagmiConfig({ chains, projectId: PROJECT_ID, metadata })
+
+createWeb3Modal({ wagmiConfig, projectId: PROJECT_ID, chains })
 
 export default function RootLayout({
   children,
@@ -18,18 +36,20 @@ export default function RootLayout({
     <html lang="en">
       <body>
       <QueryClientProvider client={client}>
-        <AuthProvider>
-          <WindowProvider>
-            <StyledComponentsRegistry>
-              <Layout>
-                {children}
-                <GoogleAnalytics />
-              </Layout>
-            </StyledComponentsRegistry>
-          </WindowProvider>
-        </AuthProvider>
-        </QueryClientProvider>
-      </body>
-    </html>
+        <WagmiConfig config={wagmiConfig}>
+          <AuthProvider>
+            <WindowProvider>
+              <StyledComponentsRegistry>
+                <Layout>
+                  {children}
+                  <GoogleAnalytics />
+                </Layout>
+              </StyledComponentsRegistry>
+            </WindowProvider>
+          </AuthProvider>
+        </WagmiConfig>
+      </QueryClientProvider>
+    </body>
+  </html>
   )
 }

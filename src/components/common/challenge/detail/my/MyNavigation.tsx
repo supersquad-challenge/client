@@ -49,12 +49,17 @@ const NavContainer = styled.nav`
   align-items: center;
   justify-content: space-between;
   height: 45px;
+  
+  @media (max-width: 350px) {
+    height: 35px;
+    font-size: 14px;
+  }
 `
 
 const NavItem = styled.div<{display: string}>`
   position: relative;
   width: 50%;
-  min-width: 120px;
+  min-width: 65px;
   height: 100%;
   display: flex;
   align-items: center;

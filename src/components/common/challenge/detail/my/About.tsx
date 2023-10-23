@@ -93,7 +93,7 @@ const PageTitle = styled.div`
 
 const Container = styled.section`
   width: 90%;
-  min-width: 350px;
+  min-width: 250px;
   max-width: 450px;
   margin: 0 auto;
 `

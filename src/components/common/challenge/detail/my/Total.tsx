@@ -92,7 +92,7 @@ const Total = ({ id }: Props) => {
 
 const Container = styled.section`
   width: 90%;
-  min-width: 350px;
+  min-width: 250px;
   max-width: 450px;
   margin: 0 auto;
 `

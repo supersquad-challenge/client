@@ -19,7 +19,9 @@ const Challenge = () => {
         id={id}
       />
       {modalState === 'payments' && (
-        <SelectPaymentModal />
+        <SelectPaymentModal
+          id={id}
+        />
       )}
       {modalState === 'deposit' && (
         <ChargeDepositModal

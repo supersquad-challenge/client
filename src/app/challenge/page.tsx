@@ -6,12 +6,10 @@ import { AllChallenges } from '@/types/challenge/Challenge';
 import Loading from '@/components/animation/Loading/Loading';
 import { useSearchParams } from 'next/navigation';
 import styled from 'styled-components';
-import ChallengeItem from '@/components/common/challenge/registered/ChallengeItem';
 import CommonError from '@/components/common/error/CommonError';
 
 const Challenge = () => {
   const param = useSearchParams();
-  const query = param.get('state');
 
   const { data, error, isLoading } = useQuery({
     queryKey: ['allChallenges'], 
@@ -36,8 +34,7 @@ const Challenge = () => {
   return (
     <main>
       <HomeInner>
-      {query === 'application' ? (
-        data.map((challenge: AllChallenges, idx: number) => {
+        {data.map((challenge: AllChallenges, idx: number) => {
           return (
             <div key={idx}>
               <ChallengeSet
@@ -52,25 +49,7 @@ const Challenge = () => {
                 isRegistered={false}
               />
             </div>
-          )
-        })
-      ) : (
-        data.map((challenge: AllChallenges, idx: number) => {
-          return (
-            <div key={idx}>
-              <ChallengeItem
-                id={challenge.challengeId}
-                title={challenge.challengeName}
-                thumbnailUrl={challenge.challengeThumbnail}
-                startDate={challenge.challengeStartsAt}
-                endDate={challenge.challengeEndsAt}
-                frequency={challenge.challengeVerificationFrequency}
-                isRegistered={false}
-              />
-            </div>
-          )
-        })
-      )}
+        )})}
       </HomeInner>
     </main>
   )

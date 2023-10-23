@@ -70,7 +70,7 @@ const ChargeDepositModal = ({ id }: Props) => {
       show={modalState === 'deposit' ? true : false}>
       <SmallBlock
         leftTitle='Period'
-        rightTitle={`${convertIsoDateToReadable(data.challengeStartsAt)} - ${convertIsoDateToReadable(data.challengeEndsAt)}`}
+        rightTitle={data.challengeStartsAt.length === 0 ? 'None' : `${convertIsoDateToReadable(data.challengeStartsAt)} - ${convertIsoDateToReadable(data.challengeEndsAt)}`}
         leftColor="#000000"
         rightColor="#000000">
       </SmallBlock>
@@ -104,15 +104,6 @@ const ChargeDepositModal = ({ id }: Props) => {
           $USDT
         </TickerContainer>
       </InputContainer>
-      <MsgContainer>
-        Members deposit 
-        <span style={{
-          color: 'red',
-          textDecoration: 'underline',
-          margin: '0 7px'
-        }}>150 $USDT</span>
-         / 1 Week in average!
-      </MsgContainer>
       <ButtonContainer>
         <FillButton 
           title={'Charge Deposit'} 

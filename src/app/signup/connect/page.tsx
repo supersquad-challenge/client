@@ -1,6 +1,6 @@
 "use client"
 import { useRouter } from 'next/navigation'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi';
 import styled from 'styled-components';
 import Image from 'next/image';
@@ -11,6 +11,8 @@ import CommonError from '@/components/common/error/CommonError';
 import Check from '@/components/animation/Check/Check';
 import { setAddress } from '@/lib/api/axios/user/setAddress';
 import { AuthContext } from '@/context/auth';
+import { useWeb3Modal } from '@web3modal/wagmi/react'
+import { useAccount } from 'wagmi'
 
 async function getWeb3ModalInstance() {
   const web3Modal = new Web3Modal({
@@ -30,9 +32,12 @@ async function getWeb3ModalInstance() {
 const WalletConnect = () => {
   const router = useRouter();
   const [account, setAccount] = useState<string>('');
+  const [isMount, setIsMount] = useState<boolean>(false);
   const [showSucces, setShowSuccess] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
-
+  const { open } = useWeb3Modal()
+  const { address, isConnected } = useAccount();;
+  const clientRef = useRef(null);
   const { userId } = useContext(AuthContext);
   
   async function connectMetaMask() {
@@ -41,86 +46,113 @@ const WalletConnect = () => {
       const connection = await web3Modal.connect()
       const provider = new ethers.BrowserProvider(connection)
       const accounts = await provider.listAccounts()
-      if (accounts[0].address !== undefined) {
-        setShowSuccess(true);
-        setAccount(accounts[0].address);
-        localStorage.setItem('isWalletConnected', 'true');
-        localStorage.setItem('walletAddress', accounts[0].address);
-        if (userId) {
-          const res = await setAddress({
-            userInfoId: userId,
-            address: accounts[0].address
-          });
-        }
-        setTimeout(() => {
-          router.back();
-        }, 4000)
-      }
+      setShowSuccess(true);
+      await handleSetAddress(accounts[0].address)
     } catch (err) {
       console.log('error:', err)
       setIsError(true);
     }
   }
+  
+  async function connectWeb3Wallet() {
+    open();
+  }
+
+  const handleSetAddress = async(account: string) => {
+    if (account !== undefined) {
+      setAccount(account);
+      localStorage.setItem('isWalletConnected', 'true');
+      localStorage.setItem('walletAddress', account);
+      if (userId) {
+        const res = await setAddress({
+          userInfoId: userId,
+          address: account
+        });
+      }
+      setTimeout(() => {
+        router.back();
+      }, 3000)
+    }
+  }
+
+  useEffect(() => {
+    setIsMount(true);
+
+    if (clientRef !== null && address) {
+      handleSetAddress(address);
+    }
+    
+    return () => {
+      setShowSuccess(false);
+      setIsMount(false);
+    }
+  }, [address])
 
   return (
     <main>
-      <HeaderContainer>
-        <ButtonContainer
-          onClick={() => router.back()}
-        >
-          <FiChevronLeft
-            color="#000000"
-            size="24"
-          />
-        </ButtonContainer>      
-      </HeaderContainer>
-      <BodyContainer>
-        <BodyTitle>
-          Connect Wallet
-        </BodyTitle>
-        <WalletContainer
-          onClick={() => connectMetaMask()}
-        >
-          <Image
-            src="/assets/metamask.svg"
-            alt="connect metamask"
-            width={100}
-            height={50}
-            style={{
-              width: "100%",
-              height: "50px"
-            }}
-          />
-        </WalletContainer>
-        <WalletContainer>
-          <Image
-            src="/assets/walletconnect.svg"
-            alt="connect wallet connect"
-            width={100}
-            height={50}
-            style={{
-              width: "100%",
-              height: "50px"
-            }}
-          />
-        </WalletContainer>
-      </BodyContainer>
-      {isError && (
-        <CommonError
+      {isMount && (
+        <>
+        <HeaderContainer>
+          <ButtonContainer
+            onClick={() => router.back()}
+            >
+            <FiChevronLeft
+              color="#000000"
+              size="24"
+            />
+          </ButtonContainer>      
+        </HeaderContainer>
+        <BodyContainer>
+          <BodyTitle>
+            Connect Wallet
+          </BodyTitle>
+          <WalletContainer
+            onClick={() => connectMetaMask()}
+          >
+            <Image
+              src="/assets/metamask.svg"
+              alt="connect metamask"
+              width={100}
+              height={50}
+              style={{
+                width: "100%",
+                height: "50px"
+              }}
+            />
+          </WalletContainer>
+          <WalletContainer
+            onClick={() => connectWeb3Wallet()}
+          >
+            <Image
+              src="/assets/walletconnect.svg"
+              alt="connect wallet connect"
+              width={100}
+              height={50}
+              style={{
+                width: "100%",
+                height: "50px"
+              }}
+            />
+          </WalletContainer>
+        </BodyContainer>
+        {isError && (
+          <CommonError
           msg='Metamask connect failed'
-        />
-      )}
-      {showSucces && (
-        <SuccessContainer>
-          <Check />
-          <SuccessMsg>
-            Successfully Connected
-          </SuccessMsg>
-          <Address>
-            {account}
-          </Address>
-        </SuccessContainer>
-      )}
+          />
+        )}
+        {(showSucces || isConnected) && (
+          <SuccessContainer>
+            <Check />
+            <SuccessMsg>
+              Successfully Connected
+            </SuccessMsg>
+            <Address>
+              {account || address}
+            </Address>
+          </SuccessContainer>
+          )}
+        </>
+        )}
     </main>
 )}
 
