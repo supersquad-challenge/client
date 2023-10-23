@@ -28,14 +28,18 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
   
   useEffect(() => {
-    const res = login();
-    console.log("login res", res);
+    handleLogin();
     const user = localStorage.getItem('supersquad');
     if (user !== undefined && user !== null) {
       setUserId(user);
       setisLogin(true);
     }
   }, [])
+  
+  const handleLogin = async() => {
+    const res = await login();
+    console.log("login res", res);    
+  }
 
   const contextValue = {
     isLogin,
