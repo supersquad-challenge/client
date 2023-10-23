@@ -1,5 +1,5 @@
 "use client"
-import Loading from '@/components/animation/Loading/Loading';
+import Loading from '@/components/animation/Loading/Spinner/Loading';
 import ChallengeItem from '@/components/common/challenge/registered/ChallengeItem';
 import CommonError from '@/components/common/error/CommonError';
 import NoChallenge from '@/components/common/error/NoChallenge';
