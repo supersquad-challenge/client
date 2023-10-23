@@ -20,7 +20,9 @@
     "dotenv": "^16.3.1",
     "ethereum-unit-converter": "^0.0.17",
     "ethers": "^6.8.0",
+    "lokijs": "^1.5.12",
     "next": "13.5.4",
+    "pino-pretty": "^10.2.3",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.11.0",
@@ -38,6 +40,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "babel-plugin-styled-components": "^2.1.4",
+    "encoding": "^0.1.13",
     "eslint": "^8",
     "eslint-config-next": "13.5.4",
     "typescript": "^5"
