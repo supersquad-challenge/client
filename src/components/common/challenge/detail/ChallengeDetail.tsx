@@ -9,13 +9,15 @@ import { thousandFormat } from '@/utils/moneyFormatUtils';
 import ChallengeInfo from '@/components/common/challenge/unregistered/ChallengeInfo';
 import FillButton from '@/components/base/button/FillButton';
 import { convertIsoDateToReadable } from '@/utils/dateFormatUtils';
-import { SingleChallenges } from '@/types/challenge/Challenge';
-import Loading from '@/components/animation/Loading/Loading';
+import { ParsedDesc, SingleChallenges } from '@/types/challenge/Challenge';
+import Loading from '@/components/animation/Loading/Spinner/Loading';
 import { WindowContext } from '@/context/window';
 import PopupModal from '@/components/base/modal/PopupModal';
 import CommonError from '@/components/common/error/CommonError';
 import { AuthContext } from '@/context/auth';
 import { useRouter } from 'next/navigation';
+import { parseChallengeDesc } from '@/utils/parseDescUtils';
+import ChallengeDesc from '../description/ChallengeDesc';
 
 type Props = {
   id: string
@@ -65,6 +67,9 @@ const ChallengeDetail = ({ id }: Props) => {
     || data === undefined)) {
     return <CommonError msg="Fetch failed" />;
   }
+
+  const _desc = parseChallengeDesc(data.description);
+
   return (
     <div>
       <ImageContainer>
@@ -114,6 +119,13 @@ const ChallengeDetail = ({ id }: Props) => {
             shadow='rb'
           />
         </InfoContainer>
+        {_desc.map((el: ParsedDesc, idx: number) => {
+          return (
+            <ChallengeDesc
+              key={idx}
+              block={el}
+            />
+        )})}
         <ButtonContainer>
           <FillButton
             title='I am in!'
@@ -179,7 +191,7 @@ const ButtonContainer = styled.footer`
   height: 60px;
   border-radius: 20px;
   overflow: hidden;
-  margin-top: 10px;
+  margin-top: 20px;
 
   &:hover {
     cursor: pointer;

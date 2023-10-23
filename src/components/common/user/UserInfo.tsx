@@ -1,4 +1,4 @@
-import Loading from '@/components/animation/Loading/Loading';
+import Loading from '@/components/animation/Loading/Spinner/Loading';
 import { getUserInfo } from '@/lib/api/querys/user/getUserInfo';
 import React from 'react'
 import { useQuery } from 'react-query'

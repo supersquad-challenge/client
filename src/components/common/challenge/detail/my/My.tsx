@@ -1,4 +1,4 @@
-import Loading from '@/components/animation/Loading/Loading';
+import Loading from '@/components/animation/Loading/Spinner/Loading';
 import LongBlock from '@/components/base/block/LongBlock';
 import ProgressBar from '@/components/base/progressbar/ProgressBar';
 import CommonError from '@/components/common/error/CommonError';

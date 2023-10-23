@@ -4,7 +4,7 @@ import { WindowContext } from '@/context/window'
 import { useQuery } from 'react-query';
 import { getSingleChallenge } from '@/lib/api/querys/challenge/getSingleChallenge';
 import { SingleChallenges } from '@/types/challenge/Challenge';
-import Loading from '@/components/animation/Loading/Loading';
+import Loading from '@/components/animation/Loading/Spinner/Loading';
 import CommonError from '@/components/common/error/CommonError';
 import SmallBlock from '@/components/base/block/SmallBlock';
 import { convertIsoDateToReadable } from '@/utils/dateFormatUtils';
