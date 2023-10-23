@@ -126,9 +126,13 @@ const ChargeDepositModal = ({ id }: Props) => {
               }, 2500)
               return ;
             }
-            const isDeposited = await transfer({ to: data?.poolAddress , value: deposit })
-            if (!isDeposited) {
+            const { status, code } = await transfer({ to: data?.poolAddress , value: deposit })
+            if (!status) {
               handleLoadingState(false);
+              handleModalState(`txFailed${code}`);
+              setTimeout(() => {
+                handleModalState('txFailed');
+              }, 2000)
               return ;
             }
 
