@@ -29,8 +29,6 @@ const About = ({ id }: Props) => {
     cacheTime: Infinity
   });
 
-  console.log(data)
-
   if (isLoading) {
     return <Loading />
   }

@@ -23,8 +23,6 @@ const MyChallenge = () => {
     cacheTime: Infinity
   });
 
-  console.log(data);
-
   if (isLoading) {
     return <Loading />
   }

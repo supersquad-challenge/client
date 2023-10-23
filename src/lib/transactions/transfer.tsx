@@ -28,7 +28,6 @@ const transfer = async ({ to, value }: Props) => {
         },
         ],
       }).then((txHash) => {
-        console.log(txHash)
         return true;
       })
     .catch((error) => {

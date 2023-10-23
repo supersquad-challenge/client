@@ -18,15 +18,11 @@ const UnRegisterItem = ({
   id,
   title,
   thumbnailUrl,
-  duration,
   participants,
   deposit,
-  isRegistered
 }: Props) => {
   return (
-    <Link href={isRegistered 
-      ? `/challenge/my/detail/${id}?state=my`
-      : `/challenge/detail/${id}`}>
+    <Link href={`/challenge/detail/${id}`}>
       <ChallengeContainer>
         <ImageContainer>
           <Image
@@ -66,6 +62,14 @@ const ChallengeContainer = styled.div`
     content: "";
     display: block;
     padding-bottom: 100%;
+  }
+
+  transition: all .2s ease;
+
+  &:hover {
+    transform: scale(105%);
+    box-shadow: 2px 2px 2px 2px #545454;
+    z-index: 99;
   }
 
 `
