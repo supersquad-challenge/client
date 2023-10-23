@@ -87,6 +87,16 @@ const SelectPaymentModal = ({ id }: Props) => {
                   router.push(`/challenge/my/detail/${userChallengeId}?state=my`)
                 }, 2500)
               }
+
+              if (res?.status === 200 || statusCode === 200) {
+                const userChallengeId = res?.data.userChallengeId;
+                handleModalState('Success');
+
+                setTimeout(() => {
+                  handleModalState(undefined);
+                  router.push(`/challenge/my/detail/${userChallengeId}?state=my`);
+                }, 3000)
+              }
             }
             return ;
           }
