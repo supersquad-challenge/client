@@ -1,6 +1,6 @@
 "use client"
 import { AxiosResponse } from 'axios';
-import React, { createContext, ReactNode, useState } from 'react';
+import React, { createContext, ReactNode, useEffect, useState } from 'react';
 
 interface windowContext {
   modalState: string | undefined;
@@ -10,6 +10,7 @@ interface windowContext {
   useCallHandler: <T> (args: T, func: (args: T) => Promise<AxiosResponse | undefined>) => Promise<AxiosResponse | undefined>;
   statusCode: number | undefined;
   handleStatusCode: (code: number | undefined) => void;
+  isEntry: boolean;
 }
 
 const defaultValue: windowContext = {
@@ -19,7 +20,8 @@ const defaultValue: windowContext = {
   handleLoadingState: () => {},
   useCallHandler: async () => undefined,
   statusCode: undefined,
-  handleStatusCode: () => {}
+  handleStatusCode: () => {},
+  isEntry: true,
 };
 
 const WindowContext = createContext(defaultValue);
@@ -28,6 +30,7 @@ const WindowProvider = ({ children } : { children: ReactNode }) => {
   const [modalState, setModalState] = useState<string | undefined>(undefined);
   const [loadingState, setLoadingState] = useState<boolean>(false);
   const [statusCode, setstatusCode ] = useState<number | undefined>(undefined);
+  const [isEntry, setIsEntry] = useState<boolean>(true);
 
   const handleModalState = (state: string | undefined) => {
     setModalState(state)
@@ -39,9 +42,7 @@ const WindowProvider = ({ children } : { children: ReactNode }) => {
 
   async function useCallHandler<T>(args: T, func: (args: T) => Promise<AxiosResponse | undefined>): Promise<AxiosResponse | undefined> {
     setLoadingState(true);
-    console.log(func)
     const res = await func(args);
-    console.log(res);
     if (res !== undefined) {
       setstatusCode(res.status);
     }
@@ -51,6 +52,19 @@ const WindowProvider = ({ children } : { children: ReactNode }) => {
 
     return res;
   }
+
+  useEffect(() => {
+    const isExist = sessionStorage.getItem('supersquad');
+    if (isExist === 'true') {
+      setIsEntry(false)
+    } else {
+      setIsEntry(true);
+      setTimeout(() => {
+        sessionStorage.setItem('supersquad', 'true');
+        setIsEntry(false)
+      }, 1200)
+    }
+  }, [])
 
   const handleStatusCode = (code: number | undefined) => {
     setstatusCode(code)
@@ -63,7 +77,8 @@ const WindowProvider = ({ children } : { children: ReactNode }) => {
     handleLoadingState,
     useCallHandler,
     statusCode,
-    handleStatusCode
+    handleStatusCode,
+    isEntry
   }
 
   return (

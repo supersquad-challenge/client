@@ -48,9 +48,7 @@ const SmallBlock = ({
 const BlockWrapper = styled.div`
   width: 100%;
   height: 45px;
-
   margin-top: 10px;
-  padding: 8px 30px;
   position: relative;
   display: flex;
   justify-content: center;

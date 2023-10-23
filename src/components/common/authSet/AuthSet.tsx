@@ -34,7 +34,7 @@ const IconContainer = styled.div`
   height: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 `
 
 const AuthSet = () => {

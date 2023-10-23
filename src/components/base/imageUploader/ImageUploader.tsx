@@ -74,7 +74,7 @@ const Container = styled.div`
 
 const ButtonItem = styled.label`
   font-size: 18px;
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   height: 100%;
   display: flex;

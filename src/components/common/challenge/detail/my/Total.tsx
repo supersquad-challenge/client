@@ -55,12 +55,14 @@ const Total = ({ id }: Props) => {
           title='Over 80% Pool'
           content={`$${thousandFormat(data.cryptoSuccessPool)}`}
           contentColor='#000000'
+          direction='left'
           shadow='rb'
         />
         <ChallengeInfo
           title='Under 80% Pool'
           content={`$${data.cryptoFailPool}`}
           contentColor='#000000'
+          direction='right'
           shadow='lb'
         />
       </InfoContainer>
@@ -77,12 +79,14 @@ const Total = ({ id }: Props) => {
           title='Over 80% Pool'
           content={`$${thousandFormat(data.cashSuccessPool)}`}
           contentColor='#000000'
+          direction='left'
           shadow='rb'
         />
         <ChallengeInfo
           title='Under 80% Pool'
           content={`$${data.cashFailPool}`}
           contentColor='#000000'
+          direction='right'
           shadow='lb'
         />
       </InfoContainer>
@@ -91,7 +95,7 @@ const Total = ({ id }: Props) => {
 }
 
 const Container = styled.section`
-  width: 90%;
+  width: 100%;
   min-width: 250px;
   max-width: 450px;
   margin: 0 auto;
@@ -99,9 +103,10 @@ const Container = styled.section`
 
 const InfoContainer = styled.div`
   margin-top: 20px;
-  width: 100%;
-  display: grid;
-  grid: '. .';
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
 `
 
 export default Total;

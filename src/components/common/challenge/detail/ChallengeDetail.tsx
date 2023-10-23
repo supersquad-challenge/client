@@ -43,8 +43,6 @@ const ChallengeDetail = ({ id }: Props) => {
     cacheTime: Infinity
   })
 
-  console.log(data)
-
   useEffect(() => {
     if (statusCode === 409) {
       setIsError(true);
@@ -91,26 +89,30 @@ const ChallengeDetail = ({ id }: Props) => {
             title='Schedule'
             content={data.challengeStartsAt.length === 0 ? 'None' : `${convertIsoDateToReadable(data.challengeStartsAt)} - ${convertIsoDateToReadable(data.challengeEndsAt)}`}
             contentColor='#000000'
+            direction='left'
             shadow='rb'
           />
-        <ChallengeInfo
-          title='How To'
-          content='Take a picture'
-          contentColor='#000000'
-          shadow='rb'
-          />
-        <ChallengeInfo
-            title='Complete'
-            content={data.challengeVerificationFrequency}
+          <ChallengeInfo
+            title='How To'
+            content='Take a picture'
             contentColor='#000000'
+            direction='right'
+            shadow='rb'
+            />
+          <ChallengeInfo
+              title='Complete'
+              content={data.challengeVerificationFrequency}
+              contentColor='#000000'
+              direction='left'
+              shadow='rb'
+            />
+          <ChallengeInfo
+            title='Crypto Yield +'
+            content={`${data.cryptoYield}%`}
+            contentColor='#8A01D7'
+            direction='right'
             shadow='rb'
           />
-        <ChallengeInfo
-          title='Crypto Yield +'
-          content={`${data.cryptoYield}%`}
-          contentColor='#8A01D7'
-          shadow='rb'
-        />
         </InfoContainer>
         <ButtonContainer>
           <FillButton
@@ -163,15 +165,16 @@ const ContentInner = styled.section`
 `
 
 const InfoContainer = styled.div`
-  margin-top: 20px;
+  margin-top: 10px;
   width: 100%;
-  display: grid;
-  grid: '. .';
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
 `
 
 const ButtonContainer = styled.footer`
-  min-width: 300px;
-  max-width: 500px;
+  max-width: 600px;
   font-weight: 500;
   height: 60px;
   border-radius: 20px;
@@ -179,6 +182,7 @@ const ButtonContainer = styled.footer`
   margin-top: 10px;
 
   &:hover {
+    cursor: pointer;
     border: 1px solid #000000;
   }
 `

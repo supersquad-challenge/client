@@ -32,7 +32,7 @@ const Container = styled.section`
   top: 0;
   left: 0;
   background-color: #00F0FF;
-  z-index: 999;
+  z-index: 9999;
 `
 
 const Title = styled.div`
@@ -56,16 +56,16 @@ const LogoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: ClashDisplayVariable;  
-  font-weight: 700;
-  font-size: 24px;
-`
+  `
 
 const LogoTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 10px;
+  font-family: ClashDisplayVariable;  
+  font-weight: 800;
+  font-size: 24px;
 `
 
 export default Splash

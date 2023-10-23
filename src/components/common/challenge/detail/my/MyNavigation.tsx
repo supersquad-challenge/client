@@ -65,6 +65,7 @@ const NavItem = styled.div<{display: string}>`
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid #6F7789;
+  font-weight: ${(props) => props.display === 'block' ? 700 : 'unset'};
 
     &:hover {
     cursor: pointer;

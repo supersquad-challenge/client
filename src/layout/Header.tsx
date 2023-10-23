@@ -21,54 +21,6 @@ const HeaderContainer = styled.header`
   background-color: #ffffff;
   `
 
-const NavItem = styled.div<{display: string, animation: string}>`
-  position: relative;
-  width: 50%;
-  min-width: 160px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid #6F7789;
-  
-  &:hover {
-    cursor: pointer;
-  }
-  
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 100%;
-    border: 2px solid #000000;
-    border-radius: 2px;
-    z-index: 9;
-    display: ${(props) => props.display};
-    animation-name: ${(props) => props.animation};
-    animation-duration: .3s;
-    animation-fill-mode: forwards;
-
-    @keyframes appearRight {
-      0% {
-        transform: translateX(-100%);
-      }
-      100% {
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes appearLeft {
-       0% {
-        transform: translateX(100%);
-      }
-      100% {
-        transform: translateX(0);
-      }
-    }
-  }
-`
-
 const HeaderInner = styled.section`
   width: 100%;
   height: 48px;
@@ -87,8 +39,8 @@ const HeaderTitle = styled.div`
   display: flex;
   justify-content: flex-start;
   padding-left: 24px;
-  font-family: Opensans;
-  font-weight: bold
+  font-family: OpenSansBold;
+  font-weight: 600;
 `
 
 const Header = () => {
@@ -145,7 +97,7 @@ const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 20px;
+  margin-left: 5px;
 
   &:hover {
     cursor: pointer;

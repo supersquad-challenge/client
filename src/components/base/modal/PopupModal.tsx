@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { IoIosNotifications } from 'react-icons/io'
+import Image from 'next/image'
 
 type Props = {
   title: string
@@ -11,9 +11,11 @@ const PopupModal = ({ title }: Props) => {
   return (
     <ModalContainer>
       <ModalInner>
-        <IoIosNotifications
-          size='20'
-          color='#8A01D7'
+        <Image
+          src={'/assets/supersquad_logo.svg'}
+          alt='supersquad logo'
+          width={25}
+          height={25}
         />
         <ModalTitle>
           {title}
@@ -36,9 +38,9 @@ const ModalContainer = styled.section`
 const ModalTitle = styled.span`
   font-weight: 500;
   font-size: 16px;
-  margin-left: 10px;
+  margin-left: 5px;
   padding-bottom: 2px;
-  color:#8A01D7;
+  color:#00F0FF;
 `
 
 const ModalInner = styled.div`
@@ -46,7 +48,7 @@ const ModalInner = styled.div`
   height: auto;
   min-width: 250px;
   max-width: 400px;
-  padding: 10px 20px;
+  padding: 7px 7px;
   position: absolute;
   top: 10%;
   left: 50%;
@@ -54,7 +56,7 @@ const ModalInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
+  background-color: #000000;
   box-shadow: 5px 5px 50px #818181;
   border-radius: 10px;
 

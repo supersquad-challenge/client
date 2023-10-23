@@ -159,7 +159,7 @@ const WalletConnect = () => {
 const HeaderContainer = styled.header`
   width: 90%;
   height: auto;
-  margin: 10px auto;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
