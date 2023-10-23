@@ -38,7 +38,6 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   
   const handleLogin = async() => {
     const res = await login();
-    console.log(res)
     if (res !== undefined && res.status === 200) {
       localStorage.setItem('supersquad', res.data.userInfoId);
     }

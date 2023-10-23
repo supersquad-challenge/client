@@ -26,14 +26,11 @@ const ChallengeItem = ({
   endDate,
   status,
   frequency,
-  isRegistered
 }: Props) => {
 
   return (
     <ItemContainer onClick={() => {}}>
-      <Link href={isRegistered 
-        ? `/challenge/my/detail/${id}?state=my`
-        : `/challenge/detail/${id}`}>
+      <Link href={`/challenge/my/detail/${id}?state=my`}>
         <ImageContainer>
           <Image
             src={isValidUrl(thumbnailUrl) ? thumbnailUrl : "/default/diet_thumbnail.svg"}
@@ -48,9 +45,7 @@ const ChallengeItem = ({
         </ImageContainer>
       </Link>
       <ChallengeInner>
-        <Link href={isRegistered 
-        ? `/challenge/my/detail/${id}?state=my`
-        : `/challenge/detail/${id}`}>
+        <Link href={`/challenge/my/detail/${id}?state=my`}>
           <ChallengeTitle>
             {title}
           </ChallengeTitle>
@@ -72,9 +67,7 @@ const ChallengeItem = ({
           />
         </ButtonContainer>
       </ChallengeInner>
-      <Link href={isRegistered 
-        ? `/challenge/my/detail/${id}?state=my`
-        : `/challenge/detail/${id}`}>
+      <Link href={`/challenge/my/detail/${id}?state=my`}>
         <IconContainer>
           <BsChevronCompactRight
             size='32'
