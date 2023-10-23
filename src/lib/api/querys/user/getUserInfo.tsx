@@ -1,5 +1,3 @@
-import axios from "axios";
-
 type Props = {
   userId: string;
 }

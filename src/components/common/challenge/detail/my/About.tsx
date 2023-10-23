@@ -79,6 +79,8 @@ const About = ({ id }: Props) => {
 
 const PageTitle = styled.div`
   margin-top: 10px;
+  font-size: 35px;
+
   @media (max-width: 600px) {
     font-size: 35px;
     margin-bottom: 15px;

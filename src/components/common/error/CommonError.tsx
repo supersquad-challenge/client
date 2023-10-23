@@ -69,9 +69,9 @@ const ButtonItem = styled.div`
   width: 50%;
   max-width: 90px;
   height: 30px;
-  background-color: #333333;
+  background-color: #000000;
   color: #ffffff;
-  border-radius: 15px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
