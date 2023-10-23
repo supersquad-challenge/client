@@ -94,6 +94,10 @@ const IconContainer = styled.div`
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
+
+  @media (max-width: 350px) {
+    right: 0px;
+  }
 `
 
 
@@ -117,15 +121,22 @@ const ChallengeInner = styled.div`
 `;
 
 const ChallengeTitle = styled.div`
-  font-size: 19px;
+  font-size: 18px;
 
   @media (max-width: 600px) {
-    font-size: 19px;
-
+    font-size: 18px;
   }
 
   @media (max-width: 450px) {
-    font-size: 18px;
+    font-size: 17px;
+  }
+
+  @media (max-width: 350px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 300px) {
+    font-size: 15px;
   }
 
   font-weight: 600;
@@ -155,6 +166,7 @@ const Duration = styled.div`
 
   font-weight: 400;
   color: #898989;
+
   &::after {
     content: "";
     position: absolute;
@@ -180,15 +192,15 @@ const ButtonContainer = styled.div`
 
   @media (max-width: 600px) {
     width: 170px;
-    height: 28px;
+    height: 31px;
   }
 
   @media (max-width: 450px) {
     width: 165px;
-    height: 31px;
+    height: 28px;
   }
 
-  @media (max-width: 392px) {
+  @media (max-width: 350px) {
     width: 150px;
     height: 28px;
   }

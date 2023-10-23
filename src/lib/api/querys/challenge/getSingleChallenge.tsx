@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 
 dotenv.config();
+
 type Props = {
   challengeId: string;
 }

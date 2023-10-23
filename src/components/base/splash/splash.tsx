@@ -28,9 +28,11 @@ const Splash = () => {
 const Container = styled.section`
   position: fixed;
   width: 100%;
+  max-width: 600px;
   height: 100%;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: #00F0FF;
   z-index: 9999;
 `
