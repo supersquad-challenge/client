@@ -42,6 +42,7 @@ const BasicButtonWrapper = styled.button<{
   width: 100%;
   min-width: 50px;
   height: 100%;
+  font-weight: 600;
   min-height: 20px;
   font-size: ${(props) => `${props.$fontSize}px`};
   color: ${(props) => props.$color};

@@ -8,6 +8,7 @@ import { BsCheckLg } from 'react-icons/bs'
 import { RxCross2 } from 'react-icons/rx'
 import Link from 'next/link';
 import { FiArrowRight } from 'react-icons/fi'
+import { AiFillEdit } from 'react-icons/ai'
 
 type Props = {
   id: string;
@@ -55,16 +56,21 @@ const UserInfo = ({ id }: Props) => {
             />
           </IconContainer>
         )}
-        {data.address.length === 0 && (
-          <Link href={'/signup/connect'}>
-            <LinkContainer>
+        <Link href={'/signup/connect'}>
+          <LinkContainer>
+            {data.address.length === 0 ? (
               <FiArrowRight
                 size='20'
                 color='#222222'
               />
+              ) : (
+                <AiFillEdit
+                  size='20'
+                  color='#888888'
+                />
+              )}
             </LinkContainer>
-          </Link>
-        )}
+        </Link>
       </BlockItem>
       <BlockItem>
         Set Nickname
@@ -83,16 +89,21 @@ const UserInfo = ({ id }: Props) => {
             />
           </IconContainer>
         )}
-        {data.nickname.length === 0 && (
-          <Link href={'/signup/nickname'}>
-            <LinkContainer>
+        <Link href={'/signup/nickname'}>
+          <LinkContainer>
+            {data.nickname.length === 0 ? (
               <FiArrowRight
                 size='20'
                 color='#222222'
               />
-            </LinkContainer>
-          </Link>
-        )}
+              ) : (
+                <AiFillEdit
+                  size='20'
+                  color='#888888'
+                />
+              )}
+          </LinkContainer>
+        </Link>
       </BlockItem>
     </Container>
   )

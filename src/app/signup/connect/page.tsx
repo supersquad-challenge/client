@@ -186,7 +186,7 @@ const BodyContainer = styled.section`
 `
 
 const BodyTitle = styled.div`
-  margin-top: 40px;
+  margin-top: 20px;
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 50px;
