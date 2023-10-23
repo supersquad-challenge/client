@@ -12,6 +12,34 @@ const nextConfig = {
       "test.com"
     ]
   },
+  webpack: (config, { webpack }) => {
+    const prod = process.env.NODE_ENV === 'development';
+    const newConfig = {
+      ...config,
+      mode: prod ? 'production' : 'development',
+      module: { 
+        rules: [
+          ...config.module.rules,
+          {
+            test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
+            use: {
+              loader: 'url-loader',
+              options: {
+                limit: 100000,
+                name: '[name].[ext]',
+              },
+            },
+          },
+        ],
+      },
+      plugins: [...config.plugins, new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /^\.\/ko$/)],
+    };
+
+    if (prod) {
+      newConfig.devtool = 'hidden-source-map';
+    }
+    return newConfig;
+  },
   async redirects() {
     return [
       {
