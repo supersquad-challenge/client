@@ -13,6 +13,7 @@ type Props = {
   thumbnailUrl: string;
   startDate: string;
   endDate: string;
+  status: string;
   frequency: string;
   isRegistered: boolean;
 }
@@ -23,12 +24,17 @@ const ChallengeItem = ({
   thumbnailUrl,
   startDate,
   endDate,
+  status,
   frequency,
   isRegistered
 }: Props) => {
+
   return (
     <ItemContainer onClick={() => {}}>
-      <ImageContainer>
+      <Link href={isRegistered 
+        ? `/challenge/my/detail/${id}?state=my`
+        : `/challenge/detail/${id}`}>
+        <ImageContainer>
           <Image
             src={isValidUrl(thumbnailUrl) ? thumbnailUrl : "/default/diet_thumbnail.svg"}
             alt='challenge'
@@ -39,23 +45,28 @@ const ChallengeItem = ({
             }}
             priority={true}
           />
-      </ImageContainer>
+        </ImageContainer>
+      </Link>
       <ChallengeInner>
-        <ChallengeTitle>
-          {title}
-        </ChallengeTitle>
+        <Link href={isRegistered 
+        ? `/challenge/my/detail/${id}?state=my`
+        : `/challenge/detail/${id}`}>
+          <ChallengeTitle>
+            {title}
+          </ChallengeTitle>
+        </Link>
         <MetaContainer>
           <Duration>
             {frequency}
           </Duration>
-          {startDate.length === 0 ? 'None' : daysBetweenDates(startDate, endDate)}
+          {startDate.length === 0 ? '2 Weeks' : daysBetweenDates(startDate, endDate)}
         </MetaContainer>
         <ButtonContainer>
           <BasicButton
-            title="starting soon"
+            title={status === 'ongoing' ? 'On Going' : 'Complete'}
             onClickHandler={() => {}}
-            color={'#000000'}
-            backgroundColor="#dadada"
+            color={'#ffffff'}
+            backgroundColor={status === 'ongoing' ? "#00F0FF" : "#8A01D7"}
             borderRadius={50}
             fontSize={14}
           />
@@ -79,6 +90,7 @@ const ItemContainer = styled.div`
   margin-top: 20px;
   padding: 15px;
   border-radius: 20px;
+  min-width: 290px;
   position: relative;
   background-color: ${colors.blockGray};
   display: flex;
@@ -106,6 +118,7 @@ const ChallengeInner = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  position: relative;
   
   margin-left: 50px;
 
@@ -187,27 +200,26 @@ const ImageContainer = styled.div`
 `
 
 const ButtonContainer = styled.div`
-  width: 190px;
-  height: 34px;
+  width: 180px;
+  height: 30px;
 
   @media (max-width: 600px) {
-    width: 170px;
-    height: 31px;
+    width: 160px;
   }
 
   @media (max-width: 450px) {
-    width: 165px;
-    height: 28px;
+    width: 140px;
   }
 
   @media (max-width: 350px) {
-    width: 150px;
-    height: 28px;
+    width: 120px;
   }
 
-  margin-top: 10px;
   font-size: 14px;
   font-weight: 700;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 `;
 
 const MetaContainer = styled.div`
@@ -215,6 +227,7 @@ const MetaContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #898989;
 `
 
 export default ChallengeItem;
