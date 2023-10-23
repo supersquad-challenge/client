@@ -13,7 +13,7 @@ const changeChain = async() => {
   let res;
   const ethereum = window.ethereum as Ethereum | undefined;
 
-  function handleChainChanged(chainId = '80001') {
+  function handleChainChanged(chainId = '11155111') {
     window.location.reload();
   }
 
@@ -29,7 +29,7 @@ const changeChain = async() => {
     res = await ethereum.request({ method: 'eth_chainId' });
   }
   
-  return res === '80001' ? true : false;
+  return res === '11155111' ? true : false;
 }
 
 const transfer = async ({ to, value }: Props) => {
