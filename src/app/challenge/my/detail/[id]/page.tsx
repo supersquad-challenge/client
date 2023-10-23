@@ -12,6 +12,7 @@ import ImageUploader from '@/components/base/imageUploader/ImageUploader';
 import { WindowContext } from '@/context/window';
 import SuccessModal from '@/components/base/modal/SuccessModal';
 import { AuthContext } from '@/context/auth';
+import PopupModal from '@/components/base/modal/PopupModal';
 
 const MyDetail = () => {
   const pathname = usePathname();
@@ -31,7 +32,7 @@ const MyDetail = () => {
   }, [query])
 
   const handleDetectDevice = () => {
-    handleModalState('You can authenticate only mobile');
+    handleModalState('onlyMobile');
     setTimeout(() => {
       handleModalState(undefined);
     }, 1500)
@@ -95,6 +96,11 @@ const MyDetail = () => {
           title='Congrats!'
           detail='You have completed today’s challenge'
           buttonTitle='Check Your Status'
+        />
+      )}
+      {modalState === 'onlyMobile' && (
+        <PopupModal
+          title='Can authenticate mobile'
         />
       )}
     </PageContainer>

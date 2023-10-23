@@ -78,8 +78,10 @@ const WalletConnect = () => {
   useEffect(() => {
     setIsMount(true);
 
-    if (clientRef !== null && address) {
-      handleSetAddress(address);
+    if (clientRef !== null) {
+      if (address !== undefined) {
+        handleSetAddress(address);
+      } else return ;
     }
     
     return () => {

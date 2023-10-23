@@ -118,8 +118,8 @@ const ChargeDepositModal = ({ id }: Props) => {
                 challengeId: id
             })
             handleLoadingState(false);
-            handleStatusCode(409);
             if (res?.status === 409 || statusCode === 409) {
+              handleStatusCode(409);
               const userChallengeId = res?.data.userChallengeId;
               setTimeout(() => {
                 router.push(`/challenge/my/detail/${userChallengeId}?state=my`)
