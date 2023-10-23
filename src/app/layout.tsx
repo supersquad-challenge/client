@@ -9,6 +9,7 @@ import GoogleAnalytics from '@/app/GoogleAnalytics'
 import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react"
 import { WagmiConfig, sepolia } from "wagmi"
 import { goerli, mainnet, polygon, polygonMumbai } from "wagmi/chains"
+import GlobalStyle from '@/styles/global'
 
 const PROJECT_ID = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || '';
 
@@ -39,12 +40,13 @@ export default function RootLayout({
         <WagmiConfig config={wagmiConfig}>
           <AuthProvider>
             <WindowProvider>
-              <StyledComponentsRegistry>
-                <Layout>
-                  {children}
-                  <GoogleAnalytics />
-                </Layout>
-              </StyledComponentsRegistry>
+              <GlobalStyle />
+                <StyledComponentsRegistry>
+                  <Layout>
+                    {children}
+                    <GoogleAnalytics />
+                  </Layout>
+                </StyledComponentsRegistry>
             </WindowProvider>
           </AuthProvider>
         </WagmiConfig>
