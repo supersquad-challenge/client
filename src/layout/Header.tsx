@@ -1,9 +1,10 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AuthSet from '@/components/common/authSet/AuthSet'
 import { usePathname, useRouter } from 'next/navigation'
 import { FiChevronLeft } from 'react-icons/fi'
 import styled from 'styled-components'
+import { AuthContext } from '@/context/auth'
 
 const HeaderContainer = styled.header`
   width: 100%;
