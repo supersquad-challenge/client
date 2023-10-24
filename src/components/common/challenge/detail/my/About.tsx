@@ -66,7 +66,7 @@ const About = ({ id }: Props) => {
             />
           <ChallengeInfo
             title='Crypto Yield +'
-            content={`%${data.cryptoYield}`}
+            content={`${data.cryptoYield}%`}
             contentColor='#8A01D7'
             direction='right'
             shadow='rb'

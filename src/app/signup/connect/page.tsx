@@ -13,6 +13,7 @@ import { setAddress } from '@/lib/api/axios/user/setAddress';
 import { AuthContext } from '@/context/auth';
 import { useWeb3Modal } from '@web3modal/wagmi/react'
 import { useAccount } from 'wagmi'
+import { ConnectWallet } from '@thirdweb-dev/react';
 
 async function getWeb3ModalInstance() {
   const web3Modal = new Web3Modal({
@@ -44,10 +45,10 @@ const WalletConnect = () => {
     try {
       const web3Modal = await getWeb3ModalInstance()
       const connection = await web3Modal.connect()
-      const provider = new ethers.BrowserProvider(connection)
+      const provider = new ethers.providers.Web3Provider(connection)
       const accounts = await provider.listAccounts()
       setShowSuccess(true);
-      await handleSetAddress(accounts[0].address)
+      await handleSetAddress(accounts[0])
     } catch (err) {
       console.log('error:', err)
       setIsError(true);
@@ -155,6 +156,7 @@ const WalletConnect = () => {
           )}
         </>
         )}
+        <ConnectWallet />
     </main>
 )}
 

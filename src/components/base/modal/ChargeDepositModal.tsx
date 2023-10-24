@@ -16,6 +16,7 @@ import { setChallenge } from '@/lib/api/axios/challenge/setChallenge';
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/context/auth';
 import transfer from '@/lib/transactions/transfer';
+import { ConnectWallet, useSigner } from '@thirdweb-dev/react'
 
 type Props = {
   id: string;
@@ -32,6 +33,8 @@ const ChargeDepositModal = ({ id }: Props) => {
   const { userId } = useContext(AuthContext);
   const router = useRouter();
   const [ deposit, setDeposit ] = useState<number>(0);
+  const signer = useSigner();
+
 
   const { data, error, isLoading } = useQuery({
     queryKey: [`singleChallenge-${id}`],
@@ -69,7 +72,6 @@ const ChargeDepositModal = ({ id }: Props) => {
       title="Win Your Goal"
       show={modalState === 'deposit' ? true : false}>
       <BlockContainer>
-
       <SmallBlock
         leftTitle='Period'
         rightTitle={data.challengeStartsAt.length === 0 ? 'None' : `${convertIsoDateToReadable(data.challengeStartsAt)} - ${convertIsoDateToReadable(data.challengeEndsAt)}`}
@@ -104,14 +106,14 @@ const ChargeDepositModal = ({ id }: Props) => {
           bordercolor='#cccccc'
         />
         <TickerContainer>
-          $MATIC
+          $USDT
         </TickerContainer>
       </InputContainer>
       <ButtonContainer>
         <FillButton 
           title={'Charge Deposit'} 
           onClickHandler={async () => {
-            const { status, code } = await transfer({ to: data?.poolAddress , value: deposit })
+            const { status, code } = await transfer({ to: data.poolAddress , value: deposit, signer: signer })
             
             if (!status) {
               handleLoadingState(false);

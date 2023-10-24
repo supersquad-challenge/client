@@ -43,7 +43,7 @@ const Total = ({ id }: Props) => {
         leftTitle='Total Crypto Deposit'
         leftContent={`$${thousandFormat(data.challengeCryptoDeposit)}`}
         rightTitle='Crypto Yield Boost'
-        rightContent={`+%${data.cryptoYieldBoost.toFixed(2)}`}
+        rightContent={`+${data.cryptoYieldBoost.toFixed(2)}%`}
         leftColor='#000000'
         rightColor='#ffffff'
         leftBackground='#D6C0F0'
