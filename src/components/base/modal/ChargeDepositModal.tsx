@@ -128,6 +128,7 @@ const ChargeDepositModal = ({ id }: Props) => {
             if (!library || !account) return ;
 
             const signer = library.getSigner(account);
+            console.log("signer", signer)
             const { status, code } = await transfer({ to: data.poolAddress , value: deposit, signer: signer, lib: library })
             
             if (!status) {

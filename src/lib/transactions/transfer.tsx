@@ -18,7 +18,12 @@ const transferUSDT = async({ to, value, signer, lib }: Props) => {
     signer
   )
 
-  const tx = await USDTContract.transfer(to, value * 1000000); 
+  console.log("to", to)
+  console.log(USDTContract)
+
+  const tx = await USDTContract.transfer(to, value); 
+ 
+  console.log(tx)
   if (tx !== undefined && tx.hash.length !== 0) {
     return true;
   }
