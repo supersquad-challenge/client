@@ -1,6 +1,4 @@
 import React from 'react'
-import { useQuery } from 'react-query';
-import { getChallenge } from '@/lib/api/querys/user/getChellenge';
 import CommonError from '@/components/common/error/CommonError';
 import Loading from '@/components/animation/Loading/Spinner/Loading';
 import styled from 'styled-components';
@@ -8,12 +6,13 @@ import ChallengeInfo from '@/components/common/challenge/unregistered/ChallengeI
 import { convertIsoDateToReadable } from '@/utils/dateFormatUtils';
 import { colors } from '@/styles/color';
 import { parseChallengeDesc } from '@/utils/parseDescUtils';
-import { ChallengeDetail, ParsedDesc } from '@/types/challenge/Challenge';
+import { ParsedDesc } from '@/types/challenge/Challenge';
+import { UserChallengeInfo } from '@/types/user/User';
 import ChallengeDesc from '@/components/common/challenge/description/ChallengeDesc';
 
 type Props = {
   id: string;
-  data: ChallengeDetail; 
+  data: UserChallengeInfo; 
   isLoading: boolean | undefined | null;
   error: boolean | undefined | null | unknown;
 }

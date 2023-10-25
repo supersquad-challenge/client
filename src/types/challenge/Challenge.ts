@@ -30,32 +30,3 @@ export type ParsedDesc = {
   text: string
   type: 'T' | 'D'
 }
-
-export type ChallengeDetail = {
-  _id: string;
-  category: string;
-  challengeName: string;
-  joinChallengeStartsAt: string;
-  joinChallengeEndsAt: string;
-  challengeStartsAt: string;
-  challengeEndsAt: string;
-  challengeStatus: string;
-  challengeVerificationFrequency: string;
-  challengeTotalVerificationNum: number;
-  challengeRequiredCompleteNum: number;
-  challengeMaxParticipants: number;
-  challengeParticipantsCount: number
-  challengeVerificationMethod: string;
-  challengeCashDeposit: number;
-  cashSuccessPool: number;
-  cashFailPool: number;
-  challengeCryptoDeposit: number;
-  cryptoSuccessPool: number;
-  cryptoFailPool: number;
-  challengeTotalDeposit: number
-  defiPool: string
-  cryptoYield: number;
-  description: string;
-  challengeThumbnail: string;
-  __v: number;
-}

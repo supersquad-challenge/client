@@ -4,7 +4,7 @@ import FillButton from '@/components/base/button/FillButton'
 import { AuthContext } from '@/context/auth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 const AuthSetContainer = styled.div`
@@ -39,31 +39,38 @@ const IconContainer = styled.div`
 
 const AuthSet = () => {
   const { isLogin } = useContext(AuthContext);
+  const [isMount, setIsMount] = useState<boolean>(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setIsMount(true);
+  }, [])
 
   return (
     <AuthSetContainer>
-      {isLogin ? (
-      <IconContainer>
-        <Link href={'/mypage'}>
-          <Profile
-            color='#222222'
-            size={28}
-          />
-        </Link>
-      </IconContainer>
-      ) : (
-        <ButtonContainer>
-          <FillButton
-            title='Login'
-            onClickHandler={() => {
-              router.push('/signup')
-            }}
-            color='#8A01D7'
-            fontSize={16}
-            backgroundcolor='#ffffff'
-          />
-        </ButtonContainer>
+      {isMount && (
+        isLogin ? (
+          <IconContainer>
+            <Link href={'/mypage'}>
+              <Profile  
+                color='#222222'
+                size={28}
+              />
+            </Link>
+          </IconContainer>
+          ) : (
+          <ButtonContainer>
+            <FillButton
+              title='Login'
+              onClickHandler={() => {
+                router.push('/signup')
+              }}
+              color='#8A01D7'
+              fontSize={16}
+              backgroundcolor='#ffffff'
+            />
+          </ButtonContainer>
+        )
       )}
     </AuthSetContainer>
   )

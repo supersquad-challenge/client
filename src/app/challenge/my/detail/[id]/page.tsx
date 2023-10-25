@@ -17,6 +17,8 @@ import { isValidUrl } from '@/utils/urlUtils';
 import { getThumbnail } from '@/utils/proto.getThumbnail';
 import { getChallenge } from '@/lib/api/querys/user/getChellenge';
 import { useQuery } from 'react-query';
+import CommonError from '@/components/common/error/CommonError';
+import Loading from '@/components/animation/Loading/Bar/Loading';
 
 const MyDetail = () => {
   const pathname = usePathname();
@@ -26,7 +28,6 @@ const MyDetail = () => {
   const userChallengeId = pathname.split('/')[4];
   const { isLogin } = useContext(AuthContext)
   const { modalState, handleModalState } = useContext(WindowContext);
-
   const [current, setCurrent] = useState<string | null>(query);
 
   const { data, isLoading, error } = useQuery({
@@ -42,6 +43,8 @@ const MyDetail = () => {
     cacheTime: Infinity
   });
 
+  console.log(data);
+
 
   useEffect(() => {
     if (!isLogin) {
@@ -55,6 +58,15 @@ const MyDetail = () => {
     setTimeout(() => {
       handleModalState(undefined);
     }, 1500)
+  }
+
+  if (isLoading) {
+    return <Loading />
+  }
+  
+  if (!isLoading && (error
+    || data === undefined || data === null)) {
+    return <CommonError msg="Fetch failed" />;
   }
   
   return (

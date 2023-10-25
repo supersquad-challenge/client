@@ -1,10 +1,9 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AuthSet from '@/components/common/authSet/AuthSet'
 import { usePathname, useRouter } from 'next/navigation'
 import { FiChevronLeft } from 'react-icons/fi'
 import styled from 'styled-components'
-import { AuthContext } from '@/context/auth'
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -45,6 +44,7 @@ const HeaderTitle = styled.div`
 `
 
 const Header = () => {
+  const [isMount, setIsMount] = useState<boolean>(false);
   const [pageTitle, setPageTitle] = useState<string>('');
   const router = useRouter();
   const pathname = usePathname();
@@ -56,6 +56,7 @@ const Header = () => {
   }
 
   useEffect(() => {
+    setIsMount(true);
     if (pathname === "/challenge") {
       setPageTitle("Supersquad")
     } else if (pathname === "/challenge/my") {
@@ -67,23 +68,25 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <HeaderInner>
+      {isMount && (
+        <HeaderInner>
         {isDetail() ? (
-        <HeaderTitle>
+          <HeaderTitle>
           {pageTitle}
         </HeaderTitle>
         ) : (
-        <ButtonContainer
+          <ButtonContainer
           onClick={() => router.back()}
-        >
+          >
           <FiChevronLeft
             color="#000000"
             size="24"
-          />
+            />
         </ButtonContainer>
         )}
         <AuthSet />
       </HeaderInner>
+      )}
     </HeaderContainer>
   )
 }

@@ -11,7 +11,8 @@ const nextConfig = {
   },
   images: {
     domains: [
-      "test.com"
+      "test.com",
+      "lh3.googleusercontent.com"
     ]
   },
   webpack: (config, { webpack }) => {
