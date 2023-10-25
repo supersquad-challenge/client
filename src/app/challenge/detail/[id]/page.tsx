@@ -5,14 +5,18 @@ import ChallengeDetail from '@/components/common/challenge/detail/ChallengeDetai
 import { usePathname } from 'next/navigation';
 import { WindowContext } from '@/context/window';
 import SelectPaymentModal from '@/components/base/modal/SelectPaymentModal';
-import ChargeDepositModal from '@/components/base/modal/ChargeDepositModal';
 import SuccessModal from '@/components/base/modal/SuccessModal';
 import PopupModal from '@/components/base/modal/PopupModal';
+import ChargeDepositModal from '@/components/base/modal/ChargeDepositModal';
+import { useWeb3React } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers';
 
 const Challenge = () => {
   const path = usePathname();
   const id = path.split('/')[3];
   const { modalState } = useContext(WindowContext);
+
+  const { account, activate, library } = useWeb3React<Web3Provider>();
 
 
   return (

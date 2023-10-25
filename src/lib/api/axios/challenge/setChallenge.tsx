@@ -8,7 +8,6 @@ type Props = {
 }
 
 export const setChallenge = async({ userId, challengeId }: Props): Promise<AxiosResponse | undefined> => {
-  console.log(userId, challengeId)
   try {
     const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/myChallenge/register`, {
       userInfoId: userId,

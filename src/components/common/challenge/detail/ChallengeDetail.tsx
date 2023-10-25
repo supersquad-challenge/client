@@ -20,6 +20,9 @@ import { parseChallengeDesc } from '@/utils/parseDescUtils';
 import ChallengeDesc from '../description/ChallengeDesc';
 import { isValidUrl } from '@/utils/urlUtils';
 import { getThumbnail } from '@/utils/proto.getThumbnail';
+import { useWeb3React } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers';
+import { injected } from '@/utils/getConnecter';
 
 type Props = {
   id: string
@@ -35,6 +38,7 @@ const ChallengeDetail = ({ id }: Props) => {
   const [isError, setIsError] = useState<boolean>(false);
   const { isLogin } = useContext(AuthContext);
   const router = useRouter();
+  const { activate } = useWeb3React<Web3Provider>();
 
   const { data, error, isLoading } = useQuery({
     queryKey: [`singleChallenge-${id}`],
@@ -60,6 +64,13 @@ const ChallengeDetail = ({ id }: Props) => {
       setIsError(false);
     }
   }, [statusCode])
+
+   const handleActivate = () => {
+    const _activate = async() => {
+      await activate(injected)
+    }
+    _activate();
+  }
 
   if (isLoading || data === undefined) {
     return <Loading />
@@ -138,7 +149,8 @@ const ChallengeDetail = ({ id }: Props) => {
             backgroundcolor='#000000'
             onClickHandler={() => {
               if (isLogin) {
-                handleModalState('payments')
+                handleActivate();
+                handleModalState('payments');
               } else {
                 handleLoadingState(true);
                 setTimeout(() => {

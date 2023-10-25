@@ -15,7 +15,7 @@ const nextConfig = {
       "lh3.googleusercontent.com"
     ]
   },
-  webpack: (config, { webpack }) => {
+  webpack: (config, { webpack, buildId, dev, isServer, defaultLoaders }) => {
     const prod = process.env.NODE_ENV === 'development';
     const newConfig = {
       ...config,
@@ -37,6 +37,11 @@ const nextConfig = {
       },
       plugins: [...config.plugins, new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /^\.\/ko$/)],
     };
+
+    newConfig.externals.push({
+      'utf-8-validate': 'commonjs utf-8-validate',
+      'bufferutil': 'commonjs bufferutil',
+    })
 
     if (prod) {
       newConfig.devtool = 'hidden-source-map';

@@ -4,64 +4,44 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi';
 import styled from 'styled-components';
 import Image from 'next/image';
-import Web3Modal from 'web3modal'
-import WalletConnectProvider from '@walletconnect/web3-provider'
-import { ethers } from 'ethers'
 import CommonError from '@/components/common/error/CommonError';
 import Check from '@/components/animation/Check/Check';
 import { setAddress } from '@/lib/api/axios/user/setAddress';
 import { AuthContext } from '@/context/auth';
 import { useWeb3Modal } from '@web3modal/wagmi/react'
-import { useAccount } from 'wagmi'
-import { ConnectWallet } from '@thirdweb-dev/react';
+import { useWeb3React } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers'
+import { injected } from '@/utils/getConnecter';
 
-async function getWeb3ModalInstance() {
-  const web3Modal = new Web3Modal({
-    cacheProvider: false,
-    providerOptions: {
-      walletconnect: {
-        package: WalletConnectProvider,
-        options: {
-          alchemy: process.env.NEXT_PUBLIC_WALLET_API_KEY
-        },
-      },
-    },
-  })
-  return web3Modal
-}
 
 const WalletConnect = () => {
   const router = useRouter();
-  const [account, setAccount] = useState<string>('');
+  const [userAddress, setUserAddress] = useState<string>('');
   const [isMount, setIsMount] = useState<boolean>(false);
   const [showSucces, setShowSuccess] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
-  const { open } = useWeb3Modal()
-  const { address, isConnected } = useAccount();;
+  const { open } = useWeb3Modal();
+  const { account, activate, library, active } = useWeb3React<Web3Provider>();
   const clientRef = useRef(null);
   const { userId } = useContext(AuthContext);
-  
-  async function connectMetaMask() {
-    try {
-      const web3Modal = await getWeb3ModalInstance()
-      const connection = await web3Modal.connect()
-      const provider = new ethers.providers.Web3Provider(connection)
-      const accounts = await provider.listAccounts()
+
+  const handleActivate = () => {
+    const _activate = async() => {
+      await activate(injected)
       setShowSuccess(true);
-      await handleSetAddress(accounts[0])
-    } catch (err) {
-      console.log('error:', err)
-      setIsError(true);
+      if (account !== null && account !== undefined)
+        await handleSetAddress(account)
     }
+    _activate();
   }
   
   async function connectWeb3Wallet() {
-    open();
+    await open();
   }
 
-  const handleSetAddress = async(account: string) => {
-    if (account !== undefined) {
-      setAccount(account);
+  const handleSetAddress = async(account: string | null) => {
+    if (account !== null) {
+      setUserAddress(account);
       localStorage.setItem('isWalletConnected', 'true');
       localStorage.setItem('walletAddress', account);
       if (userId) {
@@ -70,9 +50,6 @@ const WalletConnect = () => {
           address: account
         });
       }
-      setTimeout(() => {
-        router.back();
-      }, 3000)
     }
   }
 
@@ -80,8 +57,8 @@ const WalletConnect = () => {
     setIsMount(true);
 
     if (clientRef !== null) {
-      if (address !== undefined) {
-        handleSetAddress(address);
+      if (account !== undefined) {
+        handleSetAddress(account);
       } else return ;
     }
     
@@ -89,7 +66,7 @@ const WalletConnect = () => {
       setShowSuccess(false);
       setIsMount(false);
     }
-  }, [address])
+  }, [account])
 
   return (
     <main>
@@ -110,7 +87,7 @@ const WalletConnect = () => {
             Connect Wallet
           </BodyTitle>
           <WalletContainer
-            onClick={() => connectMetaMask()}
+            onClick={() => handleActivate()}
           >
             <Image
               src="/assets/metamask.svg"
@@ -143,20 +120,19 @@ const WalletConnect = () => {
           msg='Metamask connect failed'
           />
         )}
-        {(showSucces || isConnected) && (
+        {(showSucces || active) && (
           <SuccessContainer>
             <Check />
             <SuccessMsg>
               Successfully Connected
             </SuccessMsg>
             <Address>
-              {account || address}
+              {account || userAddress}
             </Address>
           </SuccessContainer>
           )}
         </>
         )}
-        <ConnectWallet />
     </main>
 )}
 
@@ -230,3 +206,4 @@ const Address = styled.div`
 
 
 export default WalletConnect
+

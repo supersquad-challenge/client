@@ -7,10 +7,11 @@ import StyledComponentsRegistry from '@/app/registry/registry'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import GoogleAnalytics from '@/app/GoogleAnalytics'
 import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react"
-import { WagmiConfig, sepolia } from "wagmi"
 import { goerli, mainnet, polygon, polygonMumbai } from "wagmi/chains"
 import GlobalStyle from '@/styles/global'
-import { ThirdwebProvider, metamaskWallet, walletConnect } from '@thirdweb-dev/react'
+import { WagmiConfig, sepolia } from "wagmi"
+import { getProvider } from '@/utils/getProvider'
+import { Web3ReactProvider } from '@web3-react/core';
 
 const PROJECT_ID = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || '';
 
@@ -37,26 +38,23 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-      <QueryClientProvider client={client}>
-        <ThirdwebProvider 
-          supportedWallets={[metamaskWallet(), walletConnect()]}
-          activeChain="polygon" 
-          clientId={`${process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID}`}>
-        <WagmiConfig config={wagmiConfig}>
-          <AuthProvider>
-            <WindowProvider>
-              <GlobalStyle />
-                <StyledComponentsRegistry>
-                  <Layout>
-                    {children}
-                    <GoogleAnalytics />
-                  </Layout>
-                </StyledComponentsRegistry>
-            </WindowProvider>
-          </AuthProvider>
-        </WagmiConfig>
-      </ThirdwebProvider>
+        <Web3ReactProvider getLibrary={getProvider}>
+        <QueryClientProvider client={client}>
+            <WagmiConfig config={wagmiConfig}>
+              <AuthProvider>
+                <WindowProvider>
+                  <GlobalStyle />
+                    <StyledComponentsRegistry>
+                      <Layout>
+                        {children}
+                        <GoogleAnalytics />
+                      </Layout>
+                    </StyledComponentsRegistry>
+                </WindowProvider>
+              </AuthProvider>
+            </WagmiConfig>
       </QueryClientProvider>
+      </Web3ReactProvider>
     </body>
   </html>
   )

@@ -11,7 +11,6 @@ export const setNickname = async({ userInfoId, nickname }: Props) => {
       userInfoId: userInfoId,
       nickname: nickname
     });
-    console.log(res);
     return res;
   } catch (e) {
     console.log(e);

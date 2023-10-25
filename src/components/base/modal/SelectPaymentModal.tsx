@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import PopupModal from './PopupModal';
 import { setChallenge } from '@/lib/api/axios/challenge/setChallenge';
 import { AuthContext } from '@/context/auth';
+import { setDepositInfo } from '@/lib/api/axios/tx/setDeposit';
 
 type Props = {
   id: string;
@@ -91,6 +92,11 @@ const SelectPaymentModal = ({ id }: Props) => {
               if (res?.status === 200 || statusCode === 200) {
                 const userChallengeId = res?.data.userChallengeId;
                 handleModalState('Success');
+                await setDepositInfo({
+                  userChallengeId: userChallengeId,
+                  depositMethod: 'crypto',
+                  deposit: 0
+                })
 
                 setTimeout(() => {
                   handleModalState(undefined);

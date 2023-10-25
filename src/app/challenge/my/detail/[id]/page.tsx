@@ -43,8 +43,6 @@ const MyDetail = () => {
     cacheTime: Infinity
   });
 
-  console.log(data);
-
 
   useEffect(() => {
     if (!isLogin) {

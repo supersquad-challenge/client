@@ -4,5 +4,4 @@ import axios from "axios"
 
 export const getUserId = async() => {
   const res = await axios.post('http://52.65.222.108:8080/auth/login');
-  console.log("res", res);
 }

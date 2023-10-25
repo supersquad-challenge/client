@@ -121,10 +121,12 @@ const Footer = () => {
         }}
         display={pageState === 2 ? "block" : "none"}
       >
-        <Profile
-          color='#ffffff'
-          size={26}
-        />
+        <IconContainer>
+          <Profile
+            color='#ffffff'
+            size={26}
+          />
+        </IconContainer>
         <FooterTitle>
           Profile
         </FooterTitle>
@@ -132,5 +134,15 @@ const Footer = () => {
     </FooterContainer>
   )
 }
+
+const IconContainer = styled.div`
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+`
 
 export default Footer

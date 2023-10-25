@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import BaseModal from '@/components/base/modal/BaseModal'
 import { WindowContext } from '@/context/window'
 import { useQuery } from 'react-query';
@@ -16,11 +16,15 @@ import { setChallenge } from '@/lib/api/axios/challenge/setChallenge';
 import { useRouter } from 'next/navigation';
 import { AuthContext } from '@/context/auth';
 import transfer from '@/lib/transactions/transfer';
-import { ConnectWallet, useSigner } from '@thirdweb-dev/react'
+import { useWeb3React } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers'
+import { injected } from '@/utils/getConnecter';
+import { setDepositInfo } from '@/lib/api/axios/tx/setDeposit';
 
 type Props = {
   id: string;
 }
+
 
 const ChargeDepositModal = ({ id }: Props) => {
   const { 
@@ -33,8 +37,8 @@ const ChargeDepositModal = ({ id }: Props) => {
   const { userId } = useContext(AuthContext);
   const router = useRouter();
   const [ deposit, setDeposit ] = useState<number>(0);
-  const signer = useSigner();
 
+  const { account, activate, library } = useWeb3React<Web3Provider>();
 
   const { data, error, isLoading } = useQuery({
     queryKey: [`singleChallenge-${id}`],
@@ -65,6 +69,13 @@ const ChargeDepositModal = ({ id }: Props) => {
     else 
       setDeposit(parseInt(e.target.value));
   };
+
+  const handleActivate = () => {
+    const _activate = async() => {
+      await activate(injected)
+    _activate();
+    }
+  }
 
   return (
     <BaseModal
@@ -113,7 +124,11 @@ const ChargeDepositModal = ({ id }: Props) => {
         <FillButton 
           title={'Charge Deposit'} 
           onClickHandler={async () => {
-            const { status, code } = await transfer({ to: data.poolAddress , value: deposit, signer: signer })
+            handleActivate()
+            if (!library || !account) return ;
+
+            const signer = library.getSigner(account);
+            const { status, code } = await transfer({ to: data.poolAddress , value: deposit, signer: signer, lib: library })
             
             if (!status) {
               handleLoadingState(false);
@@ -138,10 +153,15 @@ const ChargeDepositModal = ({ id }: Props) => {
               }, 2500)
               return ;
             }
-
             if (res?.status === 200 || statusCode === 200) {
               const userChallengeId = res?.data.userChallengeId;
               handleModalState('Success');
+
+              await setDepositInfo({
+                userChallengeId: userChallengeId,
+                depositMethod: 'crypto',
+                deposit: deposit
+              })
 
               setTimeout(() => {
                 handleModalState(undefined);

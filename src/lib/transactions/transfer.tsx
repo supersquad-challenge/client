@@ -1,36 +1,28 @@
 import dotenv from 'dotenv'
-import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { Signer, ethers } from 'ethers';
 import { Ethereum } from '../../../@types/ethereum';
+import Contract from '@/json/USDTContractABI.json';
 
 type Props = {
   to: string;
   value: number;
   signer: Signer | undefined;
+  lib: any;
 }
 
-const transferUSDT = async(address: string, amount: number, signer: Signer | undefined) => {
-    const thirdwebSet: any = {
-      clientId: `${process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID}`,
-      secretKey: `${process.env.NEXT_PUBLIC_THIRDWEB_SECRET_ID}`,
-    }
+const transferUSDT = async({ to, value, signer, lib }: Props) => {
     
+  const USDTContract = new ethers.Contract(
+    '0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
+    JSON.stringify(Contract),
+    signer
+  )
 
-    console.log("signer", signer)
-    if (signer) {
-      const sdk = ThirdwebSDK.fromSigner(signer, thirdwebSet);
-      const contract = await sdk.getContract("0xd43a2B06d23F820bf13f38C94Ea845011ef5e68a");
-    
-      // Address of the wallet you want to send the tokens to
-      const toAddress = address;
-      // The amount of tokens you want to send
-      const res = await contract.erc20.transfer(toAddress, amount);
-      console.log("tx usdt", res);
-      if (!res || !res.receipt)
-        return false;
-    } else 
-      return false;
+  const tx = await USDTContract.transfer(to, value * 1000000); 
+  if (tx !== undefined && tx.hash.length !== 0) {
     return true;
+  }
+  return false;
 }
 
 
@@ -67,7 +59,7 @@ const changeChain = async() => {
   return false;
 }
 
-const transfer = async ({ to, value, signer }: Props) => {
+const transfer = async ({ to, value, signer, lib }: Props) => {
   const chainIdRes =  await changeChain();
 
   console.log("chainIdRes", chainIdRes)
@@ -79,8 +71,9 @@ const transfer = async ({ to, value, signer }: Props) => {
     };
   }
 
-  const res = await transferUSDT(to, value, signer);
+  const res = await transferUSDT({to, value, signer, lib  });
 
+  console.log(res)
   if (res) {
     return {
       status: true,
@@ -88,7 +81,6 @@ const transfer = async ({ to, value, signer }: Props) => {
       msg: 'transaction success'
     };
   }
-  console.log(res)
   // const ethereum = window.ethereum as MetaMaskInpageProvider | undefined;
   //   const result = convert(value / 10000, 'ether')
   //   console.log(result.wei.toString())
