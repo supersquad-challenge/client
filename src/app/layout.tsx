@@ -45,9 +45,9 @@ export default function RootLayout({
                 <WindowProvider>
                   <GlobalStyle />
                     <StyledComponentsRegistry>
+                      <GoogleAnalytics />
                       <Layout>
                         {children}
-                        <GoogleAnalytics />
                       </Layout>
                     </StyledComponentsRegistry>
                 </WindowProvider>
