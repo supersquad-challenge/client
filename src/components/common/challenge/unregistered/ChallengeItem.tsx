@@ -1,3 +1,4 @@
+import { getThumbnail } from '@/utils/proto.getThumbnail';
 import { isValidUrl } from '@/utils/urlUtils';
 import Image from 'next/image'
 import Link from 'next/link';
@@ -26,7 +27,9 @@ const UnRegisterItem = ({
       <ChallengeContainer>
         <ImageContainer>
           <Image
-            src={isValidUrl(thumbnailUrl) ? thumbnailUrl : "/default/diet_thumbnail.svg"}
+            src={isValidUrl(thumbnailUrl) 
+              ? getThumbnail(title) 
+              : getThumbnail(title)}
             alt='challenge'
             fill
             style={{

@@ -13,6 +13,10 @@ import { WindowContext } from '@/context/window';
 import SuccessModal from '@/components/base/modal/SuccessModal';
 import { AuthContext } from '@/context/auth';
 import PopupModal from '@/components/base/modal/PopupModal';
+import { isValidUrl } from '@/utils/urlUtils';
+import { getThumbnail } from '@/utils/proto.getThumbnail';
+import { getChallenge } from '@/lib/api/querys/user/getChellenge';
+import { useQuery } from 'react-query';
 
 const MyDetail = () => {
   const pathname = usePathname();
@@ -23,7 +27,22 @@ const MyDetail = () => {
   const { isLogin } = useContext(AuthContext)
   const { modalState, handleModalState } = useContext(WindowContext);
 
-  const [current, setCurrent] = useState<string | null>(query)
+  const [current, setCurrent] = useState<string | null>(query);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: [`challenge-${userChallengeId}`],
+    queryFn: async () => {
+      const res = await getChallenge({
+        userChallengeId: userChallengeId
+      })
+      const challenge = res.challengeInfo;
+      return challenge;
+    },
+    staleTime: 5000,
+    cacheTime: Infinity
+  });
+
+
   useEffect(() => {
     if (!isLogin) {
       router.push('/signup');
@@ -42,7 +61,9 @@ const MyDetail = () => {
     <PageContainer>
       <ImageContainer>
         <Image
-          src={'/default/diet_thumbnail.svg'}
+          src={isValidUrl(data.challengeThumbnail)
+            ? getThumbnail(data.challengeName)
+            : getThumbnail(data.challengeName)}          
           alt='challenge thumbnail'
           fill
           style={{
@@ -82,6 +103,9 @@ const MyDetail = () => {
             </PageTitle>
             <About
               id={userChallengeId}
+              data={data}
+              isLoading={isLoading}
+              error={error}
             />
           </PageInner>
         )}

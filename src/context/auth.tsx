@@ -34,7 +34,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUserId(user);
       setisLogin(true);
     }
-  }, [])
+  }, [isLogin, userId])
   
   const handleLogin = async() => {
     const res = await login();

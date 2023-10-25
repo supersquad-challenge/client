@@ -39,7 +39,7 @@ const SelectPaymentModal = ({ id }: Props) => {
       >
         <BaseCheckbox
           title='a crypto wallet'
-          subTitle='Deposit $USDC to enforce your goals'
+          subTitle='Deposit $USDT to enforce your goals'
           isActive={paymentMethod === 'crypto' ? true : false}
         />
       </BoxContainer>

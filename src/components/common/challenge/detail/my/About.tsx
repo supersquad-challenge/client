@@ -8,26 +8,17 @@ import ChallengeInfo from '@/components/common/challenge/unregistered/ChallengeI
 import { convertIsoDateToReadable } from '@/utils/dateFormatUtils';
 import { colors } from '@/styles/color';
 import { parseChallengeDesc } from '@/utils/parseDescUtils';
-import { ParsedDesc } from '@/types/challenge/Challenge';
+import { ChallengeDetail, ParsedDesc } from '@/types/challenge/Challenge';
 import ChallengeDesc from '@/components/common/challenge/description/ChallengeDesc';
 
 type Props = {
   id: string;
+  data: ChallengeDetail; 
+  isLoading: boolean | undefined | null;
+  error: boolean | undefined | null | unknown;
 }
 
-const About = ({ id }: Props) => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: [`challenge-${id}`],
-    queryFn: async () => {
-      const res = await getChallenge({
-        userChallengeId: id
-      })
-      const challenge = res.challengeInfo;
-      return challenge;
-    },
-    staleTime: 5000,
-    cacheTime: Infinity
-  });
+const About = ({ id, data, isLoading, error }: Props) => {
 
   if (isLoading) {
     return <Loading />

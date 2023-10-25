@@ -6,6 +6,7 @@ import { isValidUrl } from '@/utils/urlUtils';
 import { daysBetweenDates } from '@/utils/dateFormatUtils';
 import { BsChevronCompactRight } from 'react-icons/bs';
 import Link from 'next/link';
+import { getThumbnail } from '@/utils/proto.getThumbnail';
 
 type Props = {
   id: string;
@@ -33,7 +34,9 @@ const ChallengeItem = ({
       <Link href={`/challenge/my/detail/${id}?state=my`}>
         <ImageContainer>
           <Image
-            src={isValidUrl(thumbnailUrl) ? thumbnailUrl : "/default/diet_thumbnail.svg"}
+            src={isValidUrl(thumbnailUrl) 
+              ? getThumbnail(title) 
+              : getThumbnail(title)}
             alt='challenge'
             fill
             style={{
