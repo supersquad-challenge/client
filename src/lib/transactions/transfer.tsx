@@ -79,7 +79,7 @@ const transfer = async ({ to, value, signer }: Props) => {
     };
   }
 
-  const res = await transferUSDT(to, parseInt(value), signer);
+  const res = await transferUSDT(to, value, signer);
 
   if (res) {
     return {

@@ -30,11 +30,11 @@ const ButtonContainer = styled.div`
 `
 
 const IconContainer = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   border-radius: 50%;
   overflow: hidden;
 `
