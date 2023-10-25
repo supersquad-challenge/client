@@ -23,7 +23,6 @@ export type OutlineInputT = {
 `
 
 const OutlineInput = ({ placeholder, updateInput, submitInput, currentValue, color, fontSize, bordercolor }: InputProp & OutlineInputT) => {
-  const devide = parseFloat(currentValue);
   return (
       <OutlineInputElement
         placeholder={placeholder}
@@ -32,7 +31,7 @@ const OutlineInput = ({ placeholder, updateInput, submitInput, currentValue, col
         color={color}
         fontSize={fontSize}
         bordercolor={bordercolor}
-        value={devide.toString() || ''}
+        value={currentValue}
       />  
     )
 }
