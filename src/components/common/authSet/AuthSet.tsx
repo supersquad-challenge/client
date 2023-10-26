@@ -80,7 +80,7 @@ const AuthSet = () => {
 const Username = styled.div`
   font-size: 13px;
   margin-right: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
   display: flex;
   align-items: center;
   justify-content: center;
