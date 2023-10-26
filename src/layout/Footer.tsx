@@ -20,7 +20,7 @@ const FooterContainer = styled.footer`
   left: 50%;
   transform: translateX(-50%);
   background-color: #000000;
-  border-radius: 5px;
+  border-radius: 5px 5px 0px 0px;
   z-index: 99;
 `
 
@@ -44,6 +44,7 @@ const FooterTitle = styled.div`
   color: #ffffff;
   font-size: 12px;
   font-weight: 500;
+  user-select: none;
 `
 
 const Footer = () => {

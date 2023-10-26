@@ -30,13 +30,13 @@ const ShadowContainer = styled.div<{
   $direction: string
 }>`
   border-radius: 20px;
-  margin: 10px auto;
+  margin: 7px auto;
   box-shadow: 0px 5px 25px 0px #eee;
   overflow: hidden;
   display: flex;
   align-items: center;
+  width: 48%;
   justify-content: ${(props) => props.$direction === 'left' ? 'flex-start' : 'flex-end'} ;
-  width: 46%;
   margin-left: ${(props) => props.$direction === 'left' ? 0 : 'unset'};
   margin-right: ${(props) => props.$direction === 'right' ? 0 : 'unset'};
   height: 125px;

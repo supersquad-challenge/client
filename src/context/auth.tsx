@@ -37,8 +37,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       const profile = sessionStorage.getItem('supersquad_userprofile');
 
       setUserId(user);
-      setUserName(username)
-      setUserProfile(profile)
+      setUserName(username);
+      setUserProfile(profile);
       setisLogin(true);
     }
   }, [isLogin, userId])

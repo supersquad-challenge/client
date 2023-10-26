@@ -83,6 +83,7 @@ const ImageContainer = styled.div`
 `;
 
 const CompletionTitle = styled.div`
+  font-size: 30px;
   @media (max-width: 600px) {
     font-size: 28px;
   }
@@ -103,6 +104,7 @@ const CompletionTitle = styled.div`
 `;
 
 const CompletionDetail = styled.div`
+  font-size: 20px;
   @media (max-width: 600px) {
     width: 300px;
     font-size: 18px;
@@ -126,14 +128,15 @@ const CompletionDetail = styled.div`
 `;
 
 const ButtonContainer = styled.div`
+  width: 230px;
   @media (max-width: 600px) {
-    width: 200px;
+    width: 220px;
   }
   @media (max-width: 450px) {
-    width: 180px;
+    width: 200px;
   }
   @media (max-width: 392px) {
-    width: 170px;
+    width: 190px;
   }
   height: 44px;
   margin-top: 25px;

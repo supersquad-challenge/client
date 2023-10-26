@@ -73,14 +73,13 @@ const ImageUploader = ({ onClickEvent, userChallengeId }: Props) => {
 }
 
 const Container = styled.div`
-  position: fixed;
+  position: absolute;
   left: 50%;
-  bottom: 30px;
-  width: 90%;
+  bottom: -80px;
+  width: 100%;
   transform: translateX(-50%);
   height: 60px;
   max-width: 500px;
-  margin: 0 auto;
   color: #ffffff;
 `
 
@@ -88,7 +87,7 @@ const ButtonItem = styled.label<{
   $color: string
 }>`
   font-size: 18px;
-  width: 100%;
+  width: 90%;
   margin: 0 auto;
   height: 100%;
   display: flex;

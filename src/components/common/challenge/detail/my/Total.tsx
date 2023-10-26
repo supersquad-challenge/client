@@ -102,7 +102,7 @@ const Container = styled.section`
 `
 
 const InfoContainer = styled.div`
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;

@@ -41,6 +41,7 @@ const HeaderTitle = styled.div`
   padding-left: 24px;
   font-family: OpenSansBold;
   font-weight: 600;
+  user-select: none;
 `
 
 const Header = () => {
@@ -76,7 +77,11 @@ const Header = () => {
         </HeaderTitle>
         ) : (
           <ButtonContainer
-          onClick={() => router.back()}
+          onClick={() => {
+            pathname.includes('/challenge/my/detail')
+              ? router.push('/challenge/my')
+              : router.back()
+          }}
           >
           <FiChevronLeft
             color="#000000"

@@ -41,7 +41,7 @@ const Layout = (
     <>
       {showHeader() && <Header />}
       <BodyContainer
-        top={!showHeader() || pathname.includes('/detail') || pathname.includes('/mypage') ? 35 : 60}
+        top={!showHeader() || pathname.includes('/detail') || pathname.includes('/mypage') ? 35 : 48}
         bot={showFooter() ? 110 : 40}
       >
         {modalState === 'login' && (

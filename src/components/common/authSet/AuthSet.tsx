@@ -10,7 +10,6 @@ import styled from 'styled-components'
 const AuthSetContainer = styled.div`
   width: auto;
   height: 100%;
-  padding-top: 5px;
   padding-right: 24px;
   display: flex;
   align-items: center;
@@ -30,17 +29,16 @@ const ButtonContainer = styled.div`
 `
 
 const IconContainer = styled.div`
-  width: 28px;
+  width: auto;
   height: 28px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 50%;
+  justify-content: space-between;
   overflow: hidden;
 `
 
 const AuthSet = () => {
-  const { isLogin } = useContext(AuthContext);
+  const { isLogin, userName } = useContext(AuthContext);
   const [isMount, setIsMount] = useState<boolean>(false);
   const router = useRouter();
 
@@ -53,10 +51,11 @@ const AuthSet = () => {
       {isMount && (
         isLogin ? (
           <IconContainer>
+            <Username>{userName}</Username>
             <Link href={'/mypage'}>
               <Profile  
                 color='#222222'
-                size={28}
+                size={26}
               />
             </Link>
           </IconContainer>
@@ -77,5 +76,15 @@ const AuthSet = () => {
     </AuthSetContainer>
   )
 }
+
+const Username = styled.div`
+  font-size: 13px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+`
 
 export default AuthSet
