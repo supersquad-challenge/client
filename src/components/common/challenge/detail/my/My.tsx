@@ -41,7 +41,7 @@ const My = ({ id }: Props) => {
     <Container>
       <LongBlock
         leftTitle='My Success Rate'
-        leftContent={`${thousandFormat(data.successRate)}%`}
+        leftContent={`${thousandFormat(data.successRate.toFixed(0))}%`}
         rightTitle='Target Success'
         rightContent={'100%'}
         leftColor='#000000'

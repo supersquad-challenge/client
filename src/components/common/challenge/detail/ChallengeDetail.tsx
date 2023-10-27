@@ -102,7 +102,7 @@ const ChallengeDetail = ({ id }: Props) => {
         <ChallengeMeta
           title={data.challengeName}
           participants={data.challengeParticipantsCount}
-          deposit={thousandFormat(data.challengeTotalDeposit)}
+          deposit={thousandFormat(data.challengeTotalDeposit.toFixed(0))}
         />
         <InfoContainer>
           <ChallengeInfo

@@ -41,7 +41,7 @@ const Total = ({ id }: Props) => {
     <Container>
       <LongBlock
         leftTitle='Total Crypto Deposit'
-        leftContent={`$${thousandFormat(data.challengeCryptoDeposit)}`}
+        leftContent={`$${thousandFormat(data.challengeCryptoDeposit.toFixed(0))}`}
         rightTitle='Crypto Yield Boost'
         rightContent={`+${data.cryptoYieldBoost.toFixed(2)}%`}
         leftColor='#000000'

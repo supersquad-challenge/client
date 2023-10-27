@@ -36,7 +36,7 @@ const ChallengeSet = ({
       duration={startDate.length === 0 ? 'None' : `${convertIsoDateToReadable(startDate)} 
       - ${convertIsoDateToReadable(endDate)}`}
       participants={participants}
-      deposit={thousandFormat(deposit)}
+      deposit={thousandFormat(deposit.toFixed(0))}
       isRegistered={isRegistered}
     />
   )
